@@ -75,7 +75,8 @@ git checkout dev
 ```
  ### 创建自己的开发分支
 ```sh
-git branch mydev
+git branch mydev # 创建自己的分支
+git checkout mydev  # 切换到自己的分支
 ```
 ### 提交修改
 ```sh
@@ -84,8 +85,8 @@ git commit -m '你的提交信息' # 提交到本地暂存区
 ```
 ### 将自己的开发分支合并到dev分支
 ```sh
-git merger dev # 将你的mydev本丢分支和dev合并
 git checkout dev # 切换到开发分支
+git merger mydev # 将你的mydev本本地支和dev合并
 ```
 ### 提交开发分支
 ```sh

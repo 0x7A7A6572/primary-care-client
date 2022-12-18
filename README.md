@@ -89,8 +89,18 @@ git checkout dev # 切换到开发分支
 ```
 ### 提交开发分支
 ```sh
-git push origin dev
+git push origin dev # 提交开发分支到远程仓库
 ```
+
+### 其他日常命令
+```sh
+git status # 查看仓库状态（红色已修改未提交/绿色已提交）
+git log # 查看当前分支历史提交日志
+git branch # 查看所有分支
+git branch mydev # 创建名为 `mydev` 的分支
+git checkout dev # 从当前分支切换到 dev 分支
+```
+
 
 ## 规范说明(尽量)
 

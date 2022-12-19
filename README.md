@@ -106,6 +106,16 @@ git checkout master # 从当前分支切换到 master 分支
 
 **温馨提示： git操作出现错误或冲突时从网上找的解决方案谨慎使用🤔**
 
+## 如何使用第三方图标库？
+ doc/ylicon-view 目录下是项目所用所有图标的预览 ，浏览器打开 **example.html**，可以看到所有图标，包括图标的**命名**。
+
+ 在vant中使用
+ ```html
+  <van-icon class-prefix="yl-icon" name="aixinzhijia" />
+  <!-- class-prefix="yl-icon" 字段为固定必填， name 根据图标预览项目的 命名 复制粘贴即可 -->
+ ```
+
+
 ## 规范说明(尽量)
 
   1. 命名尽量使用英文翻译

@@ -14,6 +14,13 @@
 
 <script>
 export default {
+  created(){
+    // 防止首次进入页面时,因未触发路由改变而导致ylNavShow不显示的问题
+    // （ylNavShow 默认为fasle 可以减少路由对于meta.navShow的配置)
+   if(this.$route.name == "home"){
+    this.ylNavShow = true;
+   }
+  },
   data() {
     return {
       ylNavShow: false,

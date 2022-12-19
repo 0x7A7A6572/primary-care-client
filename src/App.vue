@@ -11,7 +11,7 @@
 <style>
 @import url('./common/base.css');
 @import url('./common/reset.css');
-
+@import url('./common/font-icon.css');
 
 
 #app{

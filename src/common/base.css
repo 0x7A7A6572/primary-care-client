@@ -1,0 +1,46 @@
+:root {
+  --color-main: #00DC05; /* 主色调 */
+  --color-mian-text: #1a191e; /* 主字体色 */
+  --color-second-text: #40404d; /* 辅助字体色 */
+  --color-second-text: #adadad; /* 失效字体色 */
+  --color-mian-bg: #CFFFD6; /* 大背景色 */
+  --color-box-bg: #CFFFD6; /* 盒子背景色 */
+  --box-shadow: 1px 1px 6px #94ff7edc; /* 盒子阴影色 */
+  --border-radius-small: 5px; /* 盒子圆角-小 */
+  --border-radius-medium: 8px; /* 盒子圆角-中 */
+}
+
+ /* 大标题 */
+.text-larger{
+  color: var(--color-mian-text);
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* 次标题 */
+.text-large{
+  color: var(--color-mian-text);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 正文 */
+.text-medium{
+  color: var(--color-mian-text);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* 辅助文 */
+.text-small{
+  color: var(--color-second-text);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* 盒子 */
+.box{
+  background-color: #fff;
+  border-radius: var(--border-radius-small);
+  padding: 10px;
+}

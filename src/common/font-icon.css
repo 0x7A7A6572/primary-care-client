@@ -1,0 +1,13 @@
+/* 引入第三方字体图标样式 */
+@font-face {
+  font-family: 'yl-icon';
+  src: url('../assets/ttf/bold-icon.woff2') format('truetype');
+}
+
+.yl-icon {
+  font-family: 'yl-icon';
+}
+
+.yl-icon-extra::before {
+  content: '\ecc9';
+}

@@ -3,18 +3,24 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import httpApi from "@/http";
-import Vant from 'vant';
+// import Vant from 'vant'; // 全部导入
+import { Icon } from 'vant'; // 按需导入
+
 import 'vant/lib/index.css';
 
 // 自定义的公共组件全局引入
-import ylNav from "@/components/ylNav.vue";
-import ylTopbar from "@/components/ylTopbar";
+import ylTabbar from "@/components/ylTabbar.vue";
+import ylNavbar from "@/components/ylNavbar.vue";
+import ylTitle from "@/components/ylTitle.vue";
 
+Vue.component("ylTabbar",ylTabbar);
+Vue.component("ylNavbar",ylNavbar);
+Vue.component("ylTitle",ylTitle);
 
-Vue.component("YlNav",ylNav);
-Vue.component("YlTopbar",ylTopbar);
-
-Vue.use(Vant);
+/* 引入vant组件 */
+// Vue.use(Vant);
+// 手动按需引入
+Vue.use(Icon);
 
 Vue.config.productionTip = false;
 Vue.prototype.$api = httpApi;

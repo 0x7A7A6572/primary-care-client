@@ -2,12 +2,14 @@
   --color-main: #00DC05; /* 主色调 */
   --color-mian-text: #1a191e; /* 主字体色 */
   --color-second-text: #40404d; /* 辅助字体色 */
-  --color-second-text: #adadad; /* 失效字体色 */
+  --color-third-text: #adadad; /* 失效字体色 */
   --color-mian-bg: #E1E1E1; /* 大背景色 */
   --color-box-bg: #f8fff9; /* 盒子背景色 */
   --box-shadow: 1px 1px 6px #94ff7edc; /* 盒子阴影色 */
   --border-radius-small: 5px; /* 盒子圆角-小 */
   --border-radius-medium: 8px; /* 盒子圆角-中 */
+  --border-radius-large: 10px; /* 盒子圆角-大 */
+  --border-radius-larger: 14px; /* 盒子圆角-很大 */
 }
 
  /* 大标题 */
@@ -43,4 +45,45 @@
   background-color: #fff;
   border-radius: var(--border-radius-small);
   padding: 10px;
+}
+
+.box-round{
+  background-color: #fff;
+  border-radius: var(--border-radius-larger);
+  padding: 10px;
+  width: fit-content;
+}
+
+/* 功能类 */
+.flex{
+ display: flex;
+}
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-d-column{
+  display: flex;
+  flex-direction: column;
+}
+/* 路由跳转动画 */
+.Skright-enter-active,
+.Skright-leave-active,
+.Skleft-enter-active,
+.Sklef-leave-active {
+  transition: all 500ms;
+}
+
+.Skright-enter {
+  transform: translate3d(-100%, 0, 0);
+}
+.Skright-leave-to {
+  transform: translate3d(100%, 0, 0);
+}
+.Skleft-enter {
+  transform: translate3d(100%, 0, 0);
+}
+.Skleft-leave-to {
+  transform: translate3d(-100%, 0, 0);
 }

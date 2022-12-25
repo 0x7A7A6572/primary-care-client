@@ -1,4 +1,4 @@
-/* 演员模块相关接口 */
+/* 用户模块相关接口 */
 import myAxios from "@/utils/instance";
 const user = {
   // 注册

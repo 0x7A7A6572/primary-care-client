@@ -7,9 +7,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView,
-    meta: { navShow: true  }
+    redirect: '/home' 
   },
   { path: '/home', name: 'home',component: HomeView,meta: { navShow: true }},
   {

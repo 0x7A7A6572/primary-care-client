@@ -1,11 +1,11 @@
 <template>
   <div id="app">
    <!-- 顶部标题导航 -->
-    <ylNavbar v-show="ylTopbarShow" />
+    <ylNavbar v-show="ylNavbarShow" />
       <router-view></router-view>
     <!-- 底部标签栏 -->
     <ylTabbar
-      v-show="ylNavShow"
+      v-show="ylTabbarShow"
       :itemIndex="itemIndex"
       @onItemClick="onNavItemClick"
     />
@@ -16,16 +16,16 @@
 <script>
 export default {
   created() {
-    // 防止首次进入页面时,因未触发路由改变而导致ylNavShow不显示的问题
-    // （ylNavShow 默认为fasle 可以减少路由对于meta.navShow的配置)
+    // 防止首次进入页面时,因未触发路由改变而导致ylTabbar不显示的问题
+    // （ylTabbarShow 默认为fasle 可以减少路由对于meta.tabbarShow的配置)
     if (this.$route.name == "home") {
-      this.ylNavShow = true;
+      this.ylTabbarShow = true;
     }
   },
   data() {
     return {
-      ylNavShow: false,
-      ylTopbarShow: false,
+      ylTabbarShow: false,
+      ylNavbarShow: false,
       itemIndex: 0,
     };
   },
@@ -34,9 +34,9 @@ export default {
     $route(to, from) {
       console.log("route change:", { to, from });
       // 判断路由中navShow的值来选择显示/隐藏底部导航
-      this.ylNavShow = to.meta?.navShow || false;
+      this.ylTabbarShow = to.meta?.tabbarShow || false;
       // 判断路由中topBarShow的值来选择显示/隐藏底部导航
-      this.ylTopbarShow = to.meta?.topBarShow || false;
+      this.ylNavbarShow = to.meta?.navbarShow || false;
     },
   },
   methods: {

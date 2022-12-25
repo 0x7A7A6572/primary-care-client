@@ -9,29 +9,29 @@ const routes = [
     path: '/',
     redirect: '/home' 
   },
-  { path: '/home', name: 'home',component: HomeView,meta: { navShow: true }},
+  { path: '/home', name: 'home',component: HomeView,meta: { tabbarShow: true }},
   {
     path: '/chat',
     name: 'chat',
-    meta: { navShow: true  },
+    meta: { tabbarShow: true  },
     component: () => import('../views/ChatView/ChatView.vue')
   },
   {
     path: '/medicine',
     name: 'medicine',
-    meta: { navShow: true },
+    meta: { tabbarShow: true },
     component: () => import('../views/MedicineView/MedicineView.vue')
   },
   {
     path: '/user',
     name: 'user',
-    meta: { navShow: true  },
+    meta: { tabbarShow: true  },
     component: () => import('../views/UserView/UserView.vue')
   },
   { // 用药提醒页
     path: '/home/MedicationReminder',
     name: 'MedicationReminder',
-    meta: { title: '添加用药提醒', topBarShow: true  },
+    meta: { title: '添加用药提醒', navbarShow: true  },
     component: () => import('../views/HomeView/MedicationReminder.vue')
   }
 ]

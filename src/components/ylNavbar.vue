@@ -50,6 +50,7 @@ export default {
   font-size: 8vw;
   font-weight: bolder;
   box-shadow: 0px -2px 8px var(--color-main-bg);
+  z-index: 10;
   > .yl-navbar-title {
     // font-size: var();
     color: var(--color-main);

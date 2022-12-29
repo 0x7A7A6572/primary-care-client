@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import httpApi from "@/http";
 // import Vant from 'vant'; // 全部导入
-import { Icon } from 'vant'; // 按需导入
+import { Icon,Search,List,Cell} from 'vant'; // 按需导入
 
 import 'vant/lib/index.css';
 
@@ -21,6 +21,9 @@ Vue.component("ylTitle",ylTitle);
 // Vue.use(Vant);
 // 手动按需引入
 Vue.use(Icon);
+Vue.use(Search);
+Vue.use(List);
+Vue.use(Cell);
 
 Vue.config.productionTip = false;
 Vue.prototype.$api = httpApi;

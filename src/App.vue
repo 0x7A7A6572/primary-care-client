@@ -1,7 +1,9 @@
 <template>
   <div id="app">
    <!-- 顶部标题导航 -->
+   <van-sticky>
     <ylNavbar v-show="ylNavbarShow" />
+   </van-sticky>
       <router-view></router-view>
     <!-- 底部标签栏 -->
     <ylTabbar

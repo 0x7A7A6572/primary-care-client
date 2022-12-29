@@ -12,11 +12,11 @@
       @search="onSearch"
     >
       <!-- 搜索医生结果 -->
-      <ylEmpty 
-      v-show="searchDoctorRes.length == 0" 
-      width="30%"
-      type="search"
-      title="未搜索到相关医生"
+      <ylEmpty
+        v-show="searchDoctorRes.length == 0"
+        width="30%"
+        type="search"
+        title="未搜索到相关医生"
       />
       <div
         class="search-doctor-res"
@@ -45,10 +45,19 @@
     />
 
     <div class="scroll-recommend">
-      <div class="recom-item box" v-for="item in 6" :key="item">
-        <img class="recom-avatar" :src="item.avatar || defaultAvatar" alt="" />
-        <span class="recom-name text-blod">李医生</span>
-        <span class="text-small">主任医师</span>
+      <div
+        class="recom-item box"
+        v-for="item in recommendDoctors"
+        :key="item.id"
+        @click="consultingService(item)"
+      >
+        <img
+          class="recom-avatar border-s"
+          :src="item.avatar || defaultAvatar"
+          alt=""
+        />
+        <span class="recom-name text-blod">{{ item.name }}</span>
+        <span class="text-small">{{ item.grade }}</span>
       </div>
     </div>
 
@@ -58,18 +67,27 @@
         active-color="var(--color-main)"
         :overlay="true"
       >
-        <van-dropdown-item v-model="value1" :options="hospitals" />
-        <van-dropdown-item v-model="value2" :options="depas" />
+        <van-dropdown-item
+          v-model="hsptSelect"
+          :options="hospitals"
+          @change="dropdownHospitalsChange"
+        />
+        <van-dropdown-item
+          v-model="depaSelect"
+          :options="depas"
+          :disabled="hsptSelect == -1"
+          @change="dropdownDepaChange"
+        />
         <!-- <van-dropdown-item v-model="value2" :options="grades" /> -->
       </van-dropdown-menu>
-      <div class="doctor-item" v-for="item in 27" :key="item">
+      <div class="doctor-item" v-for="item in doctors " :key="item.id">
         <img class="recom-avatar" :src="item.avatar || defaultAvatar" alt="" />
         <div class="__doctor-details">
-          <span class="recom-name text-blod">李医生</span>
-          <span class="text-small">深圳市XXXX医院</span>
+          <span class="recom-name text-blod">{{item.name }}</span>
+          <span class="text-small">{{item.h_addr}}</span>
           <span class="text-small"
             >擅长：<span class="__good-at"
-              >大苏打实打实大苏打实打打上就打开</span
+              >{{ item.good_at }}</span
             ></span
           >
           <div class="icon-btn consulting" @click="consultingService(item)">
@@ -83,26 +101,25 @@
 </template>
 
 <script>
-// import defaultAvatar from "@/assets/images/default_doctor.png";
-import emptySearch from "@/assets/images/state_no_search.png"
 export default {
   data() {
     return {
+      doctors: [],
       searchDoctorRes: [],
+      recommendDoctors: [],
       showPanel: false,
       showSearchBtn: false,
-      defaultAvatar,
       inpt: "",
-      value1: -1,
-      value2: "a",
+      hsptSelect: -1,
+      depaSelect: -1,
       hospitals: [{ text: "全部医院", value: -1 }],
-      depas: [{ text: "全部科室", value: "a" }],
+      depas: [{ text: "全部科室", value: -1 }],
       // grades: [{ text: "全部职称", value: "a" }],
     };
   },
   methods: {
-    consultingService() {
-      console.log("进入咨询聊天");
+    consultingService(item) {
+      console.log("进入咨询聊天", item);
     },
     onSearchInput(e) {
       this.showPanel = false;
@@ -116,8 +133,37 @@ export default {
         console.log("searchDoctorRes:", this.searchDoctorRes);
       });
     },
+    dropdownHospitalsChange(v) {
+      // console.log("dropdownHospitalsChange:", v, this.hospitals[v]);
+      this.$api.info.queryDepa({ hid: v }).then((res) => {
+        // console.log("res:", res);
+        res.data.result.push({title: "全部科室", did: -1,});
+        this.depas = 
+        res.data.result.map((v) => {
+            return {
+              text: v.title,
+              value: v.did,
+            };
+          });
+        // 重置科室选择
+        this.depaSelect = -1;
+      });
+    },
+    // 科室下拉选择改变
+    dropdownDepaChange(v){
+      this.$api.info.queryDoctors({ hid: this.hsptSelect, did: v }).then((res) => {
+        this.doctors =  res.data.result;
+        console.log("res:", this.doctors );
+      });
+    }
   },
   created() {
+    // 推荐医生
+    this.$api.info.recommendDoctor().then((res) => {
+      console.log(res);
+      this.recommendDoctors = res.data;
+    });
+    // 医院列表
     this.$api.info
       .queryHospital({
         page: 1,
@@ -135,6 +181,11 @@ export default {
           })
         );
       });
+
+    // 医生列表
+    this.$api.info.queryDoctorList({page:1,pagenum:10}).then(res=>{
+      this.doctors = res.data;
+    })
   },
 };
 </script>
@@ -160,6 +211,7 @@ export default {
         background: var(--color-mian-bg);
         width: 20vw;
         height: 20vw;
+        min-width: 20vw;
         border-radius: 50%;
         margin: auto;
         object-fit: cover;
@@ -183,13 +235,15 @@ export default {
         background: var(--color-mian-bg);
         width: 14vw;
         height: 14vw;
+        min-width: 14vw;
         border-radius: 50%;
         margin: 0px 10px 0px 0px;
+        object-fit: cover;
       }
       > .__doctor-details {
         display: flex;
         flex-direction: column;
-        flex: auto;
+        flex: 1;
         .__good-at {
           // white-space: nowrap;
           // overflow: ellipsis;
@@ -216,11 +270,12 @@ export default {
       height: 14vw;
       border-radius: 50%;
       margin: 0px 10px 0px 0px;
+      object-fit: cover;
     }
     > .__doctor-details {
       display: flex;
       flex-direction: column;
-      flex: auto;
+      flex: 1;
       .__good-at {
         // white-space: nowrap;
         // overflow: ellipsis;

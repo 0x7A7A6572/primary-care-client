@@ -1,3 +1,3 @@
 import user from "./apis/user";
-
-export default { user }
+import info from "./apis/info";
+export default { user,info }

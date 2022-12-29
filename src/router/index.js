@@ -41,7 +41,14 @@ const routes = [
     name: 'MedicationReminder',
     meta: { title: '添加用药提醒', navbarShow: true  },
     component: () => import('../views/HomeView/MedicationReminder.vue')
+  },
+  { // 用药提醒页
+    path: '/home/OnlineConsultation',
+    name: 'OnlineConsultation',
+    meta: { title: '线上问诊', navbarShow: true  },
+    component: () => import('../views/OnlineConsultation/OnlineConsultation.vue')
   }
+  
 ]
 
 const router = new VueRouter({

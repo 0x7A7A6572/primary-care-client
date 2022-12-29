@@ -8,6 +8,7 @@
       '--bar-width': barWidth,
       '--bar-height': barHeight,
       '--bar-offset': barOffset,
+      '--bar-font-size': size
     }"
   >
     <span :class="'__text-' + theme"> {{ title }}</span>
@@ -25,6 +26,10 @@ export default {
       type: String, 
       default: 'var(--color-mian-text)'
     }, 
+    size: {
+      type: String,
+      default: 'medium'
+    },
     // 高亮条显示的样式 （bottom/left）
     theme: {
       type: String,
@@ -56,6 +61,7 @@ export default {
 .yl-title {
   display: flex;
   align-items: center;
+  font-size: var(--bar-font-size);
   > .__text-bottom {
     position: relative;
     color: var(--title-text-color);

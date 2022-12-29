@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import httpApi from "@/http";
 // import Vant from 'vant'; // 全部导入
-import { Icon,Search,List,Cell} from 'vant'; // 按需导入
+import { Icon, DropdownMenu, DropdownItem,Search,List,Cell} from 'vant'; // 按需导入
 
 import 'vant/lib/index.css';
 
@@ -12,15 +12,20 @@ import 'vant/lib/index.css';
 import ylTabbar from "@/components/ylTabbar.vue";
 import ylNavbar from "@/components/ylNavbar.vue";
 import ylTitle from "@/components/ylTitle.vue";
-
+import ylSearch from "@/components/ylSearch.vue";
+import ylEmpty from "@/components/ylEmpty.vue";
 Vue.component("ylTabbar",ylTabbar);
 Vue.component("ylNavbar",ylNavbar);
 Vue.component("ylTitle",ylTitle);
+Vue.component("ylSearch",ylSearch);
+Vue.component("ylEmpty",ylEmpty);
 
 /* 引入vant组件 */
 // Vue.use(Vant);
 // 手动按需引入
 Vue.use(Icon);
+Vue.use(DropdownMenu);
+Vue.use(DropdownItem);
 Vue.use(Search);
 Vue.use(List);
 Vue.use(Cell);

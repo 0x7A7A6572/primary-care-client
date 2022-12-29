@@ -47,7 +47,7 @@ export default {
   padding: 10px;
   background: var(--color-box-bg);
   height: 60px;
-  font-size: 8vw;
+  font-size: 20px;
   font-weight: bolder;
   box-shadow: 0px -2px 8px var(--color-main-bg);
   z-index: 10;

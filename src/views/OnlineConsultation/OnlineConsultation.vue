@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import defaultAvatar from "@/assets/images/default_doctor.png";
+// import defaultAvatar from "@/assets/images/default_doctor.png";
 import emptySearch from "@/assets/images/state_no_search.png"
 export default {
   data() {

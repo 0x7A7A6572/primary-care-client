@@ -24,6 +24,14 @@ const routes = [
     title: '预约挂号', navbarShow: true},
     component: () => import('../views/HomeView/doctor.vue')
   },
+  // 选择科室
+  {
+    path: '/depa',
+    name: 'depa',
+    meta: { tabbarShow:false,
+    title: '选择科室', navbarShow: true},
+    component: () => import('../views/HomeView/depa.vue')
+  },
   {
     path: '/medicine',
     name: 'medicine',

@@ -1,63 +1,42 @@
 <template>
-  <div>
-    <van-search v-model="value" shape="round" background="var(--color-main)" @search="search" placeholder="请输入医院名称" />
-    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-
-      <div>
+    <div>
+        <div>
         <ul class="ad">
-          <li v-for="item in list " :key="item.hid" @click="Jump(item)">
+          <li>
             <img src="../../assets/images/Snipaste_2022-12-28_19-24-28.jpg" alt="">
             <div>
-              <h3>{{ item.title }}</h3>
-              <span>{{ item.grade }}</span>
-              <span v-if="item.type">{{ item.type }}</span>
-              <p>地址:{{ item.address }}</p>
+              <h3>{{ hid.title }}</h3>
+              <span>{{ hid.grade }}</span>
+              <span v-if="hid.type">{{ hid.type }}</span>
+              <p>地址:{{ hid.address }}</p>
             </div>
           </li>
         </ul>
       </div>
-    </van-list>
-  </div>
+      <div class="li">
+        <van-icon name="arrow" color="var(--color-main)" size="30px" /> <span class="list">科室列表</span>
+      </div>
+      <van-list
+
+>
+  <van-cell v-for="item in list" :key="item" :title="item" />
+</van-list>
+    </div>
 </template>
 
 <script>
 
-import doctor from '@/http/apis/doctor'
 export default {
-  data() {
+   data(){
     return {
-      value: '',
-      list: [],
-      loading: false,
-      finished: false,
-      page: 1,
+        hid:{},
+        list:[]
     }
-  },
-  methods: {
-    search() {
-      let params = { name: this.value }
-      doctor.doctor(params).then(res => {
-        this.list = res.data.result
-      })
-    },
-    onLoad() {
-      let data = { page: this.page++, pagenum: 10 }
-      doctor.hospital(data).then(res => {
-        let lie = res.data.result
-        this.list.push(...lie);
-        this.loading = false;
-        if (this.list.length == res.data.total) {
-          this.finished = true;
-        }
-      })
-    },
-    Jump(e){
-   this.$router.push('/depa')
-   console.log(e)
- sessionStorage.setItem('hid',  JSON.stringify(e))
-    }
-  },
-
+   },
+   mounted(){
+   this.hid=JSON.parse( (sessionStorage.getItem('hid')))
+    console.log(this.$api.doctor)
+   }
 }
 </script>
 
@@ -115,5 +94,16 @@ export default {
       }
     }
   }
+}
+.list{
+    display: inline-block;
+    color:#998a8d ;
+    margin-top: 2px;
+    width: 100px;
+}
+.li{
+    display: flex;
+    margin-left: 10px;
+    margin-top: 40px;
 }
 </style>

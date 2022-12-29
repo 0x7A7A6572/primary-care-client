@@ -11,14 +11,14 @@ const doctor = {
     doctor(params) {
       return myAxios({
         method: "get",
-        url: "http://localhost:3010/hospital/name",
+        url: "/hospital/name",
         params,
       })
     },
     hospital(data) {
       return myAxios({
         method: "post",
-        url: "http://127.0.0.1:3010/hospital/limit",
+        url: "/hospital/limit",
         data,
       })
     }

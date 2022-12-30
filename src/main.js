@@ -9,12 +9,14 @@ import { Icon, DropdownMenu, DropdownItem, Sticky ,Search,List,Cell,Tag, Image,B
 import 'vant/lib/index.css';
 
 // 自定义的公共组件全局引入
-import ylTabbar from "@/components/ylTabbar.vue";
+import ylTabbarPro from "@/components/ylTabbarPro.vue";
+// import ylTabbar from "@/components/ylTabbar.vue";
 import ylNavbar from "@/components/ylNavbar.vue";
 import ylTitle from "@/components/ylTitle.vue";
 import ylSearch from "@/components/ylSearch.vue";
 import ylEmpty from "@/components/ylEmpty.vue";
-Vue.component("ylTabbar",ylTabbar);
+Vue.component("ylTabbarPro",ylTabbarPro);
+// Vue.component("ylTabbar",ylTabbar);
 Vue.component("ylNavbar",ylNavbar);
 Vue.component("ylTitle",ylTitle);
 Vue.component("ylSearch",ylSearch);

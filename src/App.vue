@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-   <!-- 顶部标题导航 -->
-   <van-sticky>
-    <ylNavbar v-show="ylNavbarShow" />
-   </van-sticky>
-      <router-view></router-view>
+    <!-- 顶部标题导航 -->
+    <van-sticky>
+      <ylNavbar v-show="ylNavbarShow" />
+    </van-sticky>
+    <!-- <keep-alive>  -->
+    <router-view></router-view>
+    <!-- </keep-alive> -->
     <!-- 底部标签栏 -->
-    <ylTabbar
+    <ylTabbarPro
       v-show="ylTabbarShow"
       :itemIndex="itemIndex"
       @onItemClick="onNavItemClick"
     />
-    <!-- :paths="['home','chart','medicine','user']" -->
   </div>
 </template>
 
@@ -59,12 +60,12 @@ export default {
 @import url("./common/reset.css");
 @import url("./common/font-icon.css");
 
-body{ background: var(--color-mian-bg);}
+body {
+  background: var(--color-mian-bg);
+}
 
 #app {
   width: 100vw;
   height: 100vh;
 }
-
-
 </style>

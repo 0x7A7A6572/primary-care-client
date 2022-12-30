@@ -20,7 +20,7 @@ const routes = [
     path: '/chat/room',
     name: 'chatRoom',
     meta: { title: ' ', navbarShow: true },
-    component: () => import('../views/ChatView/ChatRoomView.vue')
+    component: () => import('../views/ChatView/ChatRoom/ChatRoomView.vue')
   },
   // 预约挂号
   {

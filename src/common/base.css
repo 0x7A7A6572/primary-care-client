@@ -10,6 +10,10 @@
   --border-radius-medium: 8px; /* 盒子圆角-中 */
   --border-radius-large: 10px; /* 盒子圆角-大 */
   --border-radius-larger: 14px; /* 盒子圆角-很大 */
+      /* 文字尺寸 */
+    --font-size-sm:14px;
+    --font-size-base:18px;
+    --font-size-lg:22px;
 }
 
  /* 大标题 */

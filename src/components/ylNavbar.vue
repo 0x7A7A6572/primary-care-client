@@ -25,8 +25,8 @@ export default {
   watch: {
     $route(to, from) {
       this.title = to.meta.title;
+      this.$refs['slotTitle'].innerHTML = '';
       if(to.query.slotTitle){ 
-        this.$refs['slotTitle'].innerHTML = '';
         this.$refs['slotTitle'].appendChild(to.query.slotTitle);
       }
       // this.$refs['slotTitle'].innerHTML = (to.query.slotTitle || '');

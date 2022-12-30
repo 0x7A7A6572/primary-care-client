@@ -16,6 +16,12 @@ const routes = [
     meta: { tabbarShow: true  },
     component: () => import('../views/ChatView/ChatView.vue')
   },
+  {
+    path: '/chat/room',
+    name: 'chatRoom',
+    meta: { title: ' ', navbarShow: true },
+    component: () => import('../views/ChatView/ChatRoomView.vue')
+  },
   // 预约挂号
   {
     path: '/doctor',

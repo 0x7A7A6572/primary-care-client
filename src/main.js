@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import httpApi from "@/http";
 // import Vant from 'vant'; // 全部导入
-import { Icon, DropdownMenu, DropdownItem, Sticky ,Search,List,Cell} from 'vant'; // 按需导入
+import { Icon, DropdownMenu, DropdownItem, Sticky ,Search,List,Cell,Tag } from 'vant'; // 按需导入
 
 import 'vant/lib/index.css';
 
@@ -30,6 +30,8 @@ Vue.use(Search);
 Vue.use(List);
 Vue.use(Cell);
 Vue.use(Sticky);
+Vue.use(Tag);
+
 
 Vue.config.productionTip = false;
 Vue.prototype.$api = httpApi;

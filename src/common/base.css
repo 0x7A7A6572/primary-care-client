@@ -1,15 +1,19 @@
 :root {
-  --color-main: #00DC05; /* 主色调 */
+  --color-main: #4fc08d; /* 主色调 */
   --color-mian-text: #1a191e; /* 主字体色 */
   --color-second-text: #40404d; /* 辅助字体色 */
   --color-third-text: #adadad; /* 失效字体色 */
+  --color-light-text: rgb(247, 247, 247);
   --color-mian-bg: #E1E1E1; /* 大背景色 */
   --color-box-bg: #f8fff9; /* 盒子背景色 */
-  --box-shadow: 1px 1px 6px #94ff7edc; /* 盒子阴影色 */
+  --color-light:  #7effb8dc; 
+  --box-shadow: 1px 1px 6px #7effc9dc; /* 盒子阴影色 */
   --border-radius-small: 5px; /* 盒子圆角-小 */
   --border-radius-medium: 8px; /* 盒子圆角-中 */
   --border-radius-large: 10px; /* 盒子圆角-大 */
   --border-radius-larger: 14px; /* 盒子圆角-很大 */
+  --icon-size: 24px;
+  --color-desc-text: #ff7348;
       /* 文字尺寸 */
     --font-size-sm:14px;
     --font-size-base:18px;
@@ -51,11 +55,26 @@
   padding: 10px;
 }
 
+/* 图标按钮 */
+.icon-btn{
+  background: var(--color-main);
+  color: white;
+  width: fit-content;
+  padding: 5px 10px;
+  font-size: small;
+  border-radius: var(--border-radius-medium);
+  box-shadow: var(--box-shadow);
+}
+
 .box-round{
   background-color: #fff;
   border-radius: var(--border-radius-larger);
   padding: 10px;
   width: fit-content;
+}
+
+.shadow{
+  box-shadow: var(--box-shadow);
 }
 
 /* 功能类 */
@@ -71,6 +90,37 @@
   display: flex;
   flex-direction: column;
 }
+
+.text-blod{
+  font-weight: bold;
+}
+
+.border{
+  border: 1px solid var(--color-main)
+}
+.border-s{
+  border: 2px solid var(--color-main)
+}
+
+/* 遮罩 */
+.mask {
+  background: #000000a3;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+/* 单行文本溢出显示... */
+.text-of-e{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
 /* 路由跳转动画 */
 .Skright-enter-active,
 .Skright-leave-active,

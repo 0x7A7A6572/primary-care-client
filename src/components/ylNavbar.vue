@@ -4,7 +4,8 @@
       <van-icon class-prefix="yl-icon" name="left_arrow" />
     </div>
     <div class="yl-navbar-title text-large">
-      {{ $route.meta.title || $route.name }}
+      <div ref="slotTitle"></div>
+      {{ title }}
     </div>
   </div>
 </template>
@@ -16,14 +17,23 @@ export default {
   components: {
     [Icon.name]: Icon,
   },
-  props: {
-    title: {
-      type: String,
-      default: "标题",
+  data() {
+    return {
+      title: this.$route.meta.title
+    };
+  },
+  watch: {
+    $route(to, from) {
+      this.title = to.meta.title;
+      this.$refs['slotTitle'].innerHTML = '';
+      if(to.query.slotTitle){ 
+        this.$refs['slotTitle'].appendChild(to.query.slotTitle);
+      }
+      // this.$refs['slotTitle'].innerHTML = (to.query.slotTitle || '');
     },
   },
-  data() {
-    return {};
+  mounted(){
+  
   },
   methods: {
     onLeftArrowClick() {
@@ -47,11 +57,14 @@ export default {
   padding: 10px;
   background: var(--color-box-bg);
   height: 60px;
-  font-size: 8vw;
+  font-size: 20px;
   font-weight: bolder;
   box-shadow: 0px -2px 8px var(--color-main-bg);
+  z-index: 10;
   > .yl-navbar-title {
+    display: flex;
     // font-size: var();
+    align-items: center;
     color: var(--color-main);
     padding-left: 10px;
   }

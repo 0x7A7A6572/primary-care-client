@@ -17,6 +17,28 @@ const routes = [
     component: () => import('../views/ChatView/ChatView.vue')
   },
   {
+    path: '/chat/room',
+    name: 'chatRoom',
+    meta: { title: ' ', navbarShow: true },
+    component: () => import('../views/ChatView/ChatRoom/ChatRoomView.vue')
+  },
+  // 预约挂号
+  {
+    path: '/doctor',
+    name: 'doctor',
+    meta: { tabbarShow:false,
+    title: '预约挂号', navbarShow: true},
+    component: () => import('../views/HomeView/doctor.vue')
+  },
+  // 选择科室
+  {
+    path: '/depa',
+    name: 'depa',
+    meta: { tabbarShow:false,
+    title: '选择科室', navbarShow: true},
+    component: () => import('../views/HomeView/depa.vue')
+  },
+  {
     path: '/medicine',
     name: 'medicine',
     meta: { tabbarShow: true },
@@ -33,7 +55,14 @@ const routes = [
     name: 'MedicationReminder',
     meta: { title: '添加用药提醒', navbarShow: true  },
     component: () => import('../views/HomeView/MedicationReminder.vue')
+  },
+  { // 用药提醒页
+    path: '/home/OnlineConsultation',
+    name: 'OnlineConsultation',
+    meta: { title: '线上问诊', navbarShow: true  },
+    component: () => import('../views/OnlineConsultation/OnlineConsultation.vue')
   }
+  
 ]
 
 const router = new VueRouter({

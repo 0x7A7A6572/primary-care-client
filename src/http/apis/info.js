@@ -36,7 +36,7 @@ const info = {
   queryDoctors(data) {
     return myAxios({
       method: "post",
-      url: "/hospital/docotor",
+      url: "/doctor/byHidAndDid",
       data,
     })
   },

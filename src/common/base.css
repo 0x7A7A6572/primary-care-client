@@ -97,6 +97,24 @@
   border: 2px solid var(--color-main)
 }
 
+/* 遮罩 */
+.mask {
+  background: #000000a3;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+/* 单行文本溢出显示... */
+.text-of-e{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
 
 /* 路由跳转动画 */
 .Skright-enter-active,

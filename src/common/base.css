@@ -3,10 +3,11 @@
   --color-mian-text: #1a191e; /* 主字体色 */
   --color-second-text: #40404d; /* 辅助字体色 */
   --color-third-text: #adadad; /* 失效字体色 */
+  --color-light-text: rgb(247, 247, 247);
   --color-mian-bg: #E1E1E1; /* 大背景色 */
   --color-box-bg: #f8fff9; /* 盒子背景色 */
   --color-light:  #7effb8dc; 
-  --box-shadow: 1px 1px 6px #94ff7edc; /* 盒子阴影色 */
+  --box-shadow: 1px 1px 6px #7effc9dc; /* 盒子阴影色 */
   --border-radius-small: 5px; /* 盒子圆角-小 */
   --border-radius-medium: 8px; /* 盒子圆角-中 */
   --border-radius-large: 10px; /* 盒子圆角-大 */

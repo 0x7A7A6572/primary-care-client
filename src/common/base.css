@@ -1,14 +1,26 @@
 :root {
-  --color-main: #4fc08d; /* 主色调 */
-  --color-mian-text: #1a191e;  /* 主字体色 */
-  --color-second-text: #40404d;  /* 辅助字体色 */
-  --color-third-text: #adadad;  /* 失效字体色 */
+  /* 主色调 */
+  --color-main: #4fc08d;
+  /* 主字体色 */
+  --color-mian-text: #1a191e;
+  /* 辅助字体色 */
+  --color-second-text: #40404d;
+  /* 失效字体色 */
+  --color-third-text: #adadad;
   --color-light-text: rgb(247, 247, 247);
-  --color-mian-bg: #E1E1E1; /* 大背景色 */
-  --color-box-bg: #f8fff9;  /* 盒子背景色 */
+  /* 大背景色 */
+  --color-mian-bg: #E1E1E1;
+  /* 盒子背景色 */
+  --color-box-bg: #f8fff9;
   --color-light: #7effb8dc;
   --box-shadow: 1px 1px 6px #7effc9dc;
-  
+
+  /* 行为相关颜色 */
+  --color-primary: #007aff;
+  --color-success: #4cd964;
+  --color-warning: #f0ad4e;
+  --color-error: #dd524d;
+
   /* 圆角 */
   --border-radius-small: 5px;
   --border-radius-medium: 8px;

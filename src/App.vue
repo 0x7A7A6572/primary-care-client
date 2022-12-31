@@ -63,7 +63,7 @@ export default {
 body {
   background: var(--color-mian-bg);
 }
-
+::-webkit-scrollbar{display: none;}
 #app {
   width: 100vw;
   height: 100vh;

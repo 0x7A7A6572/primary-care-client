@@ -19,29 +19,29 @@
 
     <!-- 聊天窗口 -->
     <div class="chat-room-content">
-      <ylMsg msg="sssssssssssssssssss" theme="others"></ylMsg>
-      <ylMsg msg="131321313" theme="selft"></ylMsg>
-      <ylMsg msg="2022-10-20" theme="system"></ylMsg>
-      <ylMsg msg="你麻痹" theme="selft"></ylMsg>
-      <ylMsg msg="131321313" theme="others"></ylMsg>
-      <ylMsg msg="131321313" theme="selft"></ylMsg>
-      <ylMsg
+      <ylChatMsg msg="sssssssssssssssssss" theme="others"></ylChatMsg>
+      <ylChatMsg msg="131321313" theme="selft"></ylChatMsg>
+      <ylChatMsg msg="2022-10-20" theme="system"></ylChatMsg>
+      <ylChatMsg msg="你麻痹" theme="selft"></ylChatMsg>
+      <ylChatMsg msg="131321313" theme="others"></ylChatMsg>
+      <ylChatMsg msg="131321313" theme="selft"></ylChatMsg>
+      <ylChatMsg
         msg="啊是发卡号是否可见哈萨克回复客户是分开是开发和空间是看"
         theme="selft"
-      ></ylMsg>
-      <ylMsg msg="131321313" theme="selft"></ylMsg>
-      <ylMsg msg="131321313" theme="selft"></ylMsg>
-      <ylMsg msg="131321313" theme="selft"></ylMsg>
-      <ylMsg msg="131321313" theme="selft"></ylMsg>
-      <ylMsg msg="2022-10-20" theme="system"></ylMsg>
-      <ylMsg
+      ></ylChatMsg>
+      <ylChatMsg msg="131321313" theme="selft"></ylChatMsg>
+      <ylChatMsg msg="131321313" theme="selft"></ylChatMsg>
+      <ylChatMsg msg="131321313" theme="selft"></ylChatMsg>
+      <ylChatMsg msg="131321313" theme="selft"></ylChatMsg>
+      <ylChatMsg msg="2022-10-20" theme="system"></ylChatMsg>
+      <ylChatMsg
         msg="What's wrong with you ? funck you! get the fucking out!!!"
         theme="others"
-      ></ylMsg>
-      <ylMsg msg="131321313" theme="selft"></ylMsg>
-      <ylMsg msg="131321313" theme="selft"></ylMsg>
-      <ylMsg msg="131321313" theme="selft"></ylMsg>
-      <ylMsg msg="131321313" theme="selft"></ylMsg>
+      ></ylChatMsg>
+      <ylChatMsg msg="131321313" theme="selft"></ylChatMsg>
+      <ylChatMsg msg="131321313" theme="selft"></ylChatMsg>
+      <ylChatMsg msg="131321313" theme="selft"></ylChatMsg>
+      <ylChatMsg msg="131321313" theme="selft"></ylChatMsg>
 
       <!-- <van-sticky offset-top="80vh"> -->
         <ylChatInput></ylChatInput>
@@ -51,10 +51,10 @@
 </template>
 
 <script>
-import ylMsg from "../ChatRoom/ylMsg.vue";
+import ylChatMsg from "./ylChatMsg.vue";
 import ylChatInput from "../ChatRoom/ylChatInput.vue";
 export default {
-  components: { ylMsg, ylChatInput },
+  components: { ylChatMsg, ylChatInput },
   data() {
     return {
       doctor: this.$route.query.doctor,

@@ -1,5 +1,5 @@
 <template>
-    <div class="yl-msg" v-if="theme == 'system'">
+    <div class="yl-chat-msg" v-if="theme == 'system'">
     <span class="__system">{{ msg }} </span>
   </div>
     <div class="yl-msg" v-else-if="theme == 'others'">
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: "ylMsg",
+  name: "ylChatMsg",
   props: {
     avatar: String,
     msg: String,
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.yl-msg {
+.yl-chat-msg {
   display: flex;
   margin: calc(12px + 1rem) 12px;
   .__msg-avatar {

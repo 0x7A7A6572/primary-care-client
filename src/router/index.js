@@ -8,8 +8,8 @@ const routes = [
   /**---------------------
   *       首页
   * ---------------------*/
-  { path: '/', redirect: '/home' },
-  { path: '/home', name: 'home', component: HomeView, meta: { tabbarShow: true } },
+  { path: '/', redirect: '/Home' },
+  { path: '/Home', name: 'Home', component: HomeView, meta: { tabbarShow: true } },
   // 预约挂号(模块负责人改完删掉)
   {
     path: '/doctor',

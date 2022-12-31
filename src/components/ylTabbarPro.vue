@@ -3,28 +3,28 @@
   <div class="yl-tabbar-pro">
     <div
       :class="['tabbar-item', itemIndex === 0 ? 'active' : '']"
-      @click="itemClick(0, 'home')"
+      @click="itemClick(0, 'Home')"
     >
       <van-icon class-prefix="yl-icon" name="aixinzhijia1" />
       <span>首页</span>
     </div>
     <div
       :class="['tabbar-item', itemIndex === 1 ? 'active' : '']"
-      @click="itemClick(1, 'chat')"
+      @click="itemClick(1, 'ChatList')"
     >
       <van-icon class-prefix="yl-icon" name="xiaoxi" />
       <span>问诊</span>
     </div>
     <div
       :class="['tabbar-item', itemIndex === 2 ? 'active' : '']"
-      @click="itemClick(2, 'medicine')"
+      @click="itemClick(2, 'Medicine')"
     >
       <van-icon class-prefix="yl-icon" name="xiangzi1" />
       <span>药典</span>
     </div>
     <div
       :class="['tabbar-item', itemIndex === 3 ? 'active' : '']"
-      @click="itemClick(3, 'user')"
+      @click="itemClick(3, 'User')"
     >
       <van-icon class-prefix="yl-icon" name="danren" />
       <span>我的</span>

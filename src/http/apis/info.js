@@ -1,9 +1,9 @@
-/* 用户模块相关接口 */
+/* 综合信息模块相关接口 */
 import myAxios from "@/utils/instance";
 const info = {
 
   /**
-   * 查询医院列表
+   * 查询医院列表（分页）
    * @param {{page:Number,pagenum:Number}} data 
    * @returns 
    */
@@ -16,7 +16,7 @@ const info = {
   },
   
   /**
-   * 查询医院列表
+   * 查询医院科室列表
    * @param {{hid:Number}} data 
    * @returns 
    */

@@ -21,7 +21,7 @@ export default {
   created() {
     // 防止首次进入页面时,因未触发路由改变而导致ylTabbar不显示的问题
     // （ylTabbarShow 默认为fasle 可以减少路由对于meta.tabbarShow的配置)
-    if (this.$route.name == "home") {
+    if (this.$route.name == "Home") {
       this.ylTabbarShow = true;
     }
   },
@@ -40,6 +40,8 @@ export default {
       this.ylTabbarShow = to.meta?.tabbarShow || false;
       // 判断路由中topBarShow的值来选择显示/隐藏底部导航
       this.ylNavbarShow = to.meta?.navbarShow || false;
+      // 刷新时更新itemIndex 防止刷新页面回到0
+      this.itemIndex = to.meta.tabbarIndex;
     },
   },
   methods: {
@@ -63,7 +65,9 @@ export default {
 body {
   background: var(--color-mian-bg);
 }
-::-webkit-scrollbar{display: none;}
+::-webkit-scrollbar {
+  display: none;
+}
 #app {
   width: 100vw;
   height: 100vh;

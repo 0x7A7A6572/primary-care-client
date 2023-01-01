@@ -1,5 +1,5 @@
 <template>
-  <div class="yl-msg-item box-round">
+  <div class="yl-msg-item box-round" @click="$emit('click',{user})">
     <img :src="user?.avatar" alt="" />
     <div class="__user-info">
       <span class="__name text-large"

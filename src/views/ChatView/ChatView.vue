@@ -11,6 +11,7 @@
       lastMsg="这个是未读消息，很长很长的未读消息,23123123123123123"
       lastTime="23:59"
       :unreadCount="6"
+      @click="toChatRoom"
     ></YlMsgItem>
     <YlMsgItem
       :user="{
@@ -30,6 +31,18 @@
 import YlMsgItem from "./ylMsgItem.vue";
 export default {
   components: { YlMsgItem },
+  methods:{
+    toChatRoom(e){
+      this.$router.push({
+        path:'/ChatList/ChatRoom',
+        query:{
+          doctor: e.user,
+          title: e.user.name
+        }
+        });
+        console.log(e)
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

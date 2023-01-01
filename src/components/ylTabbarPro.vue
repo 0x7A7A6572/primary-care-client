@@ -49,20 +49,20 @@ export default {
   props: {
     // paths: Array,
     // icons: Array,
-    // itemIndex: {
-    //   type: Number,
-    //   default: 0
-    // }
+    itemIndex: {
+      type: Number,
+      default: 0
+    }
   },
   data() {
     return {
-      itemIndex: 0,
+      // itemIndex: this.$route.meta.tabbarIndex,
     };
   },
   methods: {
     itemClick(index, name) {
       this.$emit("onItemClick", { index, name });
-      this.itemIndex = index;
+      // this.itemIndex = index;
     },
   },
 };

@@ -2,11 +2,11 @@
     <div class="yl-chat-msg" v-if="theme == 'system'">
     <span class="__system">{{ msg }} </span>
   </div>
-    <div class="yl-msg" v-else-if="theme == 'others'">
+    <div class="yl-chat-msg" v-else-if="theme == 'others'">
     <img class="__msg-avatar" :src="avatar" alt="" />
     <div class="__msg-content">{{ msg }}</div>
   </div>
-  <div class="yl-msg __self" v-else>
+  <div class="yl-chat-msg __self" v-else>
     <div class="__msg-content">{{ msg }}</div>
     <img class="__msg-avatar" :src="avatar" alt="" />
   </div>

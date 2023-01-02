@@ -64,10 +64,12 @@ export default {
 
 body {
   background: var(--color-mian-bg);
+  user-select: none;
 }
 ::-webkit-scrollbar {
   display: none;
 }
+
 #app {
   width: 100vw;
   height: 100vh;

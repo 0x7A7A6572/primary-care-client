@@ -1,8 +1,9 @@
 :root {
   /* 主色调 */
   --color-main: #4fc08d;
+  --color-secondary: #00d36d;
   /* 主字体色 */
-  --color-mian-text: #1a191e;
+  --color-main-text: #1a191e;
   /* 辅助字体色 */
   --color-second-text: #40404d;
   /* 失效字体色 */
@@ -50,7 +51,12 @@
   /* 其他 */
   --color-fab-bg: linear-gradient(120deg, #8dff7edc, var(--color-main) );
 }
-
+/* 超大标题 */
+.text-larger-x {
+  color: var(--color-mian-text);
+  font-size: var(--font-size-lgxx);
+  font-weight: bold;
+}
 /* 大标题 */
 .text-larger {
   color: var(--color-mian-text);

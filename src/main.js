@@ -4,7 +4,10 @@ import router from './router'
 import store from './store'
 import httpApi from "@/http";
 // import Vant from 'vant'; // 全部导入
-import { Icon, DropdownMenu, DropdownItem, Sticky ,Popup ,Search,List,Cell,Tag, Image,Button,Divider } from 'vant'; // 按需导入
+import { Icon, DropdownMenu, DropdownItem,
+   Sticky ,Popup ,Search,List,Cell,Tag,
+    Image,Button,Divider,Form,Field
+ } from 'vant'; // 按需导入
 
 import 'vant/lib/index.css';
 
@@ -15,6 +18,7 @@ import ylNavbar from "@/components/ylNavbar.vue";
 import ylTitle from "@/components/ylTitle.vue";
 import ylSearch from "@/components/ylSearch.vue";
 import ylEmpty from "@/components/ylEmpty.vue";
+
 Vue.component("ylTabbarPro",ylTabbarPro);
 // Vue.component("ylTabbar",ylTabbar);
 Vue.component("ylNavbar",ylNavbar);
@@ -37,8 +41,13 @@ Vue.use(Popup);
 Vue.use(Tag);
 Vue.use(Button);
 Vue.use(Divider);
+Vue.use(Form);
+Vue.use(Field);
 
 Vue.config.productionTip = false;
+import ylToast from './components/ylToast/ylToast.js';
+Vue.use(ylToast);
+// Vue.prototype.$ylToast = ylToast;
 Vue.prototype.$api = httpApi;
 
 new Vue({

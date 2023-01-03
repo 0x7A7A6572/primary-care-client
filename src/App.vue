@@ -74,4 +74,35 @@ body {
   width: 100vw;
   height: 100vh;
 }
+
+/* 修改vant组件全局样式 */
+
+// van-field
+.van-field__body {
+    >input{
+    border-bottom: 1px solid var(--color-third-text);
+  }
+}
+.van-field__body{
+  >input:focus{
+    border-bottom: 1px solid var(--color-main) !important;
+  }
+}
+.van-field__control{
+  padding: var(--padding-base) 0px !important;
+}
+.van-field--error .van-field__control, .van-field--error .van-field__control::placeholder {
+    color: var( --color-third-text) !important;
+    -webkit-text-fill-color: currentColor;
+}
+
+// van-button
+.van-button{
+  background: var(--color-secondary) !important;
+  border: none !important;
+  border-radius: var(--border-radius-medium) !important;
+  font-size: var(--font-size-lg) !important;
+  box-shadow: var(--box-shadow);
+  font-weight: bold;
+}
 </style>

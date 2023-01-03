@@ -32,6 +32,15 @@ const routes = [
     title: '选择科室', navbarShow: true},
     component: () => import('../views/HomeView/depa.vue')
   },
+  // 选择科室  
+  {
+    path: '/doctorname',
+    name: 'doctorname',
+    meta: { tabbarShow: false ,
+    title:'',  navbarShow: true},
+    
+    component: () => import('../views/HomeView/doctorname.vue')
+  },
   {
     path: '/medicine',
     name: 'medicine',

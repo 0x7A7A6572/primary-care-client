@@ -6,7 +6,7 @@
   --color-mian-bg: #E1E1E1; /* 大背景色 */
   --color-box-bg: #f8fff9; /* 盒子背景色 */
   --color-light:  #7effb8dc; 
-  --box-shadow: 1px 1px 6px #94ff7edc; /* 盒子阴影色 */
+  --box-shadow: 2px 2px 6px #4fc08d; /* 盒子阴影色 */
   --border-radius-small: 5px; /* 盒子圆角-小 */
   --border-radius-medium: 8px; /* 盒子圆角-中 */
   --border-radius-large: 10px; /* 盒子圆角-大 */

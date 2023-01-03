@@ -53,7 +53,6 @@ export default {
     },
     Jump(e){
    this.$router.push('/depa')
-   console.log(e)
  sessionStorage.setItem('hid',  JSON.stringify(e))
     }
   },

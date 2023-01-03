@@ -46,6 +46,9 @@
   --margin-sm: 8px;
   --margin-base: 10px;
   --margin-lg: 16px;
+
+  /* 其他 */
+  --color-fab-bg: linear-gradient(120deg, #8dff7edc, var(--color-main) );
 }
 
 /* 大标题 */

@@ -41,7 +41,7 @@ export default {
   }
   .__msg-content {
     text-align: left;
-    max-width: calc(100% - 16vw);
+    max-width: calc(100% - 30vw);
     position: relative;
     top: 1rem;
     left: 10px;

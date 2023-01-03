@@ -32,6 +32,7 @@ Vue.use(Search);
 Vue.use(List);
 Vue.use(Cell);
 Vue.use(Sticky);
+Vue.use(Image);
 
 Vue.config.productionTip = false;
 Vue.prototype.$api = httpApi;

@@ -1,5 +1,23 @@
 <template>
   <div class="home">
+    <!-- 用户信息 -->
+    <div class="home-user">
+      <img class="__avatar" :src="$store.getters.user.avatar" alt="">
+      <span class="text-larger" style=""> 您好！</span>
+        <span class="text-larger">{{$store.getters.user.name}}</span>
+    </div>
+    <!-- 主功能模块 -->
+    <div class="main-func">
+      <div class="box __func-item">
+        <van-icon class-prefix="yl-icon" name="yiliaoqicai2" />
+        <span>在线问诊</span>
+        
+      </div>
+      <div class="box __func-item">
+        <van-icon class-prefix="yl-icon" name="jijiu1" />
+        <span>预约挂号</span>
+      </div>
+    </div>
     <!-- ylTitle 演示 -->
     <div class="box">
       <ylTitle title="健康新闻" />
@@ -34,8 +52,22 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .home {
-  padding: 10px;
+  padding: var(--padding-base);
+  .home-user{
+    display: flex;
+    align-items: center;
+    .__avatar{
+      width: 20vw;
+      height: 20vw;
+      background: var(--color-main);
+      border-radius: 50%;
+      margin-right: var(--margin-base);
+    }
+  }
+  .main-func{
+    display: flex;
+  }
 }
 </style>

@@ -69,7 +69,7 @@ const routes = [
   },
   { // 添加用药提醒
     path: '/MedicationReminder/add',
-    name: 'MedicationReminder',
+    name: 'MedicationReminderAdd',
     meta: { title: '添加用药提醒', navbarShow: true },
     component: () => import('../views/MedicationReminderView/MedReminderAdd.vue')
   },

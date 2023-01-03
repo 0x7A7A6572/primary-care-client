@@ -161,7 +161,7 @@ const routes = [
  *     医疗宝典
  * ---------------------*/
   { // 医疗宝典分类选择
-    path: '/MedicalTreasure/',
+    path: '/MedicalTreasure',
     name: 'MedicalTreasure',
     meta: {
       title: '医疗宝典', navbarShow: true

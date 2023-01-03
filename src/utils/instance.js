@@ -1,8 +1,9 @@
 import axios from "axios";
 import store from '../store';
+import config from "./config";
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3010/',
+  baseURL: config.baseUrl,
   timeout: 5000,
   headers: {
     "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",

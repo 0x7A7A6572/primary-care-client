@@ -19,7 +19,7 @@
 
     <br />
     <!-- 路由跳转 -->
-    <router-link to="/home/MedicationReminder">
+    <router-link to="/MedicationReminder/add">
       <div class="box-round flex-d-column flex-center" style="color: red">
         <van-icon class-prefix="yl-icon" name="wancheng" size="8vw" />
         <span style="padding-top: 5px">用药提醒</span>
@@ -27,7 +27,6 @@
     >
   </div>
 </template>
-
 <script>
 export default {
   name: "HomeView",

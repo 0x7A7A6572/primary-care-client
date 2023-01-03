@@ -141,6 +141,11 @@ export default {
     background: white;
     z-index: 3;
     box-shadow: var(--box-shadow);
+    // border: 2px solid var(--color-main);
+    // border-top: none;
+    padding: 6px;
+    max-height: 50vh;
+    overflow: scroll;
   }
 }
 </style>

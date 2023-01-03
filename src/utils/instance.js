@@ -12,8 +12,12 @@ const instance = axios.create({
 // 请求拦截器,在请求之前做一些处理
 instance.interceptors.request.use(
   config => {
+
     // 请求时带上token
     if (store.getters.token) config.headers["authorization"] = store.getters.token;
+
+    // TODO 测试环境 直接使用已鉴权的token
+    config.headers["authorization"] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0NTAxMTExMTExMzMzMTExMTIiLCJuYW1lIjoi55So5oi35ZCNIiwiaWF0IjoxNjcyMjEzMDkyLCJleHAiOjE2NzM1MDkwOTJ9.gChS5QSD81OC_nKoesAxi9_OgSWmc-D0NVafZS_rFu8';
     return config;
   },
   error => {

@@ -4,17 +4,19 @@ import router from './router'
 import store from './store'
 import httpApi from "@/http";
 // import Vant from 'vant'; // 全部导入
-import { Icon, DropdownMenu, DropdownItem, Sticky ,Popup ,Search,List,Cell} from 'vant'; // 按需导入
+import { Icon, DropdownMenu, DropdownItem, Sticky ,Popup ,Search,List,Cell,Tag, Image,Button,Divider } from 'vant'; // 按需导入
 
 import 'vant/lib/index.css';
 
 // 自定义的公共组件全局引入
-import ylTabbar from "@/components/ylTabbar.vue";
+import ylTabbarPro from "@/components/ylTabbarPro.vue";
+// import ylTabbar from "@/components/ylTabbar.vue";
 import ylNavbar from "@/components/ylNavbar.vue";
 import ylTitle from "@/components/ylTitle.vue";
 import ylSearch from "@/components/ylSearch.vue";
 import ylEmpty from "@/components/ylEmpty.vue";
-Vue.component("ylTabbar",ylTabbar);
+Vue.component("ylTabbarPro",ylTabbarPro);
+// Vue.component("ylTabbar",ylTabbar);
 Vue.component("ylNavbar",ylNavbar);
 Vue.component("ylTitle",ylTitle);
 Vue.component("ylSearch",ylSearch);
@@ -30,7 +32,6 @@ Vue.use(Search);
 Vue.use(List);
 Vue.use(Cell);
 Vue.use(Sticky);
-Vue.use(Popup);
 
 Vue.config.productionTip = false;
 Vue.prototype.$api = httpApi;

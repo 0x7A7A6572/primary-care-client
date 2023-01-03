@@ -39,6 +39,10 @@ Vue.use(Button);
 Vue.use(Tag);
 Vue.use(Divider);
 
+Vue.use(Popup);
+Vue.use(Tag);
+Vue.use(Button);
+Vue.use(Divider);
 
 Vue.config.productionTip = false;
 Vue.prototype.$api = httpApi;

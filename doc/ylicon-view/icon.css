@@ -2,9 +2,9 @@
  * @file icon.css
  */
 
-@font-face {
-    font-family: "ylicon";
-    src:url("../../src/assets/ttf/ylicon.woff2") format("woff2");
+ @font-face {
+  font-family: "ylicon";
+  src:url("../../src/assets/ttf/ylicon.woff2") format("woff2");
 }
 
 
@@ -597,8 +597,28 @@
   content: "\ecbc";
 }
 
-.icon-yiliao_wenzhen_zhenduan_xiaoxi:before {
+.icon-xiaoxi-fill:before {
   content: "\ec88";
+}
+
+.icon-warning:before {
+  content: "\ea8f";
+}
+
+.icon-question:before {
+  content: "\ea91";
+}
+
+.icon-info:before {
+  content: "\ea92";
+}
+
+.icon-error:before {
+  content: "\ea7f";
+}
+
+.icon-success:before {
+  content: "\ea80";
 }
 
 

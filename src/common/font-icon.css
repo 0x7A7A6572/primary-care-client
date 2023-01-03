@@ -5,7 +5,8 @@
 }
 
 .yl-icon {
-  font-family: 'yl-icon' !important;
+  font-family: "yl-icon" !important;
+  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -14,6 +15,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 
 .yl-icon-wuguan:before {
 content: "\ecda";
@@ -591,6 +593,26 @@ content: "\ecd9";
 content: "\ecbc";
 }
 
-.yl-icon-yiliao_wenzhen_zhenduan_xiaoxi:before {
+.yl-icon-xiaoxi-fill:before {
 content: "\ec88";
+}
+
+.yl-icon-warning:before {
+content: "\ea8f";
+}
+
+.yl-icon-question:before {
+content: "\ea91";
+}
+
+.yl-icon-info:before {
+content: "\ea92";
+}
+
+.yl-icon-error:before {
+content: "\ea7f";
+}
+
+.yl-icon-success:before {
+content: "\ea80";
 }

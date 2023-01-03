@@ -35,6 +35,8 @@ export default {
   // 监听路由变化
   watch: {
     $route(to, from) {
+      // TODO 登陆拦截
+
       console.log("route change:", { to, from });
       // 判断路由中navShow的值来选择显示/隐藏底部导航
       this.ylTabbarShow = to.meta?.tabbarShow || false;
@@ -42,6 +44,9 @@ export default {
       this.ylNavbarShow = to.meta?.navbarShow || false;
       // 刷新时更新itemIndex 防止刷新页面回到0
       this.itemIndex = to.meta.tabbarIndex;
+      
+      // TODO 防止用户刷新行为的数据持久化
+
     },
   },
   methods: {

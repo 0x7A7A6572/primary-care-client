@@ -1,7 +1,7 @@
 <template >
   <div class="yl-toast" v-if="show">
     <i
-      v-show="type == 'none'"
+      v-show="type !== 'none'"
       :class="['yl-icon', 'yl-icon-' + type]"
       :style="{
         color: colors[type],

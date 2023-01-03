@@ -65,7 +65,8 @@ export default {
           this.$router.push('/home');
           this.$ylToast({
             msg: "登陆成功",
-            duration: 200,
+            type:'success',
+            duration: 3000,
           });
         } else {
           this.$ylToast({

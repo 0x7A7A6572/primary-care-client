@@ -67,7 +67,7 @@ export default {
     color: var(--title-text-color);
     font-size: var(--fontsize-large);
     font-style: italic;
-    z-index: 1;
+    z-index: 0;
     &::after {
       content: "";
       position: absolute;
@@ -86,7 +86,7 @@ export default {
     font-size: medium;
     // font-style: italic;
     padding-left: 15px;
-    z-index: 1;
+    z-index: 0;
     &::after {
       content: "";
       position: absolute;

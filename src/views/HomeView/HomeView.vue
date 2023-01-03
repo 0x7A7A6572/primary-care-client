@@ -2,63 +2,120 @@
   <div class="home">
     <!-- 用户信息 -->
     <div class="home-user">
-      <img class="__avatar" :src="$store.getters.user.avatar" alt="">
+      <img class="__avatar" :src="$store.getters.user?.avatar" alt="" />
       <span class="text-larger" style=""> 您好！</span>
-        <span class="text-larger">{{$store.getters.user.name}}</span>
+      <span class="text-larger">{{ $store.getters.user?.name }}</span>
     </div>
     <!-- 主功能模块 -->
-    <div class="main-func">
-      <div class="box __func-item">
-        <van-icon class-prefix="yl-icon" name="yiliaoqicai2" />
+    <div class="main-func text-larger">
+      <router-link to="/OnlineConsultation" class="box __func-item left">
+        <van-icon class-prefix="yl-icon" name="yiliaoqicai2" size="8vw" />
         <span>在线问诊</span>
-        
-      </div>
-      <div class="box __func-item">
-        <van-icon class-prefix="yl-icon" name="jijiu1" />
+        <span class="text-small" style="color:#fffd">面对面的解答您的病状</span>
+      </router-link>
+      <router-link to="/AppointmentRegist" class="box __func-item right">
+        <van-icon class-prefix="yl-icon" name="jijiu1" size="8vw" />
         <span>预约挂号</span>
+        <span class="text-small" style="color:#fffd">快速解决"一号难求"</span>
+      </router-link>
+    </div>
+
+    <!-- 常用模块 -->
+    <div class="common-func">
+      <div style="color: var(--color-success)">
+        <router-link
+          to="/MedicalTreasure"
+          class="box-round flex-d-column flex-center"
+        >
+          <van-icon class-prefix="yl-icon" name="yiyaoxiang" size="8vw" />
+          <span style="padding-top: 5px">医疗宝典</span>
+        </router-link>
+      </div>
+      <div style="color: var(--color-warning)">
+        <router-link to="/Medicine" class="box-round flex-d-column flex-center">
+          <van-icon class-prefix="yl-icon" name="yaoping" size="8vw" />
+          <span style="padding-top: 5px">药品查询</span>
+        </router-link>
+      </div>
+      <div style="color: var(--color-primary)">
+        <router-link to="/Pharmacy" class="box-round flex-d-column flex-center">
+          <van-icon class-prefix="yl-icon" name="shangdian" size="8vw" />
+          <span style="padding-top: 5px">社区药房</span>
+        </router-link>
+      </div>
+      <div style="color: var(--color-error)">
+        <router-link
+          to="/MedicationReminder/add"
+          class="box-round flex-d-column flex-center"
+        >
+          <van-icon class-prefix="yl-icon" name="wancheng" size="8vw" />
+          <span style="padding-top: 5px">用药提醒</span>
+        </router-link>
       </div>
     </div>
-    <!-- ylTitle 演示 -->
-    <div class="box">
+    <!-- 健康新闻 -->
+    <div class="news-list box-round">
       <ylTitle title="健康新闻" />
-      <br />balibalibalibali
+
+      <!-- <van-list finished-text="没有更多了"> -->
+      <ylNewsItem v-for="item in newsList" :key="item.id" 
+      :news="item"
+      @click="toNewsPage(item)"
+      />
+      <!-- </van-list> -->
     </div>
 
-    <br />
-    <ylTitle title="科室列表" theme="left" color="var(--color-second-text)" />
-
-    <br />
-
-    <!-- 使用第三方图标 演示 -->
-    <!-- 通过 class-prefix 指定类名为 yl-icon -->
-    <van-icon class-prefix="yl-icon" name="dingwei" />
-    <van-icon class-prefix="yl-icon" name="qiche2" size="5vw" />
-    <van-icon class-prefix="yl-icon" name="qiche2" color="#dd6ff3" />
-
-    <br />
-    <!-- 路由跳转 -->
-    <router-link to="/MedicationReminder/add">
-      <div class="box-round flex-d-column flex-center" style="color: red">
-        <van-icon class-prefix="yl-icon" name="wancheng" size="8vw" />
-        <span style="padding-top: 5px">用药提醒</span>
-      </div></router-link
-    >
+    <!-- 社区活动 -->
+    <div class="activity-list box-round">
+      <ylTitle title="社区活动" />
+    </div>
   </div>
 </template>
 <script>
+import ylNewsItem from "./ylNewsItem.vue";
 export default {
   name: "HomeView",
-  components: {},
+  components: { ylNewsItem },
+  data() {
+    return {
+      newsList: [],
+    };
+  },
+  created() {
+    this.$api.news
+      .list({
+        page: 1,
+        pagenum: 2,
+      })
+      .then((res) => {
+        if (res.code == 200) {
+          console.log(res);
+          this.newsList = res.data.data;
+        }
+      });
+  },
+  methods:{
+    toNewsPage(news){
+     this.$router.push({
+      path:'/News/Details',
+      params: {
+        news
+      }
+     })
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .home {
   padding: var(--padding-base);
-  .home-user{
+  padding-bottom: 10vh;
+  .home-user {
     display: flex;
     align-items: center;
-    .__avatar{
+    margin-bottom: var(--margin-base);
+    .__avatar {
       width: 20vw;
       height: 20vw;
       background: var(--color-main);
@@ -66,8 +123,55 @@ export default {
       margin-right: var(--margin-base);
     }
   }
-  .main-func{
+  .main-func {
     display: flex;
+    .__func-item {
+      flex: 1;
+      border-radius: var(--border-radius-larger);
+      min-height: 24vw;
+      padding: var(--padding-base);
+      &.left {
+        margin: var(--margin-base) calc(var(--margin-base) / 2)
+          var(--margin-base) 0;
+        background: var(--color-secondary);
+        color: white;
+        box-shadow: 2px 2px 8px var(--color-secondary);
+      }
+      &.right {
+        margin: var(--margin-base) 0 var(--margin-base)
+          calc(var(--margin-base) / 2);
+        background: var(--color-primary);
+        color: white;
+        box-shadow: 2px 2px 8px var(--color-primary);
+      }
+      // width: ;
+      > span {
+        padding: var(--padding-base);
+        white-space: nowrap;
+      }
+    }
+  }
+  .common-func {
+    display: flex;
+    justify-content: space-between;
+    margin: var(--margin-base) 0;
+    >div{ // 兼容横屏
+      min-width: 22vw;
+      flex: 1;
+      >a{
+        min-width: 90%;
+        margin: auto;
+      }
+    }
+  
+  }
+  .news-list {
+    width: 100%;
+  }
+  .activity-list{
+    width: 100%;
+    margin: var(--margin-base) 0;
+    min-height: 30vh;
   }
 }
 </style>

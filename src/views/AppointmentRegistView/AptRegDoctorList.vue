@@ -16,51 +16,72 @@
         <ylTitle title="医生列表" theme="left" color="var(--color-second-text)" />
         <div>
         <ul class="ad">
-          <li v-for="(item) in arr " :key="item.id" class="doctor" >
-            <img :src="item.avatar" alt="">
-            <div>
-              <h3>{{ item.name }}</h3>
-              <span>{{ item.grade }}</span>
-                <p>擅长:{{ item.good_at }}</p>
-            </div>
-          </li>
+<ylPsersonDoctor
+class="doctor box"
+v-for="(item) in arr " :key="item.id"
+:doctor="item"
+>
+<span class="icon-btn yu" @click="jump(item.name)">预约</span>
+</ylPsersonDoctor>
         </ul>
       </div>
     </div>
 </template>
 <script>
-import doctor from '@/http/apis/doctor'
-
+import ylPsersonDoctor from '@/components/ylPsersonDoctor.vue'
 export default {
+    components:{
+        ylPsersonDoctor
+    },
   data(){
     return {
         hid:'',
         did:'',
         arr:[],
-        arr1:[]
+        arr1:[],
+        title1:'',
+        name1:''
     }
   },
   mounted(){
  this.hid= JSON.parse( sessionStorage.getItem('doctor')).hid
- console.log(this.hid)
  this.did=JSON.parse( sessionStorage.getItem('doctor')).did
 this.$route.meta.title=JSON.parse( sessionStorage.getItem('doctor')).title
+this.name1=JSON.parse( sessionStorage.getItem('doctor')).title
  this.arr1=this.hid = JSON.parse((sessionStorage.getItem('hid')))
+ this.title1=JSON.parse((sessionStorage.getItem('hid'))).title
 let data={hid:this.hid.hid,did:this.did}
-console.log(data)
-doctor.list(data).then(res=>{
-  console.log(res)
-  this.arr=res.data.result
-})
+      this.$api.info
+          .queryDoctors( data )
+          .then((res) => {
+              this.arr = res.data;
+          });
+  },
+  methods:{
+    jump(name){
+        sessionStorage.setItem('name',  JSON.stringify(name))
+        this.$router.push('/AppointmentRegist/RegistConfirm')
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.yu{
+ position: relative;
+ top: -55px;
+ right: -240px;
+}
 .ad,.ad1 {
   background-color: #e1e1e1;
   margin-bottom: 49px;
   margin-top: 15px;
+  .tit{
+    display: flex;
+    >span{
+        margin-right: 50px;
+    }
+  }
   >.doctor{
   width: 370px;
   margin: 15px auto;

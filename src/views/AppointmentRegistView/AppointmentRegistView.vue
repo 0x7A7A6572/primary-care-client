@@ -2,7 +2,7 @@
     <div>
       <van-search v-model="value" shape="round" background="var(--color-main)" @search="search" placeholder="请输入医院名称" />
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-  
+
         <div>
           <ul class="ad">
             <li v-for="item in list " :key="item.hid" @click="Jump(item)">

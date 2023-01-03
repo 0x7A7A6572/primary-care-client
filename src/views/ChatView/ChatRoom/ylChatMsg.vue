@@ -50,6 +50,7 @@ export default {
     border-bottom-right-radius: 1rem;
     border-top-right-radius: 1rem;
     padding: 12px;
+    word-wrap: break-word;
   }
   .__system{
     display: block;

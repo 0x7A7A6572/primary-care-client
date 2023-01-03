@@ -1,9 +1,17 @@
 import myAxios from "@/utils/instance";
 const doctor = {
-    register(data) {
+    subjct(data) {
       return myAxios({
         method: "post",
-        url: "/user/register",
+        url: "/hospital/subject",
+        data,
+      })
+    },
+    // 查询该医院科室的医生列表
+    list(data) {
+      return myAxios({
+        method: "post",
+        url: "/hospital/docotor",
         data,
       })
     },

@@ -7,8 +7,8 @@
       <div class="user_item">
         <h2 style="padding-bottom: 10px;">用户名</h2>
         <span>1996-11-02</span>
-        <div class="user_item_bi">
-          <van-icon class-prefix="yl-icon" name="xiugai_bi" color="#00DC05" />
+        <div class="user_item_bi" @click="jump('/User/EditUserBaseInfo')">
+          <van-icon class-prefix="yl-icon" name="xiugai_bi" color="var(--color-main)" />
         </div>
       </div>
     </div>
@@ -16,12 +16,12 @@
     <div class="mboder box">
       <ylTitle title="我的档案" theme="left" color="var(--color-second-text)" />
       <div class="archives">
-        <div class="registered">
-          <van-icon class-prefix="yl-icon" name="jianchabaogao" color="#00DC05" size="4vh" />
+        <div class="registered" @click="jump('/AppointmentRegist/RegistOrderList')">
+          <van-icon class-prefix="yl-icon" name="jianchabaogao" color="var(--color-main)" size="4vh" />
           <span>挂号订单</span>
         </div>
-        <div class="registered">
-          <van-icon class-prefix="yl-icon" name="xiaohua1" color="#00DC05" size="4vh" />
+        <div class="registered" @click="jump('/User/PastMedicalHistory')">
+          <van-icon class-prefix="yl-icon" name="xiaohua1" color="var(--color-main)" size="4vh" />
           <span>过往病史</span>
         </div>
       </div>
@@ -29,11 +29,16 @@
     <!-- 个人健康数据 -->
     <div class="box  mboder">
       <div class="health-item">
-        <ylTitle title="个人健康数据" theme="left" color="var(--color-second-text)" />
-        <span>2022-12-21</span>
-        <van-icon class-prefix="yl-icon" name="xiugai_bi" color="#00DC05" />
+        <div class="health-item-health">
+          <ylTitle title="个人健康数据" theme="left" color="var(--color-second-text)" />
+          <span>2022-12-21</span>
+        </div>
+        <div @click="jump('/User/EditUserHealthyInfo')">
+          <van-icon class-prefix="yl-icon" name="xiugai_bi" color="var(--color-main)" />
+        </div>
       </div>
-      <van-divider :style="{ color: '#adadad', borderColor: '#adadad', padding: '0 0px' }" />
+      <van-divider
+        :style="{ color: 'var(--color-third-text)', borderColor: 'var(--color-third-text)', padding: '0 0px' }" />
       <div class="health-list">
         <div class="health-list-item">
           <span>身高(cm)</span>
@@ -57,44 +62,81 @@
     <div class="box mboder">
       <div class="address_item">
         <div class="address">
-          <div>
-            <van-icon class="address_list" class-prefix="yl-icon" name="dingwei" color="#00DC05" size="3vh" />
+          <div class="address_list">
+            <van-icon class="address_list" class-prefix="yl-icon" name="dingwei4" color="var(--color-main)"
+              size="3vh" />
             <span>地址管理</span>
           </div>
-          <van-icon class-prefix="yl-icon" name="page_right" color="#00DC05" size="3vh" />
+          <van-icon class-prefix="yl-icon" name="page_right" color="var(--color-main)" size="3vh" />
         </div>
-        <van-divider :style="{ color: '#adadad', borderColor: '#adadad', margin: '15px 0' }" />
-        <div class="address">
-          <div>
-            <van-icon class="address_list" class-prefix="yl-icon" name="yiwurenyuan2" color="#00DC05" size="3vh"  />
+        <van-divider
+          :style="{ color: 'var(--color-third-text)', borderColor: 'var(--color-third-text)', margin: '15px 0' }" />
+        <div class="address" @click="jump('/User/DoctorAuth')">
+          <div class="address_list">
+            <van-icon class="address_list" class-prefix="yl-icon" name="yiwurenyuan2" color="var(--color-main)"
+              size="3vh" />
             <span>医生入驻</span>
           </div>
-          <van-icon class-prefix="yl-icon" name="page_right" color="#00DC05" size="3vh" />
+          <van-icon class-prefix="yl-icon" name="page_right" color="var(--color-main)" size="3vh" />
         </div>
-        <van-divider :style="{ color: '#adadad', borderColor: '#adadad', margin: '15px 0' }" />
-        <div class="address">
-          <div>
-            <van-icon class="address_list" class-prefix="yl-icon" name="quit" color="#00DC05" size="3vh" />
+        <van-divider
+          :style="{ color: 'var(--color-third-text)', borderColor: 'var(--color-third-text)', margin: '15px 0' }" />
+        <div class="address" @click="showPopup">
+          <div class="address_list">
+            <van-icon class="address_list" class-prefix="yl-icon" name="zengjia" color="var(--color-main)" size="3vh" />
             <span>退出账号</span>
+      
           </div>
-          <van-icon class-prefix="yl-icon" name="page_right" color="#00DC05" size="3vh" />
+          <van-icon class-prefix="yl-icon" name="page_right" color="var(--color-main)" size="3vh" />
         </div>
-        <van-divider :style="{ color: '#adadad', borderColor: '#adadad', margin: '15px 0' }" />
+        <van-divider
+          :style="{ color: 'var(--color-third-text)', borderColor: 'var(--color-third-text)', margin: '15px 0' }" />
         <div class="address">
-          <div>
-            <van-icon class="address_list" class-prefix="yl-icon" name="fabu" color="#00DC05" size="3vh" />
+          <div class="address_list">
+            <van-icon class="address_list" class-prefix="yl-icon" name="fasong" color="var(--color-main)" size="3vh" />
             <span>关于</span>
           </div>
-          <van-icon class-prefix="yl-icon" name="page_right" color="#00DC05" size="3vh" />
+          <van-icon class-prefix="yl-icon" name="page_right" color="var(--color-main)" size="3vh" />
         </div>
       </div>
 
-    </div>
+    </div>   
+       <van-popup  
+       closeable 
+       round
+        v-model="show">
+        <div >
+          <div class="out">
+            <h2>退出登录</h2>
+          </div>
+          <div class="out_item">
+            <span>确认退出吗?打算打算的撒的撒过的</span>
+          </div>
+        </div>
+        <div class="out_item_list">
+          <div class="out_item_list_left"><span>取消</span></div>
+          <div class="out_item_list_right"><span>确认退出</span></div>
+        </div>
+      </van-popup>
   </div>
 </template>
 
 <script>
-
+export default {
+  data() {
+    return {
+      show: false,
+    }
+  },
+  methods: {
+    jump(path) {
+      this.$router.push(path)
+    },
+    showPopup() {
+      this.show = true
+    }
+  }
+};
 </script>
 
 <style lang="scss">
@@ -115,6 +157,11 @@
 .user_item {
   margin: 10px 0px 0px 20px;
   position: relative;
+
+  >span {
+    font-size: var(--font-size-sm);
+    color: var(--color-second-text);
+  }
 }
 
 .user_item_bi {
@@ -136,6 +183,12 @@
   margin: 15px 0px 0px 0px;
 }
 
+.address_list {
+  >span {
+    font-weight: bolder;
+  }
+}
+
 .registered {
   display: flex;
   flex-direction: column;
@@ -150,11 +203,24 @@
   justify-content: space-between;
 }
 
+.health-item-health {
+  display: flex;
+  align-items: center;
+
+  >span {
+    margin-left: var(--padding-base);
+    font-size: var(--font-size-sm);
+    color: var(--color-second-text);
+  }
+}
+
 .health-list-item {
   display: flex;
   justify-content: space-between;
   font-size: var(--font-size-sm);
   color: var(--color-third-text);
+  padding: 0 var(--padding-base);
+  font-weight: bolder;
 }
 
 .address {
@@ -162,12 +228,45 @@
   justify-content: space-between;
 }
 
-.address_item{
+.address_item {
   margin-top: 10px;
   color: var(--color-second-text);
 }
 
-.address_list{
+.address_list {
   margin-right: 10px;
+}
+
+.out{
+    text-align: center;
+    margin-top: calc(var(--margin-lg)*3) ;
+}
+.out_item{
+  width: 80vw;
+  word-wrap: break-word;
+  margin:20px auto;
+  text-align: center;
+}
+.out_item_list{
+  margin-top: 80px;
+  border-top: 1px solid var(--color-second-text);
+  display: flex;
+}
+.out_item_list_left{
+  border-right: 1px solid var(--color-second-text);
+  width: 40vw;
+  height: 15vw;
+  text-align: center;
+  >span{
+    line-height: 15vw;
+  }
+}
+.out_item_list_right{
+  width: 40vw;
+  height: 15vw;
+  text-align: center;
+  >span{
+    line-height: 15vw;
+  }
 }
 </style>

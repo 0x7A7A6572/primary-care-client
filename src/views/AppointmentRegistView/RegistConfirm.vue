@@ -1,31 +1,37 @@
 <template>
     <div>
 <div class="list">
-img
+  <ylPsersonDoctor :doctor="arr" class="list1"></ylPsersonDoctor>
 </div>
     </div>
 </template>
 
 <script>
-
+import ylPsersonDoctor from '@/components/ylPsersonDoctor.vue'
 
 export default {
+    components:{
+        ylPsersonDoctor
+    },
     data(){
         return {
-            name:'',
-        title:'',
-        subject:'',
+        arr:{}
         }
     },
     mounted(){
-        this.title=JSON.parse((sessionStorage.getItem('hid'))).title
-        this.subject=JSON.parse( sessionStorage.getItem('doctor')).title
-        this.name=JSON.parse( sessionStorage.getItem('name'))
+     this.arr=this.$route.params.name
 
     }
 }
 </script>
 
 <style lang="scss" scoped>
-
+.list{
+    width: 380px;
+    height: 100px;
+    border-radius:var( --border-radius-large) ;
+    background-color: var(--color-box-bg);
+    margin: 20px auto;
+ 
+}
 </style>

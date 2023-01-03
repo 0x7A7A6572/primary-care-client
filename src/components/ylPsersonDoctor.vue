@@ -30,7 +30,7 @@ export default {
 <style lang="scss" scoped>
 .yl-person-doctor {
   display: flex;
-  margin: 10px;
+  margin: 20px;
   justify-content: space-between;
   > .recom-avatar {
     background: var(--color-mian-bg);
@@ -38,18 +38,23 @@ export default {
     height: 14vw;
     min-width: 14vw;
     border-radius: 50%;
-    margin: 0px 10px 0px 0px;
+    margin: 10px 10px 0px 0px;
     object-fit: cover;
   }
   > .__doctor-details {
     display: flex;
     flex-direction: column;
     flex: 1;
+    margin-top: 10px;
     .__good-at {
       // white-space: nowrap;
       // overflow: ellipsis;
       text-overflow: ellipsis;
       color: var(--color-desc-text);
+      
+    }
+    .text-small{
+      margin-bottom: 10px;
     }
     .consulting {
       margin: 10px;

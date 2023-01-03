@@ -21,7 +21,7 @@ class="doctor box"
 v-for="(item) in arr " :key="item.id"
 :doctor="item"
 >
-<span class="icon-btn yu" @click="jump(item.name)">预约</span>
+<span class="icon-btn yu" @click="jump(item)">预约</span>
 </ylPsersonDoctor>
         </ul>
       </div>
@@ -59,8 +59,11 @@ let data={hid:this.hid.hid,did:this.did}
   },
   methods:{
     jump(name){
-        sessionStorage.setItem('name',  JSON.stringify(name))
-        this.$router.push('/AppointmentRegist/RegistConfirm')
+      this.$router.push({
+        name: 'RegistConfirm',
+          params: { name }
+      })
+    
     }
   }
 }

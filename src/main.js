@@ -18,6 +18,7 @@ import ylNavbar from "@/components/ylNavbar.vue";
 import ylTitle from "@/components/ylTitle.vue";
 import ylSearch from "@/components/ylSearch.vue";
 import ylEmpty from "@/components/ylEmpty.vue";
+import ylSwitch from "@/components/ylSwitch.vue";
 
 Vue.component("ylTabbarPro",ylTabbarPro);
 // Vue.component("ylTabbar",ylTabbar);
@@ -25,6 +26,7 @@ Vue.component("ylNavbar",ylNavbar);
 Vue.component("ylTitle",ylTitle);
 Vue.component("ylSearch",ylSearch);
 Vue.component("ylEmpty",ylEmpty);
+Vue.component("ylSwitch",ylSwitch);
 
 /* 引入vant组件 */
 // Vue.use(Vant);

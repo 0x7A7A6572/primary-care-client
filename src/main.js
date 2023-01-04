@@ -6,7 +6,7 @@ import httpApi from "@/http";
 // import Vant from 'vant'; // 全部导入
 import { Icon, DropdownMenu, DropdownItem,
    Sticky ,Popup ,Search,List,Cell,Tag,
-    Image,Button,Divider,Form,Field
+    Image,Button,Divider,Form,Field,DatetimePicker
  } from 'vant'; // 按需导入
 
 import 'vant/lib/index.css';
@@ -38,11 +38,9 @@ Vue.use(Cell);
 Vue.use(Sticky);
 Vue.use(Image);
 Vue.use(Popup);
-Vue.use(Button);
-
+Vue.use(DatetimePicker);
 Vue.use(Tag);
 Vue.use(Divider);
-
 Vue.use(Popup);
 Vue.use(Tag);
 Vue.use(Button);

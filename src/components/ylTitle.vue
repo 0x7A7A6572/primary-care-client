@@ -24,7 +24,7 @@ export default {
     // 文字颜色
     color: {
       type: String, 
-      default: 'var(--color-mian-text)'
+      default: 'var( --color-second-text)'
     }, 
     size: {
       type: String,
@@ -83,7 +83,7 @@ export default {
   > .__text-left {
     position: relative;
     color: var(--title-text-color);
-    font-size: medium;
+    font-size: var(--bar-font-size);
     // font-style: italic;
     padding-left: 15px;
     z-index: 0;

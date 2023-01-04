@@ -1,16 +1,18 @@
 <template>
-    <div>
-      <van-search v-model="value" shape="round" background="var(--color-main)" @search="search" placeholder="请输入医院名称" />
+    <div style="padding: var(--padding-base);">
+      <ylSearch v-model="value"   :searchBtn="false"  :boxShadow="true"   @search="search" placeholder="请输入医院名称" ></ylSearch>
+      <!-- <van-search v-model="value" shape="round" background="var(--color-main)" @search="search" placeholder="请输入医院名称" /> -->
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
 
         <div>
           <ul class="ad">
             <li v-for="item in list " :key="item.hid" @click="Jump(item)">
-              <img src="../../assets/images/Snipaste_2022-12-28_19-24-28.jpg" alt="">
+              <img :src="item.logo" alt="" v-if="item.logo">
+              <img v-else src="https://med-hospital.cdn.bcebos.com/hospital-icons/1005771.png" alt="">
               <div>
                 <h3>{{ item.title }}</h3>
                 <span>{{ item.grade }}</span>
-                <span v-if="item.type">{{ item.type }}</span>
+                <span v-if="item.category">{{ item.category }}</span>
                 <p>地址:{{ item.address }}</p>
               </div>
             </li>

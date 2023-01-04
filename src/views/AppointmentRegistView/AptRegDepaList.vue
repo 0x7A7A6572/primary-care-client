@@ -1,13 +1,14 @@
 <template>
-    <div>
+    <div style="padding: var(--padding-base);">
         <div>
             <ul class="ad">
                 <li>
-                    <img src="../../assets/images/Snipaste_2022-12-28_19-24-28.jpg" alt="">
+                    <img :src="hid.logo" alt="" v-if="hid.logo">
+                    <img v-else src="https://med-hospital.cdn.bcebos.com/hospital-icons/1005771.png" alt="">
                     <div>
                         <h3>{{ hid.title }}</h3>
                         <span>{{ hid.grade }}</span>
-                        <span v-if="hid.type">{{ hid.type }}</span>
+                        <span v-if="hid.category">{{ hid.category }}</span>
                         <p>地址:{{ hid.address }}</p>
                     </div>
                 </li>

@@ -131,4 +131,27 @@ body {
     font-weight: bold;
   }
 }
+/* 修改默认的vant输入框组件为设计图的样式 */
+.yl-van-field {
+  &.van-field {
+    display: flex;
+    flex-direction: column;
+    > .van-field__label {
+      font-weight: bold;
+      font-size: var(--font-size-lg);
+      padding-bottom: var(--padding-sm);
+    }
+    .van-field__control {
+      padding: var(--padding-base);
+      border-bottom: 2px solid var(--color-light);
+      // &:focus {
+      //   border-bottom: 1px solid var(--color-main) !important;
+      // }
+      &::placeholder {
+        color: var(--color-third-text) !important;
+        -webkit-text-fill-color: currentColor;
+      }
+    }
+  }
+}
 </style>

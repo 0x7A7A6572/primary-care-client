@@ -1,9 +1,9 @@
 <template>
   <div class="login-view yl">
     <div class="__logo">
-      <img :src="null" />
+      <!-- <img :src="null" /> -->
       <!-- //TODO 暂时不设置 -->
-      <!-- <img src="@/assets/logo.png" alt="" /> -->
+      <img src="@/assets/logo.png" alt="" />
 
       <span class="text-small">社区医疗</span>
     </div>

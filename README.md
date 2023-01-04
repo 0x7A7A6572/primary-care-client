@@ -77,14 +77,19 @@ https://rp.mockplus.cn/view/by848unT9H/lIeaPGarX06?nav=1&cps=expand&rps=expand&r
 - ylSearch 搜索框组件
 - ylEmpty 空状态组件
 - ylPersonDoctor 医生信息组件 
+- ylToast 全局toast 组件
 
 ## 5.如何使用第三方图标库？
  doc/ylicon-view 目录下是项目所用所有图标的预览 ，浏览器打开 **example.html**，可以看到所有图标，包括图标的**命名**。
 
  在vant中使用
  ```html
+ <!-- 方法一 -->
   <van-icon class-prefix="yl-icon" name="aixinzhijia" />
-  <!-- class-prefix="yl-icon" 字段为固定必填， name 根据图标预览项目的 命名 复制粘贴即可 -->
+  <!-- class-prefix="yl-icon" 字段为固定必填， name 根据图标预览项目的 命名 复制粘贴即可 此方法可以使用van-icon提供的功能 -->
+<!-- 方法二  原生方法 -->
+<i class='yl-icon yl-icon-aixinzhijia'></i>
+<!-- yl-icon 字段为固定 ,yl-icon-${图标名称} -->
  ```
 
 
@@ -101,7 +106,7 @@ https://rp.mockplus.cn/view/by848unT9H/lIeaPGarX06?nav=1&cps=expand&rps=expand&r
 https://gitee.com/zzerx/primary-care-server
 
 ## 8.协作开发说明
- 合并推送使用master分支, 开发使用自己的本地dev（叫什么名字随便）分支
+ master为保护分支，创建者进行审核dev代码进行合并， dev分支为公共开发分支，大家创建自己的分支开发，然后合并到该分支
 
 
 ### 8.1大致流程(简化版)
@@ -109,22 +114,22 @@ https://gitee.com/zzerx/primary-care-server
 
 ### 8.1.1.创建自己的开发分支
 ```sh
-git branch dev # 创建自己的分支
-git checkout dev  # 切换到自己的分支
+git branch dev@mydev # 创建自己的分支 dev@mydev 随便起
+git checkout dev@mydev  # 切换到自己的分支
 ```
 ### 8.1.2.提交修改
 ```sh
 git add *  # 提交所有修改
 git commit -m '你的提交信息' # 提交到本地暂存区
 ```
-### 8.1.3.将自己的开发分支合并到master分支
+### 8.1.3.将自己的开发分支合并到公共dev分支
 ```sh
-git checkout master # 切换到master分支
-git merge dev # 将你的dev本地分支和master合并
+git checkout dev # 切换到dev分支
+git merge dev@mydev # 将你的dev本地分支和dev合并
 ```
 ### 8.1.4.提交开发分支
 ```sh
-git push origin master # 提交master分支到远程仓库
+git push origin dev # 提交dev分支到远程仓库
 ```
 
 ### 8.2.其他日常命令

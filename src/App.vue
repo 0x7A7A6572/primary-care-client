@@ -102,12 +102,13 @@ body {
 }
 
 // van-button
-.van-button{
+.yl{
+  &.van-button{
   background: var(--color-secondary) !important;
   border: none !important;
   border-radius: var(--border-radius-medium) !important;
   font-size: var(--font-size-lg) !important;
   box-shadow: var(--box-shadow);
   font-weight: bold;
-}
+}}
 </style>

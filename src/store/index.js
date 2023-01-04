@@ -40,8 +40,8 @@ export default new Vuex.Store({
   actions: {
     // 退出登陆
     logout(context){
-      context.commit(removeToken);
-      context.commit(removeUser);
+      context.commit("removeToken");
+      context.commit("removeUser");
     }
   },
   modules: {

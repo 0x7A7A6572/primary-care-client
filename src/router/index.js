@@ -9,7 +9,14 @@ const routes = [
   *       首页
   * ---------------------*/
   { path: '/', redirect: '/Home' },
-  { path: '/Home', name: 'Home', component: HomeView, meta: { tabbarShow: true, tabbarIndex:0 } },
+  {
+    path: '/Home', name: 'Home',
+    component: HomeView,
+    meta: {
+      tabbarShow: true, tabbarIndex: 0,
+      keepAlive: true
+    }
+  },
 
   /**---------------------
   *       个人信息
@@ -17,7 +24,7 @@ const routes = [
   { // 主页个人信息面板
     path: '/User',
     name: 'User',
-    meta: { tabbarShow: true, tabbarIndex:3 },
+    meta: { tabbarShow: true, tabbarIndex: 3 },
     component: () => import('../views/UserView/UserView.vue')
   },
   { // 编辑个人基本信息
@@ -79,13 +86,19 @@ const routes = [
   { // 问诊医生选择页
     path: '/OnlineConsultation',
     name: 'OnlineConsultation',
-    meta: { title: '线上问诊', navbarShow: true },
+    meta: { title: '线上问诊', navbarShow: true, keepAlive: true },
     component: () => import('../views/OnlineConsultationView/OnlineConsultationView.vue')
+  },
+  { // 医生搜索页
+    path: '/OnlineConsultation/DoctorSearch',
+    name: 'DoctorSearch',
+    meta: { title: '医生搜索', navbarShow: true },
+    component: () => import('../views/OnlineConsultationView/SearchPageView.vue')
   },
   {// 问诊消息列表
     path: '/ChatList',
     name: 'ChatList',
-    meta: { tabbarShow: true, tabbarIndex:1 },
+    meta: { tabbarShow: true, tabbarIndex: 1 },
     component: () => import('../views/ChatView/ChatView.vue')
   },
   { // 问诊聊天窗口页
@@ -143,7 +156,7 @@ const routes = [
   {
     path: '/Medicine',
     name: 'Medicine',
-    meta: { tabbarShow: true, tabbarIndex:2 },
+    meta: { tabbarShow: true, tabbarIndex: 2 },
     component: () => import('../views/MedicineView/MedicineView.vue')
   },
   /**---------------------

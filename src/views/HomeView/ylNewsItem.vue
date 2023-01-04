@@ -3,9 +3,9 @@
     <div class="__desc">
       <span class="__title">{{ news?.title }}</span>
       <div class="__hot-time">
-        <div>
-          <i class="yl-icon yl-icon-huo" style="color: var(--color-error);"></i>
-          <span class="text-small">热度 {{ news?.hot }}</span>
+        <div class="text-small">
+          <i class="yl-icon yl-icon-view" style="color:var(--color-main)"></i>
+          <span > 阅读 {{ news?.hot }}</span>
         </div>
         <span class="text-small">{{ "2022-10-20" || news?.create_time }}</span>
       </div>
@@ -41,7 +41,7 @@ export default {
     padding: var(--padding-base);
 
     .__title {
-      font-weight: bold;
+      // font-weight: bold;
     }
     .__hot-time {
       display: flex;
@@ -53,6 +53,7 @@ export default {
     width: 24vw;
     height: 24vw;
     border-radius: var(--border-radius-larger);
+    object-fit: cover;
   }
 }
 </style>

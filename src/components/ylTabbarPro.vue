@@ -20,7 +20,7 @@
       @click="itemClick(2, 'Medicine')"
     >
       <van-icon class-prefix="yl-icon" name="xiangzi1" />
-      <span>药典</span>
+      <span>查药</span>
     </div>
     <div
       :class="['tabbar-item', itemIndex === 3 ? 'active' : '']"

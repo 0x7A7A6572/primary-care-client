@@ -1,15 +1,9 @@
 <template>
   <div class="online-consultation">
     <ylSearch
+      :searchBtn="false"
       placeholder="请输入医生/疾病搜索"
-      v-model="inpt"
-      :disabled="false"
-      :loading="false"
-      :searchBtn="showSearchBtn"
-      :boxShadow="true"
-      :panel="showPanel"
-      @input="onSearchInput"
-      @search="onSearch"
+      @click="$router.push('/OnlineConsultation/DoctorSearch')"
     >
       <!-- 搜索医生结果 -->
       <ylEmpty
@@ -32,7 +26,9 @@
             <van-tag plain type="primary"> {{ item.d_title }} </van-tag>
           </span>
           <span class="text-small"
-            >擅长：<span class="__good-at">{{ item.good_at }}</span></span
+            >擅长：<span class="__good-at">{{
+              filterGoodAt(item.good_at, inpt)
+            }}</span></span
           >
         </div>
         <div class="icon-btn consulting" @click="consultingService(item)">
@@ -57,7 +53,7 @@
       >
       </ylPsersonExpert>
     </div>
-  <!-- 医生列表 -->
+    <!-- 医生列表 -->
     <div class="doctor-list box">
       <van-sticky :offset-top="50">
         <van-dropdown-menu
@@ -85,13 +81,25 @@
         finished-text="没有更多了"
         @load="onLoad"
       >
-      
-        <ylPsersonDoctor
-        v-for="item in doctors" :key="item.id"
-        :doctor="item">
-          <div class="icon-btn consulting" @click="consultingService(item)">
-            <van-icon class-prefix="yl-icon" name="liaotian4" />
-            咨询
+        <ylPsersonDoctor v-for="item in doctors" :key="item.id" :doctor="item">
+          <div class="slot-doctor-info">
+            <span>
+              <i class="yl-icon yl-icon-yiwurenyuan2"></i>
+              接诊人数：<span class="__service-count text-medium">{{
+                item.service_count
+              }}</span>
+            </span>
+
+            <span>
+              &nbsp;&nbsp;
+              <i class="yl-icon yl-icon-haoping"></i>
+              评价
+              <span class="__score text-medium">{{ item.score }}</span></span
+            >
+            <div class="icon-btn consulting" @click="consultingService(item)">
+              <van-icon class-prefix="yl-icon" name="liaotian4" />
+              咨询
+            </div>
           </div>
         </ylPsersonDoctor>
       </van-list>
@@ -103,9 +111,8 @@
 import ylPsersonDoctor from "@/components/ylPsersonDoctor.vue";
 import ylPsersonExpert from "@/components/ylPsersonExpert.vue";
 
-
 export default {
-  components:{ylPsersonDoctor, ylPsersonExpert},
+  components: { ylPsersonDoctor, ylPsersonExpert },
   data() {
     return {
       loading: false,
@@ -128,25 +135,14 @@ export default {
     consultingService(item) {
       console.log("进入咨询聊天", item);
       this.$router.push({
-        path:'/chat/room',
-        query:{
+        path: "/ChatList/ChatRoom",
+        query: {
           doctor: item,
           title: item.name,
-        }
-      })
-    },
-    onSearchInput(e) {
-      this.showPanel = false;
-      // this.showSearchBtn = e.length > 0;
-    },
-    onSearch(e) {
-      this.showPanel = true;
-      this.$api.info.searchDoctor({ key: this.inpt }).then((res) => {
-        // console.log("search:", res.data);
-        this.searchDoctorRes = res.data;
-        console.log("searchDoctorRes:", this.searchDoctorRes);
+        },
       });
     },
+
     dropdownHospitalsChange(v) {
       // console.log("dropdownHospitalsChange:", v, this.hospitals[v]);
       this.$api.info.queryDepa({ hid: v }).then((res) => {
@@ -192,6 +188,14 @@ export default {
         callback?.(res.data);
       });
     },
+
+    // 医生擅长过滤
+    // filterGoodAt(good_at,txt){
+    //   let gas = good_at.split(';');
+    //   return gas.filter((v)=>{
+    //      return v.match(txt);
+    //   }).join('丶');
+    // }
   },
   created() {
     // 推荐医生
@@ -240,10 +244,24 @@ export default {
     display: none;
   }
 
+  .slot-doctor-info {
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    font-size: var(--font-size-sm);
+    .__service-count {
+      color: var(--color-success);
+      font-weight: bold;
+    }
+    .__score {
+      color: var(--color-warning);
+      font-weight: bold;
+    }
+  }
   /** 搜索结果 */
   .search-doctor-res {
     display: flex;
-    margin: 10px;
+    margin: 20px 10px;
     justify-content: space-between;
     > .recom-avatar {
       background: var(--color-mian-bg);
@@ -276,6 +294,5 @@ export default {
       align-self: center;
     }
   }
-
 }
 </style> 

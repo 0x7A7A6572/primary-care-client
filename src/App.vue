@@ -4,9 +4,13 @@
     <van-sticky>
       <ylNavbar v-show="ylNavbarShow" />
     </van-sticky>
-    <!-- <keep-alive>  -->
-    <router-view></router-view>
-    <!-- </keep-alive> -->
+    <!-- --------------- S  缓存路由 ------------------- -->
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"> </router-view>
+    </keep-alive>
+
+    <router-view v-if="!$route.meta.keepAlive"> </router-view>
+    <!-- --------------- E ------------------------- -->
     <!-- 底部标签栏 -->
     <ylTabbarPro
       v-show="ylTabbarShow"
@@ -44,9 +48,24 @@ export default {
       this.ylNavbarShow = to.meta?.navbarShow || false;
       // 刷新时更新itemIndex 防止刷新页面回到0
       this.itemIndex = to.meta.tabbarIndex;
-      
-      // TODO 防止用户刷新行为的数据持久化
 
+      // TODO 防止用户刷新行为的数据持久化
+      let routeData = JSON.parse(sessionStorage.getItem(to.name));
+      // 持久化数据恢复
+      if (from.name == null && routeData) {
+        console.log("???");
+        for (let k in routeData.params) {
+          to.params[k] = routeData.params[k];
+        }
+        for (let k in routeData.query) {
+          to.query[k] = routeData.query[k];
+        }
+      } else {
+        sessionStorage.setItem(
+          to.name,
+          JSON.stringify({ params: to.params, query: to.query })
+        );
+      }
     },
   },
   methods: {
@@ -80,35 +99,36 @@ body {
   height: 100vh;
 }
 
-/* 修改vant组件全局样式 */
+.yl {
+  /* 修改vant组件全局样式  (需要同时使用yl样式)*/
 
-// van-field
-.van-field__body {
-    >input{
-    border-bottom: 1px solid var(--color-third-text);
+  // van-field
+  .van-field__body {
+    > input {
+      border-bottom: 1px solid var(--color-third-text);
+    }
   }
-}
-.van-field__body{
-  >input:focus{
-    border-bottom: 1px solid var(--color-main) !important;
+  .van-field__body {
+    > input:focus {
+      border-bottom: 1px solid var(--color-main) !important;
+    }
   }
-}
-.van-field__control{
-  padding: var(--padding-base) 0px !important;
-}
-.van-field--error .van-field__control, .van-field--error .van-field__control::placeholder {
-    color: var( --color-third-text) !important;
+  .van-field__control {
+    padding: var(--padding-base) 0px !important;
+  }
+  .van-field--error .van-field__control,
+  .van-field--error .van-field__control::placeholder {
+    color: var(--color-third-text) !important;
     -webkit-text-fill-color: currentColor;
-}
+  }
 
-// van-button
-.yl{
-  &.van-button{
-  background: var(--color-secondary) !important;
-  border: none !important;
-  border-radius: var(--border-radius-medium) !important;
-  font-size: var(--font-size-lg) !important;
-  box-shadow: var(--box-shadow);
-  font-weight: bold;
-}}
+  &.van-button {
+    background: var(--color-secondary) !important;
+    border: none !important;
+    border-radius: var(--border-radius-medium) !important;
+    font-size: var(--font-size-lg) !important;
+    box-shadow: var(--box-shadow);
+    font-weight: bold;
+  }
+}
 </style>

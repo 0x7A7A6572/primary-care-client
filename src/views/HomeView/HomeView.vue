@@ -9,7 +9,7 @@
     <!-- 主功能模块 -->
     <div class="main-func text-larger">
       <router-link to="/OnlineConsultation" class="box __func-item left">
-        <van-icon class-prefix="yl-icon" name="yiliaoqicai2" size="8vw" />
+        <van-icon class-prefix="yl-icon" name="tingzhenqi" size="8vw" />
         <span>在线问诊</span>
         <span class="text-small" style="color:#fffd">面对面的解答您的病状</span>
       </router-link>
@@ -28,19 +28,19 @@
           class="box-round flex-d-column flex-center"
         >
           <van-icon class-prefix="yl-icon" name="yiyaoxiang" size="8vw" />
-          <span style="padding-top: 5px">医疗宝典</span>
+          <span style="padding-top: 5px; font-size: 0.5rem;">医疗宝典</span>
         </router-link>
       </div>
       <div style="color: var(--color-warning)">
         <router-link to="/Medicine" class="box-round flex-d-column flex-center">
           <van-icon class-prefix="yl-icon" name="yaoping" size="8vw" />
-          <span style="padding-top: 5px">药品查询</span>
+          <span style="padding-top: 5px; font-size: 0.5rem;">药品查询</span>
         </router-link>
       </div>
       <div style="color: var(--color-primary)">
         <router-link to="/Pharmacy" class="box-round flex-d-column flex-center">
           <van-icon class-prefix="yl-icon" name="shangdian" size="8vw" />
-          <span style="padding-top: 5px">社区药房</span>
+          <span style="padding-top: 5px; font-size: 0.5rem;">社区药房</span>
         </router-link>
       </div>
       <div style="color: var(--color-error)">
@@ -48,8 +48,8 @@
           to="/MedicationReminder/add"
           class="box-round flex-d-column flex-center"
         >
-          <van-icon class-prefix="yl-icon" name="wancheng" size="8vw" />
-          <span style="padding-top: 5px">用药提醒</span>
+          <van-icon class-prefix="yl-icon" name="dingdan2" size="8vw" />
+          <span style="padding-top: 5px; font-size: 0.5rem;">用药提醒</span>
         </router-link>
       </div>
     </div>
@@ -129,7 +129,7 @@ export default {
       flex: 1;
       border-radius: var(--border-radius-larger);
       min-height: 24vw;
-      padding: var(--padding-base);
+      padding: var(--padding-lg);
       &.left {
         margin: var(--margin-base) calc(var(--margin-base) / 2)
           var(--margin-base) 0;

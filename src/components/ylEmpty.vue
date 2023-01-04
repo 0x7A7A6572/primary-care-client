@@ -51,7 +51,7 @@ export default {
   display: flex;
   flex-direction: column;
   text-align: center;
-  color: var( --color-light);
+  color: var(--color-third-text);
   >img{
     margin: auto;
   }

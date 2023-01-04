@@ -1,5 +1,5 @@
 <template>
-  <div class="login-view">
+  <div class="login-view yl">
     <div class="__logo">
       <img :src="null" />
       <!-- //TODO 暂时不设置 -->
@@ -26,7 +26,7 @@
           :rules="rules.pwd"
         />
         <div style="margin: 16px">
-          <van-button round block type="info" native-type="submit"
+          <van-button class="yl" round block type="info" native-type="submit"
             >登录</van-button
           >
         </div>

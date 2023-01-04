@@ -1,5 +1,6 @@
 <template>
   <div
+  @click="$emit('click')"
     :class="['yl-search', 'box', boxShadow ? 'shadow' : '']"
     :disabled="disabled"
   >
@@ -33,6 +34,10 @@
       <span v-show="!loading"> {{ searchText }}</span>
     </div>
     <div class="result-panel" v-show="panel"><slot></slot></div>
+    <div class="panel-mask" v-show="panel" 
+    @click.stop="$emit('closePanel',false)"
+    @scroll.stop="()=>{return false;}"
+    ></div>
   </div>
 </template>
 
@@ -103,7 +108,7 @@ export default {
   // justify-content: space-between;
   padding: 14px;
   border-radius: var(--border-radius-medium);
-
+ 
   > input {
     border: none;
     padding-left: 20px;
@@ -146,6 +151,18 @@ export default {
     padding: 6px;
     max-height: 50vh;
     overflow: scroll;
+    border-bottom-left-radius: var(--border-radius-medium);
+    border-bottom-right-radius: var(--border-radius-medium);
+
+  }
+  .panel-mask{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.562);
+    z-index: 1;
   }
 }
 </style>

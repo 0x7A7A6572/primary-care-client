@@ -6,7 +6,7 @@ import httpApi from "@/http";
 // import Vant from 'vant'; // 全部导入
 import { Icon, DropdownMenu, DropdownItem,
    Sticky ,Popup ,Search,List,Cell,Tag,
-    Image,Button,Divider,Form,Field,DatetimePicker
+    Image,Button,Divider,Form,Field,DatetimePicker,Dialog
  } from 'vant'; // 按需导入
 
 import 'vant/lib/index.css';
@@ -47,13 +47,25 @@ Vue.use(Button);
 Vue.use(Divider);
 Vue.use(Form);
 Vue.use(Field);
+// Vue.use(Dialog);
 
 Vue.config.productionTip = false;
 import ylToast from './components/ylToast/ylToast.js';
 Vue.use(ylToast);
 // Vue.prototype.$ylToast = ylToast;
 Vue.prototype.$api = httpApi;
-
+Vue.prototype.$Dialog = Dialog;
+Vue.filter('datetime',(num)=>{
+  	//参数是数字--时间戳 ,返回日期时间字符串
+	let d = new Date(num) //把时间戳转换为日期对像
+	//获取Date中的不同部分
+	let yy = d.getFullYear()
+	let mm = d.getMonth()+1 
+	mm = mm<10?'0'+mm:mm
+	let dd = d.getDate()
+	dd = dd<10?'0'+dd:dd
+	return `${yy}-${mm}-${dd}`
+})
 new Vue({
   router,
   store,

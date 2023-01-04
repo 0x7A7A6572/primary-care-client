@@ -3,10 +3,10 @@
     <!-- 用户登录显示模块 -->
     <div class="user">
       <van-image round width="5rem" height="5rem" fit="cover"
-        src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg" />
+        :src="$store.getters.user?.avatar" />
       <div class="user_item">
-        <h2 style="padding-bottom: 10px;">用户名</h2>
-        <span>1996-11-02</span>
+        <h2 style="padding-bottom: 10px;">{{$store.getters.user?.name}}</h2>
+        <span>{{$store.getters.user?.birthday | datetime}}</span>
         <div class="user_item_bi" @click="jump('/User/EditUserBaseInfo')">
           <van-icon class-prefix="yl-icon" name="xiugai_bi" color="var(--color-main)" />
         </div>
@@ -31,7 +31,7 @@
       <div class="health-item">
         <div class="health-item-health">
           <ylTitle title="个人健康数据" theme="left" color="var(--color-second-text)" />
-          <span>2022-12-21</span>
+          <span>{{user.update_time | datetime}}</span>
         </div>
         <div @click="jump('/User/EditUserHealthyInfo')">
           <van-icon class-prefix="yl-icon" name="xiugai_bi" color="var(--color-main)" />
@@ -42,19 +42,19 @@
       <div class="health-list">
         <div class="health-list-item">
           <span>身高(cm)</span>
-          <span>180cm</span>
+          <span>{{user.height}}cm</span>
         </div>
         <div class="health-list-item">
           <span>体重(kg)</span>
-          <span>200kg</span>
+          <span>{{user.weight}}kg</span>
         </div>
         <div class="health-list-item">
           <span>血压(mmHg)</span>
-          <span>2mmHg</span>
+          <span>{{user.blood_ressure}}mmHg</span>
         </div>
         <div class="health-list-item">
           <span>血糖(mmol/L)</span>
-          <span>餐前25mmol/L</span>
+          <span>{{user.blood_sugar}}mmol/L</span>
         </div>
       </div>
     </div>
@@ -85,7 +85,7 @@
           <div class="address_list">
             <van-icon class="address_list" class-prefix="yl-icon" name="zengjia" color="var(--color-main)" size="3vh" />
             <span>退出账号</span>
-      
+
           </div>
           <van-icon class-prefix="yl-icon" name="page_right" color="var(--color-main)" size="3vh" />
         </div>
@@ -99,25 +99,8 @@
           <van-icon class-prefix="yl-icon" name="page_right" color="var(--color-main)" size="3vh" />
         </div>
       </div>
+    </div>
 
-    </div>   
-       <van-popup  
-       closeable 
-       round
-        v-model="show">
-        <div >
-          <div class="out">
-            <h2>退出登录</h2>
-          </div>
-          <div class="out_item">
-            <span>确认退出吗?打算打算的撒的撒过的</span>
-          </div>
-        </div>
-        <div class="out_item_list">
-          <div class="out_item_list_left"><span>取消</span></div>
-          <div class="out_item_list_right"><span>确认退出</span></div>
-        </div>
-      </van-popup>
   </div>
 </template>
 
@@ -126,27 +109,50 @@ export default {
   data() {
     return {
       show: false,
+      user:[],
     }
   },
   methods: {
+    userHealthInfo(){  
+      this.$api.user.userHealthInfo().then(res=>{
+        console.log('数据',res);
+        this.user = res.data[0];
+      })
+    },
     jump(path) {
       this.$router.push(path)
     },
     showPopup() {
-      this.show = true
-    }
+      this.$Dialog.confirm({
+        title: '退出登录',
+        message: '确定退出登录吗?',
+        beforeClose: (action, done)=> {
+          if (action === 'confirm') {
+           this.$router.push('/Login');
+           this.$store.dispatch('logout');
+           done();
+          } else {
+            done();
+          }
+        },
+      });
+    },
+  },
+  mounted(){
+    this.userHealthInfo()
   }
 };
+
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .mboder {
   border-radius: 15px;
   margin-bottom: 20px;
 }
 
 .user-view {
-  padding: 0px 20px 0px 20px;
+  padding: 0px var(--padding-base);
 }
 
 .user {
@@ -237,35 +243,41 @@ export default {
   margin-right: 10px;
 }
 
-.out{
-    text-align: center;
-    margin-top: calc(var(--margin-lg)*3) ;
+.out {
+  text-align: center;
+  margin-top: calc(var(--margin-lg)*3);
 }
-.out_item{
+
+.out_item {
   width: 80vw;
   word-wrap: break-word;
-  margin:20px auto;
+  margin: 20px auto;
   text-align: center;
 }
-.out_item_list{
+
+.out_item_list {
   margin-top: 80px;
   border-top: 1px solid var(--color-second-text);
   display: flex;
 }
-.out_item_list_left{
+
+.out_item_list_left {
   border-right: 1px solid var(--color-second-text);
   width: 40vw;
   height: 15vw;
   text-align: center;
-  >span{
+
+  >span {
     line-height: 15vw;
   }
 }
-.out_item_list_right{
+
+.out_item_list_right {
   width: 40vw;
   height: 15vw;
   text-align: center;
-  >span{
+
+  >span {
     line-height: 15vw;
   }
 }

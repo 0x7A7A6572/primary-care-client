@@ -2,6 +2,7 @@
   <div class="login-view">
     <div class="__logo">
       <img :src="null" />
+      <!-- //TODO 暂时不设置 -->
       <!-- <img src="@/assets/logo.png" alt="" /> -->
 
       <span class="text-small">社区医疗</span>
@@ -15,14 +16,14 @@
           v-model="username"
           name="phone"
           placeholder="请输入登陆手机号或身份证号"
-          :rules="[{ required: true, message: '请填写用户名' }]"
+          :rules="rules.phone"
         />
         <van-field
           v-model="password"
           type="password"
           name="pwd"
           placeholder="请输入密码"
-          :rules="[{ required: true, message: '请填写密码' }]"
+          :rules="rules.pwd"
         />
         <div style="margin: 16px">
           <van-button round block type="info" native-type="submit"
@@ -45,12 +46,17 @@
 
 <script>
 import md5 from "js-md5";
-
+// 判断手机和身份证正则表达式
+const Reg_phone_id = /^1[3456789]\d{9}$|^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
 export default {
   data() {
     return {
       username: "",
       password: "",
+      rules: {
+        phone: [{ required: true, pattern: Reg_phone_id, message: '请填写正确身份证或手机号' }],
+        pwd: [{ required: true, message: '请填写密码' }]
+      }
     };
   },
   methods: {

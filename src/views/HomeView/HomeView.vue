@@ -28,19 +28,19 @@
           class="box-round flex-d-column flex-center"
         >
           <van-icon class-prefix="yl-icon" name="yiyaoxiang" size="8vw" />
-          <span style="padding-top: 5px; font-size: 0.5rem;">医疗宝典</span>
+          <span style="padding-top: 5px; font-size: small;">医疗宝典</span>
         </router-link>
       </div>
       <div style="color: var(--color-warning)">
         <router-link to="/Medicine" class="box-round flex-d-column flex-center">
           <van-icon class-prefix="yl-icon" name="yaoping" size="8vw" />
-          <span style="padding-top: 5px; font-size: 0.5rem;">药品查询</span>
+          <span style="padding-top: 5px; font-size: small;">药品查询</span>
         </router-link>
       </div>
       <div style="color: var(--color-primary)">
         <router-link to="/Pharmacy" class="box-round flex-d-column flex-center">
           <van-icon class-prefix="yl-icon" name="shangdian" size="8vw" />
-          <span style="padding-top: 5px; font-size: 0.5rem;">社区药房</span>
+          <span style="padding-top: 5px; font-size: small;">社区药房</span>
         </router-link>
       </div>
       <div style="color: var(--color-error)">
@@ -49,7 +49,7 @@
           class="box-round flex-d-column flex-center"
         >
           <van-icon class-prefix="yl-icon" name="dingdan2" size="8vw" />
-          <span style="padding-top: 5px; font-size: 0.5rem;">用药提醒</span>
+          <span style="padding-top: 5px; font-size: small;">用药提醒</span>
         </router-link>
       </div>
     </div>

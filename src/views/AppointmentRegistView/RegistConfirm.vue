@@ -36,7 +36,7 @@
     :rules="[{ required: true, message: '请填写预约姓名' }]"
   />
   <div style="margin: 16px;">
-    <van-button round block type="info"  class="yl" native-type="submit">确认预约</van-button>
+    <van-button round block type="info"  :disabled="count>0?true:false" class="yl" native-type="submit">确认预约</van-button>
   </div>
 </van-form>
 
@@ -47,7 +47,7 @@
 
 <script>
 import ylPsersonDoctor from '@/components/ylPsersonDoctor.vue'
-
+import aptregister from '@/http/apis/aptregister'
 export default {
     components:{
         ylPsersonDoctor
@@ -61,15 +61,45 @@ export default {
         time2:'',
         time3:'',
         show: false,
+        uid:'',
+        hid:'',
+        did:'',
+        state:0,
+        create_time:'',
+        update_time:'',
+        count:0
         }
     },
     mounted(){
      this.arr=this.$route.params.name
-      console.log(this.$store.getters.user)
+      // console.log(this.$store.getters.user)
+      this.uid=this.$store.getters.user.uid
+      this.hid= JSON.parse( sessionStorage.getItem('doctor')).hid
+      this.did= JSON.parse( sessionStorage.getItem('doctor')).did
+      this.create_time=this.$store.getters.user.create_time
+      this.update_time=new Date().getTime()
     },
     methods:{
-        onSubmit(values) {
-      console.log('submit', values);
+        onSubmit(value) {
+        
+          let data = {uid:this.uid,did:this.did,create_time:this.create_time,
+            yy_time:this.time2,state:this.state,update_time:this.update_time,
+            hid:this.hid
+          }
+          if(this.time2 &&value){
+            aptregister.add(data).then(res=>{
+             if(res.code==200){
+              this.count++
+            this.$router.push('/AppointmentRegist/AppointmentResult')    
+        }else {
+          this.$ylToast({
+            type:'error',
+            msg: res.msg
+            
+          });
+        }
+            })
+          }
     },
     showPopup() {
       this.show = true;

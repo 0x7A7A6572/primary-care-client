@@ -20,21 +20,23 @@
   :min-date="minDate"
   @confirm="Please"
   @cancel="cancel"
+  class="yl-van-field"
  
 />
 
 </van-popup>
 <ylTitle title="就诊人姓名" theme="left" style="margin: 20px 0;" size="15px" />
   <van-field
-    v-model="password"
+    v-model="user"
     type="text"
+    class="yl-van-field"
     name="姓名"
     label="姓名"
     placeholder="请输入预约姓名"
     :rules="[{ required: true, message: '请填写预约姓名' }]"
   />
   <div style="margin: 16px;">
-    <van-button round block type="info" native-type="submit">确认预约</van-button>
+    <van-button round block type="info"  class="yl" native-type="submit">确认预约</van-button>
   </div>
 </van-form>
 
@@ -53,7 +55,7 @@ export default {
     data(){
         return {
         arr:{},
-        password:'',
+        user:'',
         currentDate: new Date(),
         minDate:new Date(),
         time2:'',
@@ -63,7 +65,7 @@ export default {
     },
     mounted(){
      this.arr=this.$route.params.name
-       
+      console.log(this.$store.getters.user)
     },
     methods:{
         onSubmit(values) {
@@ -105,8 +107,8 @@ export default {
 
 <style lang="scss" scoped>
 .list{
-    width: 380px;
-    height: 100px;
+    width: 90vw;
+    height: 16vh;
     border-radius:var( --border-radius-large) ;
     background-color: var(--color-box-bg);
     margin: 20px auto;
@@ -114,7 +116,7 @@ export default {
 }
 .title{
     display: inline-block;
-    width: 200px;
+    width:52vw;
     margin-left: 13px;
     font-size: 16px;
     color: var(--color-second-text);

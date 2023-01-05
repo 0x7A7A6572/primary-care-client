@@ -73,9 +73,9 @@ let data={hid:this.hid.hid,did:this.did}
 
 <style lang="scss" scoped>
 .yu{
- position: relative;
- top: -55px;
- right: -240px;
+ position: absolute;
+ top: 18px;
+ right: 14px;
 }
 .ad,.ad1 {
   background-color: #e1e1e1;
@@ -88,16 +88,17 @@ let data={hid:this.hid.hid,did:this.did}
     }
   }
   >.doctor{
-  width: 370px;
+  width:90vw;
   margin: 15px auto;
+  position: relative;
   border-radius: var(  --border-radius-large);}
   li {
     display: flex;
     background-color: #ffffff;
 
     >img {
-      width: 50px;
-      height: 50px;
+      width: 13vw;
+      height: 9vh;
       margin-top: 20px;
       margin-left: 15px;
       border-radius: 50px;
@@ -109,7 +110,7 @@ let data={hid:this.hid.hid,did:this.did}
       >span:nth-child(2) {
         background-color: #145d8d;
         border-radius: 10px;
-        width: 100px;
+        width: 26vw;
         display: inline-block;
         text-align: center;
         color: #ffffff;
@@ -122,7 +123,7 @@ let data={hid:this.hid.hid,did:this.did}
         color: #145d8d;
         margin-left: 10px;
         border-radius: var(  --border-radius-large);
-        width: 100px;
+        width: 26vw;
         text-align: center;
         display: inline-block;
         overflow: hidden;
@@ -136,7 +137,7 @@ let data={hid:this.hid.hid,did:this.did}
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        width: 300px;
+        width: 80vw;
         margin-left: -25px;
       }
       >h3{

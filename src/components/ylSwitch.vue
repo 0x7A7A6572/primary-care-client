@@ -14,7 +14,7 @@ export default {
   props: {
     items: {
       type: Array,
-      default: () => ["男", "女"],
+      default: () => ["女", "男"],
     },
   },
   data() {

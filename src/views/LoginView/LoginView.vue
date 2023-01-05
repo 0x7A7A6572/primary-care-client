@@ -13,12 +13,14 @@
           >登录</span
         >
         <van-field
+        class="yl-van-field"
           v-model="username"
           name="phone"
           placeholder="请输入登陆手机号或身份证号"
           :rules="rules.phone"
         />
         <van-field
+        class="yl-van-field"
           v-model="password"
           type="password"
           name="pwd"

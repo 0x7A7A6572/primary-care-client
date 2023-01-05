@@ -53,7 +53,6 @@ export default {
       let routeData = JSON.parse(sessionStorage.getItem(to.name));
       // 持久化数据恢复
       if (from.name == null && routeData) {
-      
         for (let k in routeData.params) {
           to.params[k] = routeData.params[k];
         }
@@ -101,8 +100,8 @@ body {
 
 .yl {
   /* 修改vant组件全局样式  (需要同时使用yl样式)*/
-
-  // van-field
+  
+  van-field
   .van-field__body {
     > input {
       border-bottom: 1px solid var(--color-third-text);
@@ -144,9 +143,7 @@ body {
     .van-field__control {
       padding: var(--padding-base);
       border-bottom: 2px solid var(--color-light);
-      // &:focus {
-      //   border-bottom: 1px solid var(--color-main) !important;
-      // }
+
       &::placeholder {
         color: var(--color-third-text) !important;
         -webkit-text-fill-color: currentColor;

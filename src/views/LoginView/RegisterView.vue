@@ -1,7 +1,7 @@
 <template>
   <div class="yl-regster-view">
     <div class="regster-view-header">
-      <img class="__logo" src="@/assets/logo.png" alt="" />
+      <img class="__logo" src="@/assets/logo.svg" alt="" />
       <div class="flex-d-column">
         <span class="text-small">社区医疗</span>
         <span class="text-larger">欢迎注册!</span>
@@ -208,9 +208,9 @@ export default {
     > .__logo {
       width: 20vw;
       height: 20vw;
-      background: var(--color-light);
       border-radius: var(--border-radius-larger);
-      padding: var(--padding-base);
+      // background: var(--color-light);
+      // padding: var(--padding-base);
     }
     > div {
       margin-left: var(--margin-lg);

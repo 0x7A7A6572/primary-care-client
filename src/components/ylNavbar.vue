@@ -59,7 +59,7 @@ export default {
   height: 60px;
   font-size: 20px;
   font-weight: bolder;
-  box-shadow: 0px -2px 8px var(--color-main-bg);
+  box-shadow: 0px 2px 8px var(--color-third-text);
   z-index: 10;
   > .yl-navbar-title {
     display: flex;

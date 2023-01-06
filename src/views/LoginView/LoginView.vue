@@ -1,8 +1,6 @@
 <template>
   <div class="login-view yl">
     <div class="__logo">
-      <!-- <img :src="null" /> -->
-      <!-- //TODO 暂时不设置 -->
       <img src="@/assets/logo-text.svg" alt="" />
 
       <!-- <span class="text-small">社区医疗</span> -->
@@ -18,6 +16,7 @@
           name="phone"
           placeholder="请输入登陆手机号或身份证号"
           :rules="rules.phone"
+          :disabled="loading"
         />
         <van-field
           class="yl-van-field"
@@ -26,9 +25,10 @@
           name="pwd"
           placeholder="请输入密码"
           :rules="rules.pwd"
+          :disabled="loading"
         />
         <div style="margin: 16px">
-          <van-button class="yl" round block type="info" native-type="submit"
+          <van-button class="yl" :disabled="loading" :loading="loading" round block type="info" native-type="submit"
             >登录</van-button
           >
         </div>
@@ -54,6 +54,7 @@ const Reg_phone_id =
 export default {
   data() {
     return {
+      loading: false,
       username: "",
       password: "",
       rules: {
@@ -70,6 +71,7 @@ export default {
   },
   methods: {
     onSubmit(e) {
+      this.loading = true;
       let { phone, pwd } = e;
       this.$api.user.login({ phone, pwdmd5: md5(pwd) }).then((res) => {
         if (res.code === 200) {
@@ -88,6 +90,7 @@ export default {
             msg: res.msg,
           });
         }
+      this.loading = false;
       });
     },
   },

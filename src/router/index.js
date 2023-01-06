@@ -24,7 +24,7 @@ const routes = [
   { // 主页个人信息面板
     path: '/User',
     name: 'User',
-    meta: { tabbarShow: true, tabbarIndex: 3 },
+    meta: { tabbarShow: true, tabbarIndex: 3,keepAlive: true },
     component: () => import('../views/UserView/UserView.vue')
   },
   { // 编辑个人基本信息
@@ -86,19 +86,19 @@ const routes = [
   { // 问诊医生选择页
     path: '/OnlineConsultation',
     name: 'OnlineConsultation',
-    meta: { title: '线上问诊', navbarShow: true, keepAlive: true },
+    meta: { title: '线上问诊', navbarShow: true, keepAlive: true,keepAlive: true },
     component: () => import('../views/OnlineConsultationView/OnlineConsultationView.vue')
   },
   { // 医生搜索页
     path: '/OnlineConsultation/DoctorSearch',
     name: 'DoctorSearch',
-    meta: { title: '医生搜索', navbarShow: true },
+    meta: { title: '医生搜索', navbarShow: true,keepAlive: true },
     component: () => import('../views/OnlineConsultationView/SearchPageView.vue')
   },
   {// 问诊消息列表
     path: '/ChatList',
     name: 'ChatList',
-    meta: { tabbarShow: true, tabbarIndex: 1 },
+    meta: { tabbarShow: true, tabbarIndex: 1, keepAlive: true },
     component: () => import('../views/ChatView/ChatView.vue')
   },
   { // 问诊聊天窗口页
@@ -165,7 +165,7 @@ const routes = [
   {
     path: '/Medicine',
     name: 'Medicine',
-    meta: { tabbarShow: true, tabbarIndex: 2 },
+    meta: { tabbarShow: true, tabbarIndex: 2,keepAlive: true },
     component: () => import('../views/MedicineView/MedicineView.vue')
   },
   /**---------------------
@@ -202,8 +202,13 @@ const router = new VueRouter({
 // 全局路由守卫
 router.beforeEach((to, from, next) => {
   let token = store.getters.token;
+  // console.log({token,path:to.path,reg: /\/Login/g.test(to.path)})
   if (!/\/Login/g.test(to.path)) {
-    if (!token)  next('/Login');//跳到登录页面
+    if (!token) {
+      next('/Login');//跳到登录页面
+    }else{
+      next();
+    }
   } else {
     next();
   }

@@ -116,7 +116,7 @@ export default {
     userHealthInfo(){  
       this.$api.user.userHealthInfo().then(res=>{
         console.log('数据',res);
-        this.user = res.data[0];
+        this.user = res.data?.[0];
       })
     },
     jump(path) {
@@ -135,6 +135,10 @@ export default {
             done();
           }
         },
+      }).then(()=>{
+        // on confirm
+      }).catch(()=>{
+
       });
     },
   },

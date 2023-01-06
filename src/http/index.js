@@ -12,4 +12,6 @@ import aptregister from "./apis/aptregister";
 import medicine from "./apis/medicine";
 // 用药提醒相关
 import remind from "./apis/remind";
-export default { user, info, news, bible,aptregister,medicine,remind }
+// 文件上传
+import upload from "./apis/upload";
+export default { user, info, news, bible,aptregister,medicine,remind,upload }

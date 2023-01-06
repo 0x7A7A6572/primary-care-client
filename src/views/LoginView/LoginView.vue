@@ -3,9 +3,9 @@
     <div class="__logo">
       <!-- <img :src="null" /> -->
       <!-- //TODO 暂时不设置 -->
-      <img src="@/assets/logo.png" alt="" />
+      <img src="@/assets/logo-text.svg" alt="" />
 
-      <span class="text-small">社区医疗</span>
+      <!-- <span class="text-small">社区医疗</span> -->
     </div>
     <div class="login-from">
       <van-form @submit="onSubmit">
@@ -13,14 +13,14 @@
           >登录</span
         >
         <van-field
-        class="yl-van-field"
+          class="yl-van-field"
           v-model="username"
           name="phone"
           placeholder="请输入登陆手机号或身份证号"
           :rules="rules.phone"
         />
         <van-field
-        class="yl-van-field"
+          class="yl-van-field"
           v-model="password"
           type="password"
           name="pwd"
@@ -49,16 +49,23 @@
 <script>
 import md5 from "js-md5";
 // 判断手机和身份证正则表达式
-const Reg_phone_id = /^1[3456789]\d{9}$|^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+const Reg_phone_id =
+  /^1[3456789]\d{9}$|^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
 export default {
   data() {
     return {
       username: "",
       password: "",
       rules: {
-        phone: [{ required: true, pattern: Reg_phone_id, message: '请填写正确身份证或手机号' }],
-        pwd: [{ required: true, message: '请填写密码' }]
-      }
+        phone: [
+          {
+            required: true,
+            pattern: Reg_phone_id,
+            message: "请填写正确身份证或手机号",
+          },
+        ],
+        pwd: [{ required: true, message: "请填写密码" }],
+      },
     };
   },
   methods: {
@@ -69,16 +76,16 @@ export default {
           // 保存用户信息和token 到vuex
           this.$store.commit("updateUser", res.data.user);
           this.$store.commit("updateToken", res.data.token);
-          this.$router.push('/home');
+          this.$router.push("/home");
           this.$ylToast({
             msg: "登陆成功",
-            type:'success',
+            type: "success",
             duration: 2000,
           });
         } else {
           this.$ylToast({
-            type:'error',
-            msg: res.msg
+            type: "error",
+            msg: res.msg,
           });
         }
       });
@@ -107,17 +114,20 @@ export default {
     padding: var(--padding-lg);
     > img {
       margin: auto;
-      width: 30vw;
-      height: 30vw;
-      padding: var(--padding-base);
-      background: var(--color-light);
+      // width: 30vw;
+      height: 50vw;
+      // padding: var(--padding-base);
+      // background: var(--color-light);
       border-radius: var(--border-radius-larger);
       margin-bottom: var(--margin-lg);
+      opacity: 0;
+      animation: show-in-top  1s ease-in-out 0s 1 alternate forwards;
     }
   }
   .login-from {
     display: flex;
     flex-direction: column;
+    animation: show-in-bottom  1s ease-in-out 0s 1 alternate forwards;
     .van-field {
       font-size: var(--font-size-base);
       padding: var(--padding-base);
@@ -126,6 +136,26 @@ export default {
   .no-acount-desc {
     margin: auto;
     color: var(--color-third-text);
+  }
+}
+@keyframes show-in-top {
+  0% {
+    opacity: 0;
+    transform: translateY(-30vw);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes show-in-bottom {
+  0% {
+    // opacity: 0;
+    transform: translateY(30vw);
+  }
+  100% {
+    // opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>

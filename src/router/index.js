@@ -1,8 +1,8 @@
+import store from '@/store'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView/HomeView.vue'
-
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   /**---------------------
@@ -141,7 +141,7 @@ const routes = [
     },
     component: () => import('../views/AppointmentRegistView/RegistConfirm.vue')
   },
- 
+
   { // 挂号信息结果
     path: '/AppointmentRegist/AppointmentResult',
     name: 'AppointmentResult',
@@ -197,6 +197,16 @@ const router = new VueRouter({
   mode: 'hash',
   base: process.env.BASE_URL,
   routes
+})
+
+// 全局路由守卫
+router.beforeEach((to, from, next) => {
+  let token = store.getters.token;
+  if (!/\/Login/g.test(to.path)) {
+    if (!token)  next('/Login');//跳到登录页面
+  } else {
+    next();
+  }
 })
 
 export default router

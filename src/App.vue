@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-if="_isMobile() || $route.query.showPhone">
     <!-- 顶部标题导航 -->
     <van-sticky>
       <ylNavbar v-show="ylNavbarShow" />
@@ -18,10 +18,17 @@
       @onItemClick="onNavItemClick"
     />
   </div>
+
+  <!-- 临时解决方案 -->
+  <PhoneHomeView id="app" v-else></PhoneHomeView>
+
 </template>
 
 <script>
 export default {
+  components:{
+    PhoneHomeView: ()=>import('@/views/HomeView/PhoneHomeView.vue')
+  },
   created() {
     // 防止首次进入页面时,因未触发路由改变而导致ylTabbar不显示的问题
     // （ylTabbarShow 默认为fasle 可以减少路由对于meta.tabbarShow的配置)
@@ -65,6 +72,11 @@ export default {
           JSON.stringify({ params: to.params, query: to.query })
         );
       }
+
+      // 😀  pc mei xie hahah
+      if (from.query.showPhone) {
+        to.query.showPhone = true;
+      }
     },
   },
   methods: {
@@ -74,6 +86,12 @@ export default {
       // 如果和当前路由同名则不跳转
       if (this.$route.name == name) return;
       this.$router.push(name);
+    },
+    _isMobile() {
+      let flag = navigator.userAgent.match(
+        /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+      );
+      return flag;
     },
   },
 };
@@ -100,9 +118,8 @@ body {
 
 .yl {
   /* 修改vant组件全局样式  (需要同时使用yl样式)*/
-  
-  van-field
-  .van-field__body {
+
+  van-field .van-field__body {
     > input {
       border-bottom: 1px solid var(--color-third-text);
     }
@@ -151,4 +168,5 @@ body {
     }
   }
 }
+
 </style>

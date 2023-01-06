@@ -3,7 +3,12 @@
     <!-- 用户信息 -->
     <div class="home-user">
       <img class="__avatar" :src="$store.getters.user?.avatar" alt="" />
-      <span class="text-larger" style=""> 您好！</span>
+      <span
+        class="text-larger"
+        style="color: var(--color-second-text); font-weight: unset"
+      >
+        您好！</span
+      >
       <span class="text-larger">{{ $store.getters.user?.name }}</span>
     </div>
     <!-- 主功能模块 -->
@@ -13,15 +18,13 @@
           <van-icon class-prefix="yl-icon" name="tingzhenqi" size="8vw" />
           <span class="__title">在线问诊</span>
         </div>
-        <span class="text-small" style="color: #fffd"
-          >面对面的解答病状</span
-        >
+        <span class="text-small" style="color: #fffd">面对面的解答病状</span>
       </router-link>
       <router-link to="/AppointmentRegist" class="box __func-item right">
         <div>
-        <van-icon class-prefix="yl-icon" name="jijiu1" size="8vw" />
-        <span class="__title">预约挂号</span>
-      </div>
+          <van-icon class-prefix="yl-icon" name="jijiu1" size="8vw" />
+          <span class="__title">预约挂号</span>
+        </div>
         <span class="text-small" style="color: #fffd">快速解决"一号难求"</span>
       </router-link>
     </div>
@@ -156,7 +159,7 @@ export default {
       .__title {
         white-space: nowrap;
       }
-       span {
+      span {
         padding: var(--padding-sm);
       }
     }

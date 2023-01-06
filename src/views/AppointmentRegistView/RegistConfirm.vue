@@ -27,7 +27,7 @@
 </van-popup>
 <ylTitle title="就诊人姓名" theme="left" style="margin: 20px 0;" size="15px" />
   <van-field
-    v-model="user"
+    v-model="name"
     type="text"
     class="yl-van-field"
     name="姓名"
@@ -55,7 +55,6 @@ export default {
     data(){
         return {
         arr:{},
-        user:'',
         currentDate: new Date(),
         minDate:new Date(),
         time2:'',
@@ -67,17 +66,19 @@ export default {
         state:0,
         create_time:'',
         update_time:'',
-        count:0
+        count:0,
+        name:''
         }
     },
     mounted(){
      this.arr=this.$route.params.name
-      // console.log(this.$store.getters.user)
+      // console.log(this.$store.getters.user.name)
       this.uid=this.$store.getters.user.uid
       this.hid= JSON.parse( sessionStorage.getItem('doctor')).hid
       this.did= JSON.parse( sessionStorage.getItem('doctor')).did
       this.create_time=this.$store.getters.user.create_time
       this.update_time=new Date().getTime()
+      this.name=this.$store.getters.user.name
     },
     methods:{
         onSubmit(value) {

@@ -72,8 +72,8 @@
       background-color: #ffffff;
   
       >img {
-        width: 50px;
-        height: 50px;
+        width: 13vw;
+        height: 9vh;
         margin-top: 20px;
         margin-left: 15px;
       }
@@ -84,7 +84,7 @@
         >span:nth-child(2) {
           background-color: #145d8d;
           border-radius: 10px;
-          width: 50px;
+          width: 13vw;
           display: inline-block;
           text-align: center;
           color: #ffffff;
@@ -98,7 +98,7 @@
           color: #145d8d;
           margin-left: 10px;
           border-radius: 10px;
-          width: 100px;
+          width: 26vw;
           text-align: center;
           display: inline-block;
           overflow: hidden;

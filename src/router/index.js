@@ -141,6 +141,15 @@ const routes = [
     },
     component: () => import('../views/AppointmentRegistView/RegistConfirm.vue')
   },
+ 
+  { // 挂号信息结果
+    path: '/AppointmentRegist/AppointmentResult',
+    name: 'AppointmentResult',
+    meta: {
+      title: '挂号信息结果', navbarShow: true
+    },
+    component: () => import('../views/AppointmentRegistView/AppointmentResult.vue')
+  },
   { // 挂号预约订单列表
     path: '/AppointmentRegist/RegistOrderList',
     name: 'RegistOrderList',

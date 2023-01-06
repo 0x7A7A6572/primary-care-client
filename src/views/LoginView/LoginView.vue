@@ -65,7 +65,6 @@ export default {
     onSubmit(e) {
       let { phone, pwd } = e;
       this.$api.user.login({ phone, pwdmd5: md5(pwd) }).then((res) => {
-        console.log("login res:", res);
         if (res.code === 200) {
           // 保存用户信息和token 到vuex
           this.$store.commit("updateUser", res.data.user);
@@ -74,7 +73,7 @@ export default {
           this.$ylToast({
             msg: "登陆成功",
             type:'success',
-            duration: 3000,
+            duration: 2000,
           });
         } else {
           this.$ylToast({
@@ -83,7 +82,6 @@ export default {
           });
         }
       });
-      console.log("onSubmit:", e, md5(pwd));
     },
   },
 };

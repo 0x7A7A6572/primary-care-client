@@ -9,14 +9,20 @@
     <!-- 主功能模块 -->
     <div class="main-func text-larger">
       <router-link to="/OnlineConsultation" class="box __func-item left">
-        <van-icon class-prefix="yl-icon" name="tingzhenqi" size="8vw" />
-        <span>在线问诊</span>
-        <span class="text-small" style="color:#fffd">面对面的解答您的病状</span>
+        <div>
+          <van-icon class-prefix="yl-icon" name="tingzhenqi" size="8vw" />
+          <span class="__title">在线问诊</span>
+        </div>
+        <span class="text-small" style="color: #fffd"
+          >面对面的解答病状</span
+        >
       </router-link>
       <router-link to="/AppointmentRegist" class="box __func-item right">
+        <div>
         <van-icon class-prefix="yl-icon" name="jijiu1" size="8vw" />
-        <span>预约挂号</span>
-        <span class="text-small" style="color:#fffd">快速解决"一号难求"</span>
+        <span class="__title">预约挂号</span>
+      </div>
+        <span class="text-small" style="color: #fffd">快速解决"一号难求"</span>
       </router-link>
     </div>
 
@@ -28,19 +34,19 @@
           class="box-round flex-d-column flex-center"
         >
           <van-icon class-prefix="yl-icon" name="yiyaoxiang" size="8vw" />
-          <span style="padding-top: 5px; font-size: small;">医疗宝典</span>
+          <span style="padding-top: 5px; font-size: small">医疗宝典</span>
         </router-link>
       </div>
       <div style="color: var(--color-warning)">
         <router-link to="/Medicine" class="box-round flex-d-column flex-center">
           <van-icon class-prefix="yl-icon" name="yaoping" size="8vw" />
-          <span style="padding-top: 5px; font-size: small;">药品查询</span>
+          <span style="padding-top: 5px; font-size: small">药品查询</span>
         </router-link>
       </div>
       <div style="color: var(--color-primary)">
         <router-link to="/Pharmacy" class="box-round flex-d-column flex-center">
           <van-icon class-prefix="yl-icon" name="shangdian" size="8vw" />
-          <span style="padding-top: 5px; font-size: small;">社区药房</span>
+          <span style="padding-top: 5px; font-size: small">社区药房</span>
         </router-link>
       </div>
       <div style="color: var(--color-error)">
@@ -49,7 +55,7 @@
           class="box-round flex-d-column flex-center"
         >
           <van-icon class-prefix="yl-icon" name="dingdan2" size="8vw" />
-          <span style="padding-top: 5px; font-size: small;">用药提醒</span>
+          <span style="padding-top: 5px; font-size: small">用药提醒</span>
         </router-link>
       </div>
     </div>
@@ -58,9 +64,11 @@
       <ylTitle title="健康新闻" />
 
       <!-- <van-list finished-text="没有更多了"> -->
-      <ylNewsItem v-for="item in newsList" :key="item.id" 
-      :news="item"
-      @click="toNewsPage(item)"
+      <ylNewsItem
+        v-for="item in newsList"
+        :key="item.id"
+        :news="item"
+        @click="toNewsPage(item)"
       />
       <!-- </van-list> -->
     </div>
@@ -94,16 +102,16 @@ export default {
         }
       });
   },
-  methods:{
-    toNewsPage(news){
-     this.$router.push({
-      path:'/News/Details',
-      params: {
-        news
-      }
-     })
-    }
-  }
+  methods: {
+    toNewsPage(news) {
+      this.$router.push({
+        path: "/News/Details",
+        params: {
+          news,
+        },
+      });
+    },
+  },
 };
 </script>
 
@@ -145,9 +153,11 @@ export default {
         box-shadow: 2px 2px 8px var(--color-primary);
       }
       // width: ;
-      > span {
-        padding: var(--padding-base);
+      .__title {
         white-space: nowrap;
+      }
+       span {
+        padding: var(--padding-sm);
       }
     }
   }
@@ -155,20 +165,20 @@ export default {
     display: flex;
     justify-content: space-between;
     margin: var(--margin-base) 0;
-    >div{ // 兼容横屏
+    > div {
+      // 兼容横屏
       min-width: 22vw;
       flex: 1;
-      >a{
+      > a {
         min-width: 90%;
         margin: auto;
       }
     }
-  
   }
   .news-list {
     width: 100%;
   }
-  .activity-list{
+  .activity-list {
     width: 100%;
     margin: var(--margin-base) 0;
     min-height: 30vh;

@@ -6,7 +6,8 @@ import httpApi from "@/http";
 // import Vant from 'vant'; // 全部导入
 import { Icon, DropdownMenu, DropdownItem,
    Sticky ,Popup ,Search,List,Cell,Tag,
-    Image,Button,Divider,Form,Field,DatetimePicker,Dialog
+    Image,Button,Divider,Form,Field,DatetimePicker,Dialog,
+		Uploader
  } from 'vant'; // 按需导入
 
 import 'vant/lib/index.css';
@@ -50,6 +51,8 @@ Vue.use(Divider);
 Vue.use(Form);
 Vue.use(Field);
 // Vue.use(Dialog);
+Vue.use(Uploader);
+
 
 Vue.config.productionTip = false;
 import ylToast from './components/ylToast/ylToast.js';

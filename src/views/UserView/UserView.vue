@@ -115,7 +115,6 @@ export default {
   methods: {
     userHealthInfo(){  
       this.$api.user.userHealthInfo().then(res=>{
-        console.log('数据',res);
         this.user = res.data?.[0];
       })
     },

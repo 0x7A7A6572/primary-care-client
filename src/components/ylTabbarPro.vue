@@ -93,17 +93,19 @@ export default {
   font-size: 8vw;
   font-weight: bolder;
   // border-radius: 20px 20px 0px 0px;
-  box-shadow: 0px -2px 8px var(--color-main-bg);
+  // box-shadow: 0px -2px 8px var(--color-third-text);
   .tabbar-bg {
     position: absolute;
     bottom: 0;
     left: 0;
     background: var(--color-box-bg);
-    border-radius: 20px 20px 0px 0px;
+    border-radius: 16px 16px 0px 0px;
     height: 16vw;
     width: 100%;
     z-index: 1;
     overflow: hidden;
+    box-shadow: 0px -2px 6px rgba(159, 159, 159, 0.366);
+
 
     .false-active-bg {
       position: absolute;
@@ -177,7 +179,7 @@ export default {
     transition: 0.3s;
     // border: 1vw solid var(--color-mian-bg);
     margin: 1vw; // 代替border 同时宽高-2vw
-    // box-shadow: 0px 2px 8px rgba(11, 255, 251, 0.842);
+    box-shadow: 0px 2px 8px var(--color-main);
   }
 }
 </style>

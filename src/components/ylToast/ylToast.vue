@@ -82,6 +82,7 @@ export default {
   animation: show 0.5s;
   padding: var(--padding-base);
   box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+  z-index: 999;
   > span {
     display: block;
     color: #fff;

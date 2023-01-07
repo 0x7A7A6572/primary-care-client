@@ -202,7 +202,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   let token = store.getters.token;
   // console.log({token,path:to.path,reg: /\/Login/g.test(to.path)})
-  if (!/\/Login/g.test(to.path)) {
+  if (!/\/Login|\/Home/g.test(to.path)) {
     if (!token) {
       next('/Login');//跳到登录页面
     }else{

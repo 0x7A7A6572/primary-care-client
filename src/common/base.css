@@ -47,7 +47,7 @@
   --margin-lg: 16px;
 
   /* 其他 */
-  --color-fab-bg: linear-gradient(120deg, #8dff7edc, var(--color-main) );
+  --color-fab-bg: linear-gradient(120deg, #8dff7e, var(--color-main) );
 }
 /* 超大标题 */
 .text-larger-x {

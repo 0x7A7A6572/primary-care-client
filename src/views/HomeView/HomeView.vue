@@ -2,14 +2,20 @@
   <div class="home">
     <!-- 用户信息 -->
     <div class="home-user">
-      <img class="__avatar" :src="$store.getters.user?.avatar" alt="" />
+      <van-image
+        class="__avatar" round
+        :src="$store.getters.user?.avatar"
+      />
+      <!-- <img class="__avatar" :src="$store.getters.user?.avatar" alt="" /> -->
       <span
         class="text-larger"
         style="color: var(--color-second-text); font-weight: unset"
       >
         您好！</span
       >
-      <span class="text-larger">{{ $store.getters.user?.name }}</span>
+      <router-link to="/User" class="text-larger">{{
+        $store.getters.user?.name || "未登录"
+      }}</router-link>
     </div>
     <!-- 主功能模块 -->
     <div class="main-func text-larger">

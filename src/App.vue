@@ -46,8 +46,6 @@ export default {
   // 监听路由变化
   watch: {
     $route(to, from) {
-      // TODO 登陆拦截
-
       console.log("route change:", { to, from });
       // 判断路由中navShow的值来选择显示/隐藏底部导航
       this.ylTabbarShow = to.meta?.tabbarShow || false;

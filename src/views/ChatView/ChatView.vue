@@ -1,6 +1,7 @@
 <template>
   <div class="chat-view">
-    <div class="text-larger __title">问诊消息列表</div>
+    <!-- <div class="text-larger __title">问诊消息列表</div> -->
+    <ylStickyHead title="问诊记录" />
     <YlMsgItem
       :user="{
         avatar:
@@ -29,8 +30,9 @@
 
 <script>
 import YlMsgItem from "./ylMsgItem.vue";
+import ylStickyHead from "@/components/ylStickyHead.vue";
 export default {
-  components: { YlMsgItem },
+  components: { YlMsgItem,ylStickyHead },
   methods:{
     toChatRoom(e){
       this.$router.push({

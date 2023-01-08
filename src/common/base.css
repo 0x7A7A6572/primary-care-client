@@ -161,6 +161,15 @@
   top: 0;
 }
 
+.tag{
+  /* display: block; */
+  font-size: var(--font-size-sm);
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 0 4px;
+  height: fit-content;
+}
+
 /* 单行文本溢出显示... */
 .text-of-e {
   overflow: hidden;

@@ -1,8 +1,9 @@
 <template>
   <div
-  @click="$emit('click')"
+    @click="$emit('click')"
     :class="['yl-search', 'box', boxShadow ? 'shadow' : '']"
     :disabled="disabled"
+    :style="{border: '2px solid ' + borderColor}"
   >
     <van-icon
       class-prefix="yl-icon"
@@ -34,9 +35,15 @@
       <span v-show="!loading"> {{ searchText }}</span>
     </div>
     <div class="result-panel" v-show="panel"><slot></slot></div>
-    <div class="panel-mask" v-show="panel" 
-    @click.stop="$emit('closePanel',false)"
-    @scroll.stop="()=>{return false;}"
+    <div
+      class="panel-mask"
+      v-show="panel"
+      @click.stop="$emit('closePanel', false)"
+      @scroll.stop="
+        () => {
+          return false;
+        }
+      "
     ></div>
   </div>
 </template>
@@ -66,11 +73,15 @@ export default {
       type: Boolean,
       default: false,
     },
+    borderColor: {
+      type: String,
+      default: "transparent",
+    },
     disabled: {
       type: Boolean,
       default: false,
     },
-    panel:{
+    panel: {
       type: Boolean,
       default: false,
     },
@@ -81,7 +92,7 @@ export default {
   },
   data() {
     return {
-    //   currentValue: this.value,
+      //   currentValue: this.value,
     };
   },
   methods: {
@@ -89,11 +100,10 @@ export default {
       this.$emit("change", e);
     },
     inputload(e) {
-      let value = e.target.value;
-      this.$emit("input", value);
+      this.$emit("input", e.target.value);
     },
-    search() {
-      this.$emit("search", this.inptext);
+    search(e) {
+      this.$emit("search", e.target.value);
     },
   },
 };
@@ -106,9 +116,9 @@ export default {
   display: flex;
   align-items: center;
   // justify-content: space-between;
-  padding: 14px;
+  padding: var(--padding-base);
   border-radius: var(--border-radius-medium);
- 
+
   > input {
     border: none;
     padding-left: 20px;
@@ -153,9 +163,8 @@ export default {
     overflow: scroll;
     border-bottom-left-radius: var(--border-radius-medium);
     border-bottom-right-radius: var(--border-radius-medium);
-
   }
-  .panel-mask{
+  .panel-mask {
     position: fixed;
     top: 0;
     left: 0;

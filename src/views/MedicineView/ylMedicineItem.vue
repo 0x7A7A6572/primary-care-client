@@ -8,9 +8,9 @@
     <span>规格：<span>{{ meddata.spec }}</span></span>
     <span>药品编号：<span>{{ meddata.code }}</span></span>
     <span >制药公司：{{ meddata.pro_unit }}</span>
-    <router-link class="to-baidu-baike" to="" title="跳转百科查看详情">
+    <a class="to-baidu-baike" :href="returnBaikeUrl(meddata.name)" title="跳转百科查看详情">
      <i class="yl-icon yl-icon-yaowan icon-btn" />
-    </router-link>
+    </a>
   </div>
 </template>
 
@@ -21,7 +21,13 @@ export default {
     meddata: Object,
     keyword: String
   },
+  data(){
+    return{
+      baikeUrl: 'https://baike.baidu.com/item/&fromModule=search_box'
+    }
+  },
   methods:{
+    // 搜索结果关键字标红
     formatKeyword(str=str.toString()){
     if(!this.$props.keyword) return str;
       let keyIndex = str.indexOf(this.$props.keyword[0]);
@@ -35,7 +41,12 @@ export default {
       return `${
         str.slice(0,keyIndex)}<span style='color:red;'>${
         str.slice(keyIndex,keyEndIndex)}</span>${str.slice(keyEndIndex)}`
+    },
+
+    returnBaikeUrl(name){
+      return `https://baike.baidu.com/item/${name}?timestamp=${new Date().getTime()}&fromModule=search_box`
     }
+
   }
 };
 </script>

@@ -14,6 +14,7 @@
     <input
       type="text"
       :placeholder="placeholder"
+      :value="value"
       @change="change"
       @input="inputload"
       :disabled="disabled"
@@ -92,14 +93,16 @@ export default {
   },
   data() {
     return {
-      //   currentValue: this.value,
+        // currentValue: '',
     };
   },
   methods: {
     change(e) {
-      this.$emit("change", e);
+    //  this.currentValue = e.target.value
+      this.$emit("change", e.target.value);
     },
     inputload(e) {
+    //  this.currentValue = e.target.value
       this.$emit("input", e.target.value);
     },
     search(e) {

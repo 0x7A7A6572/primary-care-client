@@ -13,10 +13,19 @@
           :panel="false"
           borderColor="var(--color-main)"
           @search="onSearch"
-          @input="onChange"
-        />
+         @input="onChange"
+        /> 
       </div>
     </van-sticky>
+    <div v-show="!search.onSearch || search.meddatas.length == 0"  class="hot-search box-round" >
+        <ylTitle title="大家在搜" barColor="white" />
+        <div><!-- @click="onSearch(item)" -->
+          <span v-for="(item,index) in drugsHotSearch" class="tag" :key="index" @click="()=>{onSearch(item); inpt=item}">
+            <i class="yl-icon yl-icon-yaowan" />
+            {{item}}
+            </span>
+        </div>
+    </div>
     <!-- 空状态处理 -->
     <ylEmpty v-if="showEmpty()" type="search" title="抱歉！搜索结果为空" />
     <van-list
@@ -63,6 +72,8 @@ export default {
       finished: false,
       inpt: "",
       meddatas: [],
+      // TODO 这个接口没写
+      drugsHotSearch:['布洛芬缓释胶囊','莲花清温','六位地黄丸','小儿肠胃康颗粒','藿香正气水']
     };
   },
   created() {
@@ -93,7 +104,7 @@ export default {
       }
     },
     onSearch(v) {
-      // console.log(v);
+      if(!v || !v.trim()) return;
       this.$api.medicine
         .searchDrugs({
           name1: v,
@@ -112,6 +123,7 @@ export default {
         });
     },
     onChange(e) {
+  
       if (!e) {
         // 关闭搜索结果标识符
         this.search.onSearch = false;
@@ -141,6 +153,7 @@ export default {
           callback?.(res);
         });
     },
+
     // 判断是否搜索为空
     showEmpty() {
       if (this.search.onSearch) {
@@ -163,6 +176,28 @@ export default {
 
   .drugs-list {
     padding-bottom: 10vh;
+  }
+
+  .hot-search{
+    // margin: var(--margin-sm);
+    width: auto;
+    background: linear-gradient(135deg, var(--color-secondary), rgb(0, 184, 178));
+    .yl-title{
+      padding-bottom: 10px;
+    }
+    >div{
+    display: flex;
+    flex-wrap: wrap;
+    white-space: nowrap;
+    >span{
+      font-size: var(--font-size-base);
+      margin: 6px;
+      padding: 4px 6px;
+      color: white;
+      font-weight: bold;
+    }
+    }
+
   }
 
   /* 修改默认.van-sticky 粘连时的样式 */

@@ -93,6 +93,15 @@
           :style="{ color: 'var(--color-third-text)', borderColor: 'var(--color-third-text)', margin: '15px 0' }" />
         <div class="address">
           <div class="address_list">
+            <van-icon class="address_list" class-prefix="yl-icon" name="bingli" color="var(--color-main)" size="3vh" />
+            <span>使用帮助</span>
+          </div>
+          <van-icon class-prefix="yl-icon" name="page_right" color="var(--color-main)" size="3vh" />
+        </div>
+        <van-divider
+          :style="{ color: 'var(--color-third-text)', borderColor: 'var(--color-third-text)', margin: '15px 0' }" />
+        <div class="address">
+          <div class="address_list">
             <van-icon class="address_list" class-prefix="yl-icon" name="fasong" color="var(--color-main)" size="3vh" />
             <span>关于</span>
           </div>

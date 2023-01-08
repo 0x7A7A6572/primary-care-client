@@ -150,6 +150,10 @@ body {
   &.van-field {
     display: flex;
     flex-direction: column;
+    &::after{
+      // 去掉原有的下边框线
+      border: none;
+    }
     > .van-field__label {
       font-weight: bold;
       font-size: var(--font-size-lg);

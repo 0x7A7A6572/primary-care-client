@@ -52,7 +52,7 @@ export default {
   .__cover {
     width: 24vw;
     height: 24vw;
-    border-radius: var(--border-radius-larger);
+    border-radius: var(--border-radius-small);
     object-fit: cover;
   }
 }

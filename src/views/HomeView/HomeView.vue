@@ -21,14 +21,14 @@
     <div class="main-func text-larger">
       <router-link to="/OnlineConsultation" class="box __func-item left">
         <div>
-          <van-icon class-prefix="yl-icon" name="tingzhenqi" size="8vw" />
-          <span class="__title">在线问诊</span>
+          <van-icon class-prefix="yl-icon" name="yiwurenyuan2" size="8vw" />
+          <span class="__title">线上问诊</span>
         </div>
         <span class="text-small" style="color: #fffd">面对面的解答病状</span>
       </router-link>
       <router-link to="/AppointmentRegist" class="box __func-item right">
         <div>
-          <van-icon class-prefix="yl-icon" name="jijiu1" size="8vw" />
+          <van-icon class-prefix="yl-icon" name="tingzhenqi" size="8vw" />
           <span class="__title">预约挂号</span>
         </div>
         <span class="text-small" style="color: #fffd">快速解决"一号难求"</span>

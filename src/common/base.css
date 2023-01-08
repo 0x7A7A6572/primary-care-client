@@ -95,6 +95,7 @@
   background: var(--color-main);
   color: white;
   width: fit-content;
+  height: fit-content;
   padding: 5px 10px;
   font-size: small;
   border-radius: var(--border-radius-medium);

@@ -60,7 +60,7 @@
       </div>
       <div style="color: var(--color-error)">
         <router-link
-          to="/MedicationReminder/add"
+          to="/MedicationReminder"
           class="box-round flex-d-column flex-center"
         >
           <van-icon class-prefix="yl-icon" name="dingdan2" size="8vw" />

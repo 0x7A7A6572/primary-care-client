@@ -46,7 +46,7 @@ export default {
   // 监听路由变化
   watch: {
     $route(to, from) {
-      console.log("route change:", { to, from });
+      // console.log("route change:", { to, from });
       // 判断路由中navShow的值来选择显示/隐藏底部导航
       this.ylTabbarShow = to.meta?.tabbarShow || false;
       // 判断路由中topBarShow的值来选择显示/隐藏底部导航
@@ -146,10 +146,10 @@ body {
   }
 }
 /* 修改默认的vant输入框组件为设计图的样式 */
-.yl-van-field {
+.yl-van-field,.yl-van-field-flex {
+
   &.van-field {
     display: flex;
-    flex-direction: column;
     &::after{
       // 去掉原有的下边框线
       border: none;
@@ -170,5 +170,17 @@ body {
     }
   }
 }
+.yl-van-field-flex{
+  .van-cell__title{
+    flex: 0;
+    white-space: nowrap;
+  }
+}
+.yl-van-field.van-field{ flex-direction: column;}
 
+/* .van-popup--bottom 的上半部分圆角样式 */
+.van-popup--bottom{
+  border-top-left-radius: var(--border-radius-larger);
+  border-top-right-radius: var(--border-radius-larger);
+}
 </style>

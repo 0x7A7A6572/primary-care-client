@@ -6,7 +6,8 @@ import httpApi from "@/http";
 // import Vant from 'vant'; // 全部导入
 import { Icon, DropdownMenu, DropdownItem,
    Sticky ,Popup ,Search,List,Cell,Tag,
-    Image,Button,Divider,Form,Field,DatetimePicker,Dialog,Uploader 
+    Image,Button,Divider,Form,Field,DatetimePicker,Dialog,Uploader,
+		Popover
  } from 'vant'; // 按需导入
 
 import 'vant/lib/index.css';
@@ -50,8 +51,7 @@ Vue.use(Divider);
 Vue.use(Form);
 Vue.use(Field);
 Vue.use(Uploader);
-// Vue.use(Dialog);
-Vue.use(Uploader);
+Vue.use(Popover);
 
 
 Vue.config.productionTip = false;
@@ -70,7 +70,15 @@ Vue.filter('datetime',(num)=>{
 	let dd = d.getDate()
 	dd = dd<10?'0'+dd:dd
 	return `${yy}-${mm}-${dd}`
-})
+});
+Vue.filter('time',(num)=>{
+let d = new Date(num) 
+let hh = d.getHours()
+let mm = d.getMinutes()+1 
+mm = mm<10?'0'+mm:mm
+hh = hh<10?'0'+hh:hh
+return `${hh}:${mm}`
+});
 new Vue({
   router,
   store,

@@ -7,7 +7,7 @@ import httpApi from "@/http";
 import { Icon, DropdownMenu, DropdownItem,
    Sticky ,Popup ,Search,List,Cell,Tag,
     Image,Button,Divider,Form,Field,DatetimePicker,Dialog,Uploader,
-		Popover
+		Popover, TreeSelect 
  } from 'vant'; // 按需导入
 
 import 'vant/lib/index.css';
@@ -52,6 +52,8 @@ Vue.use(Form);
 Vue.use(Field);
 Vue.use(Uploader);
 Vue.use(Popover);
+Vue.use(TreeSelect);
+
 
 
 Vue.config.productionTip = false;

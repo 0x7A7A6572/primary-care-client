@@ -187,7 +187,7 @@ const routes = [
     meta: {
       title: '医疗宝典', navbarShow: true
     },
-    component: () => import('../views/NewsView/NewsDetails.vue')
+    component: () => import('../views/MedicalTreasureView/MedicalTreasureView.vue')
   },
 ]
 

@@ -11,31 +11,68 @@
     <div class="redrem-list">
       <div class="redrem-item" v-for="item in reminders" :key="item.rid">
         <div class="__content flex-d-column">
-          <span class="__name"
-            ><i class="yl-icon yl-icon-yaowan"></i>{{ item.medname }} 
-            <span class="tag" v-show="item.icsurl" >ics</span>
-            </span
-          >
+          <ylTitle
+            class="__name"
+            theme="left"
+            barColor="white"
+            :title="item.medname"
+          />
+          <!-- <span class="__name">
+            <i class="yl-icon yl-icon-yaowan"></i>&emsp;{{ item.medname }} 
+            </span> -->
           <span class="text-small"
             >{{ `每${item.freq} / ${item.units}${item.dose} ` }}
             &emsp;
             <i class="yl-icon yl-icon-shizhong"></i>
             {{ item.dtstatr | time }} ~ {{ item.dtend | time }}</span
           >
-          <div
-            v-if="item.icsurl"
-            class="create-ics flex-center"
-            style="color:var(--color-main)"
-            :data-ics-url="config.uploadUrl + item.icsurl"
-          >
-            <!-- <span>
-               复制ICS&emsp;{{ config.uploadUrl}}{{ item.icsurl }}
-            </span> -->
-            <i class="yl-icon yl-icon-wenjianbangong"></i>
+          <!-- 操作控制 -->
+          <div class="flex create-ics" v-if="item.icsurl">
+            <!-- <div
+              class="flex-center"
+              style="color: white"
+              :data-ics-url="config.uploadUrl + item.icsurl"
+            >
+              <i class="yl-icon yl-icon-wenjianbangong"></i>
+            </div> -->
+            <span
+              class="icon-btn"
+              id="icsel"
+              ref="icsurl"
+              @click="copyICS(item)"
+              ><i class="yl-icon yl-icon-wenjianbangong"></i> 复制ICS</span
+            >
+            <span
+              class="icon-btn"
+              style="margin-left: var(--margin-base)"
+              @click="showDelPopup(item)"
+              ><i class="yl-icon yl-icon-docu_delete"></i> 删除</span
+            >
           </div>
-          <span v-else class="create-ics icon-btn" v-show="!item.icsurl"
-            ><i class="yl-icon yl-icon-chenggong1"></i> 生成日程提醒ICS</span
-          >
+          <div class="flex-cloumn create-ics" v-else>
+            <span
+              class="icon-btn"
+              v-show="!item.icsurl"
+              @click="createICS(item)"
+              ><i class="yl-icon yl-icon-chenggong1"></i> 生成日程提醒ICS</span
+            >
+            <span
+              class="icon-btn"
+              style="margin-left: var(--margin-base)"
+              @click="showDelPopup(item)"
+              ><i class="yl-icon yl-icon-docu_delete"></i> 删除</span
+            >
+          </div>
+
+          <div>
+            <!-- <span class="text-small" v-show="!item.icsurl" @click="createICS(item)"
+              ><i class="yl-icon yl-icon-chenggong1"></i> 生成日程提醒ICS</span
+            > -->
+            <span class="tag" v-show="item.icsurl">ics</span>
+            <span v-show="item.icsurl" class="ics-text text-small">
+              {{ config.uploadUrl + item.icsurl }}</span
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -59,11 +96,70 @@ export default {
     };
   },
   created() {
-    this.$api.remind.list().then((res) => {
-      console.log(res);
-      this.reminders = res.data;
-    });
+    this.updateRemList();
   },
+  methods: {
+    delRemItem(item) {
+      this.$api.remind.del({ rid: item.rid }).then((res) => {
+        if (res.code == 200) {
+          this.$ylToast({
+            type: "success",
+            msg: res.msg,
+          });
+          // 刷新列表
+          this.updateRemList();
+        } else {
+          this.$ylToast({
+            type: "error",
+            msg: res.msg,
+          });
+        }
+      });
+    },
+    createICS(item) {
+      this.$api.remind.ics({ rid: item.rid }).then((res) => {
+        // console.log(res);
+        if (res.code == 200) {
+          this.$ylToast({
+            type: "success",
+            msg: res.msg,
+          });
+          // 刷新列表
+          this.updateRemList();
+        } else {
+          this.$ylToast({
+            type: "error",
+            msg: res.msg,
+          });
+        }
+      });
+    },
+    copyICS(item) {
+      navigator.clipboard.writeText(config.uploadUrl + item.icsurl).then(
+        () => {
+          this.$ylToast({ type: "success", msg: "复制成功" });
+        },
+        () => {
+          this.$ylToast({ type: "error", msg: "复制失败" });
+        }
+      );
+    },
+    updateRemList() {
+      this.$api.remind.list().then((res) => {
+        console.log(res);
+        this.reminders = res.data;
+      });
+    },
+     showDelPopup(item) {
+      this.$Dialog.confirm({
+        title: '删除提醒',
+        message: `确定删除 ${item.medname} 提醒吗?`,
+      }).then(()=>{
+        this.delRemItem(item);
+       }).catch(()=>{});
+    },
+  },
+
 };
 </script>
 <style lang="scss" scoped>
@@ -75,8 +171,11 @@ export default {
     margin: var(--margin-base) 0px;
   }
   .redrem-list {
-    max-height: 50vh;
+    max-height: 60vh;
+    overflow: scroll;
     .redrem-item {
+      // background: var(--color-main);
+      background: var(--color-item-bg);
       position: relative;
       width: auto;
       padding: var(--padding-base);
@@ -95,7 +194,7 @@ export default {
         padding: var(--padding-base);
         font-size: var(--font-size-lg);
         .__name {
-          color: var(--color-main);
+          // color: var(--color-main);
           font-weight: bold;
           padding-bottom: var(--padding-sm);
         }
@@ -112,9 +211,13 @@ export default {
   }
   .help {
     position: absolute;
+    display: block;
     bottom: 10px;
     width: 100%;
     text-align: center;
+  }
+  .ics-text {
+    user-select: all;
   }
 }
 </style>

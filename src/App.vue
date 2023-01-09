@@ -171,6 +171,7 @@ body {
   }
 }
 .yl-van-field-flex{
+  align-items: center;
   .van-cell__title{
     flex: 0;
     white-space: nowrap;

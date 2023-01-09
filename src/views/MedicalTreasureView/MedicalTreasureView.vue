@@ -4,6 +4,8 @@
     :items="items"
     :active-id.sync="activeId"
     :main-active-index.sync="activeIndex"
+    @click-nav="clickNav"
+    @click-item="clickItem"
   />
 </template>
 
@@ -11,22 +13,43 @@
 export default {
   data() {
     return {
-      items: [
-        {
-          text: "浙江",
-          children: [
-            { text: "浙江1", children: [], dot: true },
-            { text: "浙江2", children: [], dot: true },
-            { text: "浙江3", children: [], dot: true },
-          ],
-          dot: false,
-        },
-        { text: "江苏", children: [] },
-      ],
+      items: [],
       activeId: 1,
       activeIndex: 0,
     };
   },
+  created(){
+    this.$api.bible.query().then(res=>{
+      // console.log(res);
+       this.items = res.data.map(v=>{
+          return { text: v.subject, children: [], id:v.sid , sid: v.sid }
+       });
+      // 显示第一个
+      this.queryFid(res.data[0].sid, this.items[0]);
+    });
+  },
+  methods:{
+    queryFid(id, parent){
+       this.$api.bible.queryFid({id}).then(res=>{
+        // console.log(res);
+        parent.children = res.data.map(v=>{
+          return { text: v.Disease, id:v.did ,sid: v.did }
+        });
+       })
+    },
+    clickNav(e){
+        // console.log(e);
+        // 避免重复请求
+        if(this.items[e].children.length == 0) this.queryFid(this.items[e].sid, this.items[e]);
+    },
+    clickItem(e){
+        // console.log(e);
+        this.$ylToast({
+          type:'success',
+          msg: '跳转详情：' + e.text
+        });
+    }
+  }
 };
 </script>
 
@@ -37,6 +60,9 @@ export default {
   padding: var(--padding-base);
   ::v-deep .van-sidebar-item--select::before {
     background: var(--color-main);
+  }
+  ::v-deep .van-tree-select__item--active{
+     color: var(--color-main);
   }
 }
 </style>

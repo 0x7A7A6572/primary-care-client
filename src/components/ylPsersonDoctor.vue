@@ -7,7 +7,7 @@
         >{{ doctor.name }}
         <van-tag type="primary">{{ doctor.grade }}</van-tag>
 
-        <van-tag plain type="primary"> {{ doctor.d_title }} </van-tag>
+        <van-tag plain type="primary" style="margin-left:5px;"> {{ doctor.d_title }} </van-tag>
       </span>
       <span class="text-small">{{ doctor.h_title }} </span>
       <span :class="['text-small', ellipsis ? 'text-of-e' : '']"

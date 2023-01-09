@@ -1,5 +1,23 @@
 <template>
-  <div class="doctor-auth">
+  <div class="doctor-auth" v-if="!$store.getters.user?.isdoctor">
+    <div class="__avatar">
+      <van-image
+        round
+        width="24vw"
+        height="24vw"
+        fit="cover"
+        :src="$store.getters.user?.avatar"
+      />
+      <van-uploader
+        class="upload-btn"
+        :show-upload="false"
+        name="file"
+        action="http://localhost:9010/upload"
+        :after-read="afterRead"
+      >
+        <i class="yl-icon yl-icon-xiugai_bi" />
+      </van-uploader>
+    </div>
     <van-field class="vf-center" label="医院选择" :disabled="loading">
       <template #input>
         <van-dropdown-menu
@@ -88,10 +106,23 @@
       >申请认证</van-button
     >
   </div>
+  <!-- 已认证 -->
+  <div class="doctor-auth" v-else>
+    <!-- // TODO 获取用户信息相关的医生信息 -->
+    <ylPsersonDoctor :doctor="{}" />
+
+    <div class="auth-success">
+      <i class="yl-icon yl-icon-jiangzhang_jifen \e81c" />
+      <span>您已认证为医生</span>
+    </div>
+  </div>
 </template>
 
 <script>
+import ylPsersonDoctor from "@/components/ylPsersonDoctor.vue";
+
 export default {
+  components: { ylPsersonDoctor },
   data() {
     return {
       form: {
@@ -116,6 +147,8 @@ export default {
         { text: "副主任医师", value: 1 },
         { text: "主治任医师", value: 2 },
         { text: "领域专家", value: 3 },
+        { text: "住院医师", value: 4 },
+        { text: "主管护师", value: 5 },
       ],
     };
   },
@@ -177,6 +210,46 @@ export default {
   padding: var(--padding-base);
   background: white;
   min-height: 100%;
+
+  .__avatar {
+    width: fit-content;
+    margin: auto;
+    position: relative;
+    .van-image {
+      border: 2px solid var(--color-main);
+    }
+    .upload-btn {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      background: var(--color-main);
+      // border: 2px solid var(--color-main);
+      // padding: 6px;
+      border-radius: 50%;
+      width: fit-content;
+      height: fit-content;
+      i {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        display: block;
+        color: white;
+        padding: 6px;
+        font-size: 6px;
+      }
+    }
+  }
+
+  // 认证成功页面
+  .auth-success{
+    display: block;
+    text-align: center;
+    color: var(--color-main);
+    font-weight: bold;
+   >i{
+    margin-right: 5px;
+   }
+  }
   ::v-deep .border-round {
     .van-field__control {
       // min-height: 5rem;
@@ -185,15 +258,15 @@ export default {
     }
   }
   ::v-deep .van-field {
-    &.vf-center{
-    align-items: center;
+    &.vf-center {
+      align-items: center;
     }
     .van-field__label {
       font-size: var(--font-size-lg);
       font-weight: bold;
     }
   }
-  ::v-deep .van-dropdown-menu__bar{
+  ::v-deep .van-dropdown-menu__bar {
     box-shadow: none;
   }
 }

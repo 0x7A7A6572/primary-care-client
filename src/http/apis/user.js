@@ -51,7 +51,7 @@ const user = {
   })
  },
  // 获取用户病史
- updateUserHealthInfo(params){
+ getUserHealthInfo(params){
   return myAxios({
     method: "GET",
     url: "/user/medical_history",

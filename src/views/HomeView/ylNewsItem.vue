@@ -7,7 +7,7 @@
           <i class="yl-icon yl-icon-view" style="color:var(--color-main)"></i>
           <span > 阅读 {{ news?.hot }}</span>
         </div>
-        <span class="text-small">{{ "2022-10-20" || news?.create_time }}</span>
+        <span class="text-small">{{ news?.create_time | datetime }}</span>
       </div>
     </div>
     <img class="__cover" :src="baseUrl + news?.cover" alt="" />

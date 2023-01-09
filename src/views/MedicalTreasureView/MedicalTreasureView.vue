@@ -64,5 +64,17 @@ export default {
   ::v-deep .van-tree-select__item--active{
      color: var(--color-main);
   }
+  .van-sidebar-item {
+    // color: white;
+    // background-color: var(--color-main);
+    // font-style: italic;
+    font-weight: bold;
+    }
+  .van-sidebar-item--select, .van-sidebar-item--select:active{
+  //  background: white;
+  //   color: var(--color-second-text);
+    font-style: italic;
+
+  }
 }
 </style>

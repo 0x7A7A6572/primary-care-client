@@ -115,6 +115,9 @@ export default {
     toNewsPage(news) {
       this.$router.push({
         path: "/News/Details",
+        query:{
+         nid: news.nid
+        },
         params: {
           news,
         },

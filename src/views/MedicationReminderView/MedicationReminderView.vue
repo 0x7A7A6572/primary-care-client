@@ -171,6 +171,9 @@ export default {
     margin: var(--margin-base) 0px;
   }
   .redrem-list {
+    display: flex;
+    flex-direction: column-reverse;
+
     max-height: 60vh;
     overflow: scroll;
     .redrem-item {

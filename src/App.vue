@@ -161,8 +161,10 @@ body {
     }
     .van-field__control {
       padding: var(--padding-base);
-      border-bottom: 2px solid var(--color-light);
-
+      border-bottom: 2px solid var(--color-secondary);
+      &:disabled{
+ border-bottom: 2px solid var(--color-light-text);
+      }
       &::placeholder {
         color: var(--color-third-text) !important;
         -webkit-text-fill-color: currentColor;

@@ -139,7 +139,7 @@
       </van-popover>
     </div>
     <div class="flex-center padding-base text-large">
-      <span class="text-large __title">结束重复提醒时间：</span>
+      <span class="text-large __title">结束提醒时间：</span>
       <div
         @click="
           [show, timeTitle, timeType] = [true, '选择结束重复提醒时间', 'date']

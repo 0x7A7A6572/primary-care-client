@@ -1,18 +1,18 @@
 <template>
   <!-- 医生组件封装 -->
   <div class="yl-person-doctor">
-    <img class="recom-avatar" :src="doctor.avatar" alt="" />
+    <img class="recom-avatar" :src="doctor?.avatar" alt="" />
     <div class="__doctor-details">
       <span class="recom-name text-blod"
-        >{{ doctor.name }}
-        <van-tag type="primary">{{ doctor.grade }}</van-tag>
+        >{{ doctor?.name }}
+        <van-tag type="primary">{{ doctor?.grade }}</van-tag>
 
-        <van-tag plain type="primary" style="margin-left:5px;"> {{ doctor.d_title }} </van-tag>
+        <van-tag plain type="primary" style="margin-left:5px;"> {{ doctor?.d_title }} </van-tag>
       </span>
-      <span class="text-small">{{ doctor.h_title }} </span>
+      <span class="text-small">{{ doctor?.h_title }} </span>
       <span :class="['text-small', ellipsis ? 'text-of-e' : '']"
       @click="ellipsis = !ellipsis"
-        >擅长：<span class="__good-at">{{ doctor.good_at }}</span></span
+        >擅长：<span class="__good-at">{{ doctor?.good_at }}</span></span
       >
       <slot></slot>
     </div>

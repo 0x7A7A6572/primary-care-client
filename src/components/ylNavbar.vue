@@ -4,7 +4,9 @@
       <van-icon class-prefix="yl-icon" name="left_arrow" />
     </div>
     <div class="yl-navbar-title text-large">
-      <div ref="slotTitle"></div>
+      <div ref="slotTitle"><!-- 自定义导航条的内容显示 --></div>
+      <!-- 通过路由配置控制title显示的文本 
+       权重： params.title > meta.title -->
       {{ title }}
     </div>
   </div>
@@ -13,34 +15,34 @@
 <script>
 import { Icon } from "vant";
 export default {
-  name:'ylNavbar',
+  name: "ylNavbar",
   components: {
     [Icon.name]: Icon,
   },
   data() {
     return {
-      title: this.$route.meta.title
+      title: '',
     };
   },
   watch: {
     $route(to, from) {
-      this.title = to.meta.title;
-      this.$refs['slotTitle'].innerHTML = '';
-      if(to.query.slotTitle){ 
-        this.$refs['slotTitle'].appendChild(to.query.slotTitle);
+      this.title = to.params.title || to.meta.title;
+      this.$refs["slotTitle"].innerHTML = "";
+      if (to.query.slotTitle) {
+        this.$refs["slotTitle"].appendChild(to.query.slotTitle);
       }
       // this.$refs['slotTitle'].innerHTML = (to.query.slotTitle || '');
     },
   },
-  mounted(){
-  
-  },
+  mounted() {},
   methods: {
     onLeftArrowClick() {
-      if (this.$route.meta?.return) {
-        this.$router.push(this.$route.meta?.return);
+      let back = this.$route.params?.back || this.$route.meta?.back;
+      if (!back) return this.$router.go(-1);
+      if (typeof back == "number") {
+        this.$router.go(back);
       } else {
-        this.$router.go(-1);
+        this.$router.replace({ name: back });
       }
     },
   },

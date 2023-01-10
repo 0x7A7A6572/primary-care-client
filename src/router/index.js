@@ -94,6 +94,12 @@ const routes = [
     meta: { title: '医生搜索', navbarShow: true,keepAlive: true },
     component: () => import('../views/OnlineConsultationView/SearchPageView.vue')
   },
+  { // 问诊确认信息页
+    path: '/OnlineConsultation/OnlineConConfirm',
+    name: 'OnlineConConfirm',
+    meta: { title: '问诊信息确认', navbarShow: true},
+    component: () => import('../views/OnlineConsultationView/OnlineConConfirmView.vue')
+  },
   {// 问诊消息列表
     path: '/ChatList',
     name: 'ChatList',
@@ -103,7 +109,7 @@ const routes = [
   { // 问诊聊天窗口页
     path: '/ChatList/ChatRoom',
     name: 'ChatRoom',
-    meta: { title: ' ', navbarShow: true },
+    meta: { title: ' ', navbarShow: true, /* back:'OnlineConsultation'  */ },
     component: () => import('../views/ChatView/ChatRoom/ChatRoomView.vue')
   },
   /**---------------------

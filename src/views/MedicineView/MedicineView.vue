@@ -59,13 +59,13 @@ export default {
   data() {
     return {
       page: 1,
-      pagenum: 20,
+      pagenum: 10,
       total: 0,
       search: {
         onSearch: false,
         meddatas: [],
         page: 1,
-        pagenum: 20,
+        pagenum: 10,
         total: 0,
       },
       loading: false,

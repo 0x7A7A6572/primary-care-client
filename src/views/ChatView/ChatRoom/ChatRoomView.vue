@@ -19,11 +19,33 @@
 
     <!-- 聊天窗口 -->
     <div class="chat-room-content" ref="chatRoomWindow">
+      <!-- 患者信息 -->
+      <div class="patient-info box-round margin-base">
+        <div class="__info">
+          <van-image round :src="consultInfor.patient.avatar"></van-image>
+          <span class="__name">{{ consultInfor.patient.name }}&emsp; </span>
+          <span class="__age"
+            >{{ consultInfor.patient.gender == 0 ? "女" : "男" }}&emsp;
+          </span>
+          <span class="__age"
+            >{{ consultInfor.patient.birthday | age }}岁&emsp;
+          </span>
+          <span>{{ consultInfor.ctime | time }} </span>
+        </div>
+        <hr />
+        <div
+          :class="['_desc', ellipsis ? 'text-of-e' : '']"
+          @click="ellipsis = !ellipsis"
+        >
+          <span class="text-blod">症状描述：</span>
+          <span>{{ consultInfor.desc || '无' }}</span>
+        </div>
+      </div>
       <ylChatMsg
         v-for="item in msgs"
         :key="item.msg + item.time"
         :msg="item.msg"
-        :avatar="item.role == 'others'? doctor.avatar : null"
+        :avatar="item.role == 'others' ? doctor.avatar : null"
         :theme="item.role"
       />
     </div>
@@ -38,7 +60,8 @@ export default {
   components: { ylChatMsg, ylChatInput },
   data() {
     return {
-      doctor: this.$route.query.doctor,
+      doctor: this.$route.params.doctor || this.$route.query.doctor,
+      consultInfor: this.$route.params.consultInfor,
       inptxt: "",
       msgs: [
         // 模拟数据
@@ -74,6 +97,7 @@ export default {
         { time: "00", msg: "寄了🤔", type: "text", role: "others" },
         { time: "00", msg: "？？？？？😧....", type: "text", role: "self" },
       ],
+      ellipsis: true,
     };
   },
   methods: {
@@ -104,6 +128,11 @@ export default {
   mounted() {
     this.$route.query.slotTitle = this.$refs["avatar"];
   },
+  // watch: {
+  //   $route(to, from) {
+  //     if(to.name == 'OnlineConConfirm') from.params.back = -2;
+  //   }
+  // }
 };
 </script>
 
@@ -121,6 +150,29 @@ export default {
       width: 40px;
       height: 40px;
       border-radius: 50%;
+    }
+  }
+
+  .patient-info {
+    margin: var(--margin-base);
+    width: auto;
+    .__info {
+      position: relative;
+      display: flex;
+      align-items: center;
+      > .van-image {
+        width: 14vw;
+        height: 14vw;
+        margin: var(--margin-sm);
+      }
+      .__name {
+        font-weight: bold;
+      }
+      .__age {
+      }
+    }
+    .__desc {
+      margin: var(--margin-base);
     }
   }
 }

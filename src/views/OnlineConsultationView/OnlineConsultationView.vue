@@ -133,13 +133,9 @@ export default {
   },
   methods: {
     consultingService(item) {
-      console.log("进入咨询聊天", item);
       this.$router.push({
-        path: "/ChatList/ChatRoom",
-        query: {
-          doctor: item,
-          title: item.name,
-        },
+          name: 'OnlineConConfirm',
+          params: { doctor:item},
       });
     },
 

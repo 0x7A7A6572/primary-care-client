@@ -135,7 +135,9 @@ export default {
       });
     },
     copyICS(item) {
-      navigator.clipboard.writeText(config.uploadUrl + item.icsurl).then(
+      try {
+        // TODO navigator.clipboard.writeText 在localhost/127.0.0.1 和https下可用 部署后注意配置ssl证书
+       navigator.clipboard.writeText(config.uploadUrl + item.icsurl).then(
         () => {
           this.$ylToast({ type: "success", msg: "复制成功" });
         },
@@ -143,6 +145,11 @@ export default {
           this.$ylToast({ type: "error", msg: "复制失败" });
         }
       );
+      } catch (error) {
+        this.$ylToast({ type: "error", msg: "复制失败" });
+        console.warn(error);
+      }
+
     },
     updateRemList() {
       this.$api.remind.list().then((res) => {

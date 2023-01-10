@@ -4,11 +4,12 @@ import router from './router'
 import store from './store'
 import httpApi from "@/http";
 // import Vant from 'vant'; // 全部导入
-import { Icon, DropdownMenu, DropdownItem,
-   Sticky ,Popup ,Search,List,Cell,Tag,
-    Image,Button,Divider,Form,Field,DatetimePicker,Dialog,Uploader,
-		Popover, TreeSelect 
- } from 'vant'; // 按需导入
+import {
+	Icon, DropdownMenu, DropdownItem,
+	Sticky, Popup, Search, List, Cell, Tag,
+	Image, Button, Divider, Form, Field, DatetimePicker, Dialog, Uploader,
+	Popover, TreeSelect
+} from 'vant'; // 按需导入
 
 import 'vant/lib/index.css';
 
@@ -21,13 +22,13 @@ import ylSearch from "@/components/ylSearch.vue";
 import ylEmpty from "@/components/ylEmpty.vue";
 import ylSwitch from "@/components/ylSwitch.vue";
 
-Vue.component("ylTabbarPro",ylTabbarPro);
+Vue.component("ylTabbarPro", ylTabbarPro);
 // Vue.component("ylTabbar",ylTabbar);
-Vue.component("ylNavbar",ylNavbar);
-Vue.component("ylTitle",ylTitle);
-Vue.component("ylSearch",ylSearch);
-Vue.component("ylEmpty",ylEmpty);
-Vue.component("ylSwitch",ylSwitch);
+Vue.component("ylNavbar", ylNavbar);
+Vue.component("ylTitle", ylTitle);
+Vue.component("ylSearch", ylSearch);
+Vue.component("ylEmpty", ylEmpty);
+Vue.component("ylSwitch", ylSwitch);
 
 /* 引入vant组件 */
 // Vue.use(Vant);
@@ -62,27 +63,35 @@ Vue.use(ylToast);
 // Vue.prototype.$ylToast = ylToast;
 Vue.prototype.$api = httpApi;
 Vue.prototype.$Dialog = Dialog;
-Vue.filter('datetime',(num)=>{
-  	//参数是数字--时间戳 ,返回日期时间字符串
+Vue.filter('datetime', (num) => {
+	//参数是数字--时间戳 ,返回日期时间字符串
 	let d = new Date(num) //把时间戳转换为日期对像
 	//获取Date中的不同部分
 	let yy = d.getFullYear()
-	let mm = d.getMonth()+1 
-	mm = mm<10?'0'+mm:mm
+	let mm = d.getMonth() + 1
+	mm = mm < 10 ? '0' + mm : mm
 	let dd = d.getDate()
-	dd = dd<10?'0'+dd:dd
+	dd = dd < 10 ? '0' + dd : dd
 	return `${yy}-${mm}-${dd}`
 });
-Vue.filter('time',(num)=>{
-let d = new Date(num) 
-let hh = d.getHours()
-let mm = d.getMinutes()+1 
-mm = mm<10?'0'+mm:mm
-hh = hh<10?'0'+hh:hh
-return `${hh}:${mm}`
+Vue.filter('time', (num) => {
+	let d = new Date(num)
+	let hh = d.getHours()
+	let mm = d.getMinutes() + 1
+	mm = mm < 10 ? '0' + mm : mm
+	hh = hh < 10 ? '0' + hh : hh
+	return `${hh}:${mm}`
+});
+// 年龄
+Vue.filter('age', (num) => {
+	let d = new Date(num);
+	let currd = new Date();
+	let yy = d.getFullYear();
+	let currd_yy = currd.getFullYear();
+	return currd_yy - yy;
 });
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+	router,
+	store,
+	render: h => h(App)
 }).$mount('#app')

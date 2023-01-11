@@ -9,10 +9,10 @@ export default new Vuex.Store({
     token: localStorage.getItem('token')
   },
   getters: {
-    user(state){
+    user(state) {
       return state.user;
     },
-    token(state){
+    token(state) {
       return state.token;
     }
   },
@@ -22,7 +22,7 @@ export default new Vuex.Store({
       state.user = user;
       localStorage.setItem('user', JSON.stringify(user));
     },
-    removeUser(state){
+    removeUser(state) {
       state.user = null;
       localStorage.removeItem('user');
     },
@@ -31,15 +31,20 @@ export default new Vuex.Store({
       state.token = token;
       localStorage.setItem('token', token);
     },
-    removeToken(state){
+    removeToken(state) {
       state.token = null;
       localStorage.removeItem('token');
-    }
+    },
+    // 本地设置认证 （主要不想再次请求，或者认证后后端返回新的用户信息）
+    setUserCer(state) {
+      state.user.isdoctor = 1;
+      localStorage.setItem('user', JSON.stringify(state.user));
+    },
 
   },
   actions: {
     // 退出登陆
-    logout(context){
+    logout(context) {
       context.commit("removeToken");
       context.commit("removeUser");
     }

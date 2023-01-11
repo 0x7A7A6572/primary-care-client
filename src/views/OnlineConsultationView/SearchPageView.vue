@@ -66,14 +66,18 @@ export default {
       });
     },
     consultingService(item) {
-      console.log("进入咨询聊天", item);
+      // console.log("进入咨询聊天", item);
       this.$router.push({
-        path: "/ChatList/ChatRoom",
-        query: {
-          doctor: item,
-          title: item.name,
-        },
+        name: "OnlineConConfirm",
+        params: { doctor: item },
       });
+      // this.$router.push({
+      //   path: "/ChatList/ChatRoom",
+      //   query: {
+      //     doctor: item,
+      //     title: item.name,
+      //   },
+      // });
     },
     onSearchInput(e) {
       if (!e && this.doctors?.length == 0) {

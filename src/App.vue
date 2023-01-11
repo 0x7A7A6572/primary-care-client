@@ -21,13 +21,12 @@
 
   <!-- 临时解决方案 -->
   <PhoneHomeView id="app" v-else></PhoneHomeView>
-
 </template>
 
 <script>
 export default {
-  components:{
-    PhoneHomeView: ()=>import('@/views/HomeView/PhoneHomeView.vue')
+  components: {
+    PhoneHomeView: () => import("@/views/HomeView/PhoneHomeView.vue"),
   },
   created() {
     // 防止首次进入页面时,因未触发路由改变而导致ylTabbar不显示的问题
@@ -110,6 +109,8 @@ body {
 }
 
 #app {
+  display: flex;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
 }
@@ -146,11 +147,11 @@ body {
   }
 }
 /* 修改默认的vant输入框组件为设计图的样式 */
-.yl-van-field,.yl-van-field-flex {
-
+.yl-van-field,
+.yl-van-field-flex {
   &.van-field {
     display: flex;
-    &::after{
+    &::after {
       // 去掉原有的下边框线
       border: none;
     }
@@ -162,8 +163,8 @@ body {
     .van-field__control {
       padding: var(--padding-base);
       border-bottom: 2px solid var(--color-secondary);
-      &:disabled{
- border-bottom: 2px solid var(--color-light-text);
+      &:disabled {
+        border-bottom: 2px solid var(--color-light-text);
       }
       &::placeholder {
         color: var(--color-third-text) !important;
@@ -172,17 +173,19 @@ body {
     }
   }
 }
-.yl-van-field-flex{
+.yl-van-field-flex {
   align-items: center;
-  .van-cell__title{
+  .van-cell__title {
     flex: 0;
     white-space: nowrap;
   }
 }
-.yl-van-field.van-field{ flex-direction: column;}
+.yl-van-field.van-field {
+  flex-direction: column;
+}
 
 /* .van-popup--bottom 的上半部分圆角样式 */
-.van-popup--bottom{
+.van-popup--bottom {
   border-top-left-radius: var(--border-radius-larger);
   border-top-right-radius: var(--border-radius-larger);
 }

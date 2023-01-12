@@ -40,7 +40,11 @@ export default new Vuex.Store({
       state.user.isdoctor = 1;
       localStorage.setItem('user', JSON.stringify(state.user));
     },
-
+    //更新用户头像
+    setUserAvatar(state,avatar){
+      state.user.avatar = avatar;
+      localStorage.setItem('user',JSON.stringify(state.user))
+    }
   },
   actions: {
     // 退出登陆

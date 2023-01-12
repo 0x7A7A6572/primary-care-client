@@ -5,11 +5,11 @@
       <van-image
         width="100"
         height="100"
-        src="https://img01.yzcdn.cn/vant/cat.jpeg"
+        :src="avatar"
         fit="cover"
         round
       />
-     <van-uploader class="Personal" :show-upload="false"  name="file" action="http://localhost:9010/upload"  :after-read="afterRead">
+     <van-uploader  class="Personal" :show-upload="false"  name="file" :action="config.uploadUrl + '/upload'"  :after-read="afterRead">
         <van-icon
           class-prefix="yl-icon"
           name="xiugai_bi"
@@ -20,6 +20,7 @@
     <!-- 详细地址 -->
     <div>
       <van-field
+        v-model="address"
         class="yl-van-field"
         label="详细地址"
         placeholder="请输入详细地址"
@@ -58,6 +59,7 @@
 
       <div style="margin: 16px">
         <van-button
+        @click="updateUserBaseInfo"
           class="yl"
           round
           block
@@ -72,14 +74,18 @@
 </template>
 
 <script>
+import config from '@/utils/config';
 export default {
   data() {
     return {
+      config,
       loading: false,
       show: false,
       currentDate: new Date(1960, 0, 1),
       maxDate: new Date(),
       minDate: new Date(1900, 1, 1),
+      address:'',
+      avatar:'',
     };
   },
   methods: {
@@ -90,15 +96,19 @@ export default {
       this.show = false;
     },
     afterRead(file) {
-      file.status = 'uploading';
-      file.message = '上传中...';
         console.log(file);
-        
-      setTimeout(() => {
-        file.status = 'failed';
-        file.message = '上传失败';
-      }, 1000);
+        this.$api.upload.upload(file).then(res=>{
+          console.log('上传成功',res);
+          this.avatar = res.data
+          this.$store.commit('setUserAvatar',this.avatar)
+        })
     },
+    updateUserBaseInfo(){
+      let data = {avatar:this.avatar, address:this.address}
+      this.$api.user.updateUserBaseInfo(data).then(res=>{
+        console.log('成功',res);
+      })
+    }
   },
 };
 </script>

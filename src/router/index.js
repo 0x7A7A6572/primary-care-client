@@ -151,7 +151,7 @@ const routes = [
     path: '/AppointmentRegist/AppointmentResult',
     name: 'AppointmentResult',
     meta: {
-      title: '挂号信息结果', navbarShow: true
+      title: '挂号信息结果', navbarShow: false
     },
     component: () => import('../views/AppointmentRegistView/AppointmentResult.vue')
   },

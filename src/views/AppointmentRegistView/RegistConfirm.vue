@@ -91,7 +91,13 @@ export default {
             aptregister.add(data).then(res=>{
              if(res.code==200){
               this.count++
-            this.$router.push('/AppointmentRegist/AppointmentResult')    
+              let arr =this.arr
+              let time =this.time2
+            // this.$router.push('/AppointmentRegist/AppointmentResult')    
+            this.$router.push({
+        name: 'AppointmentResult',
+          params: { arr ,time}
+      })
         }else {
           this.$ylToast({
             type:'error',

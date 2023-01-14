@@ -79,6 +79,11 @@
   font-size: var(--font-size-base);
   font-weight: bold;
 }
+.text-medium-int {
+  color: var(--color-mian-text);
+  font-size: var(--font-size-base);
+  font-weight:initial;
+}
 
 /* 辅助文 */
 .text-small {

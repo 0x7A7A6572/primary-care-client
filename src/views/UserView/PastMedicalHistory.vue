@@ -17,14 +17,14 @@
           >
           <!-- 操作控制 -->
 
-          <!-- <div class="flex-cloumn create-ics" >
+          <div class="flex-cloumn create-ics" >
             <span
               class="icon-btn"
               style="margin-left: var(--margin-base)"
               @click="showDelPopup(item)"
               ><i class="yl-icon yl-icon-docu_delete"></i> 删除</span
             >
-          </div> -->
+          </div>
 
           <div></div>
         </div>
@@ -106,36 +106,36 @@ export default {
           this.show = false;
         });
     },
-    // delRemItem(item) {
-    //   this.$api.remind.del({ rid: item.rid }).then((res) => {
-    //     if (res.code == 200) {
-    //       this.$ylToast({
-    //         type: "success",
-    //         msg: res.msg,
-    //       });
-    //       // 刷新列表
-    //       this.updateRemList();
-    //     } else {
-    //       this.$ylToast({
-    //         type: "error",
-    //         msg: res.msg,
-    //       });
-    //     }
-    //   });
-    // },
+    delRemItem(item) {
+      this.$api.user.delMedicalHistory({ mid: item.mid }).then((res) => {
+        if (res.code == 200) {
+          this.$ylToast({
+            type: "success",
+            msg: res.msg,
+          });
+          // 刷新列表
+          this.updateRemList();
+        } else {
+          this.$ylToast({
+            type: "error",
+            msg: '删除失败',
+          });
+        }
+      });
+    },
     updateRemList() {
       this.$api.user.getUserHealthInfo().then((res) => {
         this.reminders = res.data;
       });
     },
-    //  showDelPopup(item) {
-    //   this.$Dialog.confirm({
-    //     title: '删除提醒',
-    //     message: `确定删除 ${item.descs} 提醒吗?`,
-    //   }).then(()=>{
-    //     this.delRemItem(item);
-    //    }).catch(()=>{});
-    // },
+     showDelPopup(item) {
+      this.$Dialog.confirm({
+        title: '删除提醒',
+        message: `确定删除 ${item.descs} 提醒吗?`,
+      }).then(()=>{
+        this.delRemItem(item);
+       }).catch(()=>{});
+    },
     changeTimePicker(v) {
       this.selectTime = this.date(v);
       this.tpShow = false;

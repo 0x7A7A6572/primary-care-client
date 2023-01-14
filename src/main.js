@@ -8,7 +8,7 @@ import {
 	Icon, DropdownMenu, DropdownItem,
 	Sticky, Popup, Search, List, Cell, Tag,
 	Image, Button, Divider, Form, Field, DatetimePicker, Dialog, Uploader,
-	Popover, TreeSelect
+	Popover, TreeSelect,Tab,Tabs
 } from 'vant'; // 按需导入
 
 import 'vant/lib/index.css';
@@ -54,6 +54,8 @@ Vue.use(Field);
 Vue.use(Uploader);
 Vue.use(Popover);
 Vue.use(TreeSelect);
+Vue.use(Tab);
+Vue.use(Tabs);
 
 
 

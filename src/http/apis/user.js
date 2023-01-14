@@ -42,6 +42,14 @@ const user = {
     params,
   })
  },
+ // 删除病史
+ delMedicalHistory(data){
+  return myAxios({
+    method: "post",
+    url: "/user/del_medical_history",
+    data,
+  })
+ },
  // 添加用户病史
  addMedicalHistory(data){
   return myAxios({
@@ -59,13 +67,22 @@ const user = {
   })
  },
  // 医生入驻认证
- updateUserHealthInfo(data){
+ doctorCer(data){
   return myAxios({
     method: "post",
-    url: " /user/doctor_cer",
+    url: "/user/doctor_cer",
     data,
   })
  },
+ // 获取认证信息
+ getDoctorCer(data){
+  return myAxios({
+    method: "post",
+    url: "/user/cer_info",
+    data,
+  })
+ },
+ 
 }
 
 export default user;

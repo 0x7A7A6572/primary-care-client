@@ -1,7 +1,7 @@
 <template>
   <div class="onlinecon-confirm-view">
     <ylPsersonDoctor class="box-round shadow" :doctor="doctor">
-      <div class="slot-doctor-info">
+      <!-- <div class="slot-doctor-info">
         <span>
           <i class="yl-icon yl-icon-yiwurenyuan2"></i>
           接诊人数：<span class="__service-count text-medium">{{
@@ -15,8 +15,31 @@
           评价
           <span class="__score text-medium">{{ doctor?.score }}</span></span
         >
-      </div>
+      </div> -->
     </ylPsersonDoctor>
+          <div class="slot-doctor-info">
+        <span>
+          <i class="yl-icon yl-icon-yiwurenyuan2"></i>
+          接诊人数：<span class="__service-count text-medium">{{
+            doctor?.service_count
+          }}</span>
+        </span>
+
+        <span>
+          &nbsp;&nbsp;
+          <i class="yl-icon yl-icon-haoping"></i>
+          评价
+          <span class="__score">{{ doctor?.score }}</span></span
+        >
+      </div>
+      <div class="padding-base text-medium-int" style="padding-left:16px">医生简介: <span>{{doctor.descs || '无'}}</span></div>
+    <!-- <van-field
+      label="医生简介:"
+    ><template #input>
+        {{doctor.descs || '无'}}
+      </template>
+    </van-field> -->
+    <van-divider>患者信息</van-divider>
     <van-field
       label="问诊人:"
       :value="consultInfor.patient?.name"
@@ -83,6 +106,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .onlinecon-confirm-view {
   padding: var(--padding-base);
   background: #fff;
@@ -91,7 +115,9 @@ export default {
     display: flex;
     white-space: nowrap;
     align-items: center;
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
+    // justify-content: center;
+    padding-left: var(--padding-lg);
     .__service-count {
       color: var(--color-success);
       font-weight: bold;

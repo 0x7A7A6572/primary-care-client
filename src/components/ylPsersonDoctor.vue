@@ -35,6 +35,7 @@ export default {
 
 <style lang="scss" scoped>
 .yl-person-doctor {
+  width: auto;
   display: flex;
   margin: 20px;
   justify-content: space-between;

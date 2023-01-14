@@ -85,6 +85,7 @@
     <!-- 社区活动 -->
     <div class="activity-list box-round">
       <ylTitle title="社区活动" />
+      <ylEmpty title="暂无活动" />
     </div>
   </div>
 </template>

@@ -25,6 +25,19 @@
       lastTime="23:59"
       :unreadCount="12"
     ></YlMsgItem>
+    <YlMsgItem
+     v-for="item in chatlist" :key="item.sid"
+    :user="{
+       avatar: user.uid == item.uid ? item.d_avatar : item.u_avatar,
+       name: user.uid == item.uid ? item.d_name : item.u_name,
+       grade: user.uid == item.uid ? item.d_grade : '患者',
+       lastMsg: '?',
+       lastTime:  item.stime
+    }"
+    />
+    <!-- <div class="box" v-for="item in chatlist" :key="item.sid">
+      {{item}}
+    </div> -->
   </div>
 </template>
 
@@ -33,6 +46,18 @@ import YlMsgItem from "./ylMsgItem.vue";
 import ylStickyHead from "@/components/ylStickyHead.vue";
 export default {
   components: { YlMsgItem,ylStickyHead },
+  data(){
+    return{
+      user: this.$store.getters.user,
+      chatlist:[]
+    }
+  },
+  mounted(){
+    this.$api.chat.list().then(res=>{
+      console.log(res);
+      this.chatlist = res.data;
+    })
+  },
   methods:{
     toChatRoom(e){
       this.$router.push({

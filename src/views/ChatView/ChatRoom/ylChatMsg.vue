@@ -8,7 +8,8 @@
   </div>
   <div class="yl-chat-msg __self" v-else>
     <div class="__msg-content">{{ msg }}</div>
-    <img class="__msg-avatar" :src="avatar" alt="" />
+    <van-image round class="__msg-avatar" :src="avatar" alt="" />
+    <!-- <img class="__msg-avatar" :src="avatar" alt="" /> -->
   </div>
 
 </template>
@@ -45,7 +46,7 @@ export default {
     position: relative;
     top: 1rem;
     left: 10px;
-    background: var(--color-box-bg);
+    background: #fff;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
     border-top-right-radius: 1rem;

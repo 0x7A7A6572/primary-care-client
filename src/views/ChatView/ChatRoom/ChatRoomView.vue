@@ -1,26 +1,27 @@
 <template>
   <div class="chat-room" ref="chatRoom">
-    <!-- 嵌入ylNavbar -->
-    <template name="slot-title">
-      <div ref="avatar" class="slot-title-avatar">
-        <img
-          :src="doctor.avatar"
-          alt=""
-          width="40px"
-          height="40px"
-          style="
-            border-radius: 50%;
-            margin-right: 10px;
-            border: 2px solid var(--color-main);
-          "
-        />
-      </div>
-    </template>
-
+    <!-- S 嵌入ylNavbar -->
+    <div ref="avatar" class="slot-title-avatar">
+      <img
+        :src="doctor.avatar"
+        alt=""
+        width="40px"
+        height="40px"
+        style="
+          border-radius: 50%;
+          margin-right: 10px;
+          border: 2px solid var(--color-main);
+        "
+      />
+    </div>
+    <span ref="endChat" style="color: var(--color-error)" @click="showEndPopup">
+      结束问诊
+    </span>
+    <!-- E 嵌入ylNavbar -->
     <!-- 聊天窗口 -->
     <div class="chat-room-content" ref="chatRoomWindow">
       <!-- 患者信息 -->
-      <div class="patient-info box-round margin-base">
+      <div class="patient-info box-round margin-base shadow">
         <div class="__info">
           <van-image round :src="consultInfor.patient.avatar"></van-image>
           <span class="__name">{{ consultInfor.patient.name }}&emsp; </span>
@@ -38,14 +39,16 @@
           @click="ellipsis = !ellipsis"
         >
           <span class="text-blod">症状描述：</span>
-          <span>{{ consultInfor.desc || '无' }}</span>
+          <span>{{ consultInfor.desc || "无" }}</span>
         </div>
       </div>
       <ylChatMsg
         v-for="item in msgs"
         :key="item.msg + item.time"
         :msg="item.msg"
-        :avatar="item.role == 'others' ? doctor.avatar : null"
+        :avatar="
+          item.role == 'others' ? doctor.avatar : $store.getters.user.avatar
+        "
         :theme="item.role"
       />
     </div>
@@ -60,10 +63,13 @@ export default {
   components: { ylChatMsg, ylChatInput },
   data() {
     return {
+      state: 0, //当前会话状态
+      sid: 0, // 当前问诊会话id
       doctor: this.$route.params.doctor || this.$route.query.doctor,
       consultInfor: this.$route.params.consultInfor,
       inptxt: "",
       msgs: [
+        /* 
         // 模拟数据
         {
           time: "00",
@@ -96,6 +102,7 @@ export default {
         { time: "2-25 23:59", msg: "2-26 01:30", type: "text", role: "system" },
         { time: "00", msg: "寄了🤔", type: "text", role: "others" },
         { time: "00", msg: "？？？？？😧....", type: "text", role: "self" },
+       */
       ],
       ellipsis: true,
     };
@@ -106,16 +113,40 @@ export default {
         console.log("请先输入文字再发送！");
         return;
       }
-      this.msgs.push({
+      let Msg = {
+        uid: this.$store.getters.user.uid,
+        token: this.$store.getters.token,
+        touid: this.doctor?.uid,
         time: new Date().getTime(),
         msg: v,
         type: "text",
         role: "self",
-      });
+      };
+      this.msgs.push(Msg);
+      server.emit("uchat", Msg);
       // 滑动到最新消息
       this.$nextTick(() => {
         this.$refs.chatRoom.scrollTop = this.$refs.chatRoomWindow.scrollHeight;
       });
+    },
+
+    // 结束问诊弹出确认
+    showEndPopup() {
+      this.$Dialog
+        .confirm({
+          title: "结束问诊",
+          message: `确定结束本次问诊吗?`,
+        })
+        .then(() => {
+          // TODD 执行结束问诊
+          console.log("end");
+          server.emit('end',{
+            msg: "问诊结束",
+            sid: this.sid,
+            endid: this.$store.getters.user.uid,
+          });
+        })
+        .catch(() => {});
     },
   },
   created() {
@@ -126,13 +157,43 @@ export default {
     });
   },
   mounted() {
-    this.$route.query.slotTitle = this.$refs["avatar"];
+    // 挂载到navBar
+    this.$route.params.slotTitle = this.$refs["avatar"];
+    this.$route.params.slotTitleBefore = this.$refs["endChat"];
+
+    // socket 服务
+    this.$io.on("schat", (msg) => {
+      console.log("schat", msg);
+      // $('.chart-box').scroll(-1);
+      this.msgs.push(msg);
+    });
+    this.$io.on("uchat", (msg) => {
+      console.log("uchat", msg);
+      this.msgs.push(msg);
+      // $('.chart-box').scroll(-1);
+    });
+    this.$io.on("register", (msg) => {
+      console.log("register", msg);
+      // 发送验证消息告诉服务器开始用户发起问诊
+      switch (msg.code) {
+        case 0x7a7a6572:
+          server.emit("register", {
+            uid: this.$store.getters.user.uid, // 发送者
+            token: this.$store.getters.token,
+            touid: this.doctor?.uid,
+            recipient: this.doctor?.uid, // 接收者
+            descs: this.consultInfor.desc,
+            type: this.consultInfor.type,
+          });
+          console.log("this.consultInfor", this.consultInfor);
+          break;
+        case 1: // 会话创建成功
+          this.msgs.push(msg);
+          this.sid = msg.sid;
+          break;
+      }
+    });
   },
-  // watch: {
-  //   $route(to, from) {
-  //     if(to.name == 'OnlineConConfirm') from.params.back = -2;
-  //   }
-  // }
 };
 </script>
 
@@ -144,7 +205,8 @@ export default {
     padding-bottom: 20vh;
   }
   .slot-title-avatar {
-    width: 40px;
+    // width: 40px;
+    width: auto;
     height: 40px;
     > img {
       width: 40px;

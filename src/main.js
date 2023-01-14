@@ -3,7 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import httpApi from "@/http";
-// import Vant from 'vant'; // 全部导入
+import io from "socket.io-client";
+import config from '@/utils/config';
 import {
 	Icon, DropdownMenu, DropdownItem,
 	Sticky, Popup, Search, List, Cell, Tag,
@@ -63,6 +64,11 @@ Vue.use(ylToast);
 // Vue.prototype.$ylToast = ylToast;
 Vue.prototype.$api = httpApi;
 Vue.prototype.$Dialog = Dialog;
+// scoket 
+const server = io(config.chatUrl);
+Vue.prototype.$io = server;
+
+// 过滤器
 Vue.filter('datetime', (num) => {
 	//参数是数字--时间戳 ,返回日期时间字符串
 	let d = new Date(num) //把时间戳转换为日期对像

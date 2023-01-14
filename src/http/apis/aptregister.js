@@ -2,10 +2,11 @@
 import myAxios from "@/utils/instance";
 const aptregister = {
   // 查询用户挂号订单列表
-  list() {
+  list(data) {
     return myAxios({
       method: "POST",
-      url: "/register/list"
+      url: "/register/list",
+      data
     })
   },
   // 添加用户挂号订单

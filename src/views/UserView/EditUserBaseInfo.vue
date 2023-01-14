@@ -19,12 +19,15 @@
     </div> 
     <!-- 详细地址 -->
     <div>
+      <van-form @submit="onSubmit">
       <van-field
         v-model="address"
         class="yl-van-field"
         label="详细地址"
         placeholder="请输入详细地址"
+        :rules="rules.Detailed"
       />
+      </van-form>
       <div class="form-user-info text-large flex-around">
         <div>
           <span class="text-large __title">出生日期</span>
@@ -48,13 +51,13 @@
           <ylSwitch :items="['男']" />
         </div>
       </div>
-      <van-field class="yl-van-field" label="姓名" :disabled="loading" />
-      <van-field class="yl-van-field" label="居民身份证" :disabled="loading" />
+      <van-field class="yl-van-field" label="姓名" disabled />
+      <van-field class="yl-van-field" label="居民身份证" disabled />
       <van-field
         class="yl-van-field"
         label="手机号"
         name="phone"
-        :disabled="loading"
+        disabled
       />
 
       <div style="margin: 16px">
@@ -86,9 +89,15 @@ export default {
       minDate: new Date(1900, 1, 1),
       address:'',
       avatar:'',
+      rules:{
+       Detailed: [{ required: true, message: '请填写详细地址' }]
+      }
     };
   },
   methods: {
+    onSubmit(values) {
+      console.log('submit', values);
+    },
     showPopup() {
       this.show = true;
     },
@@ -106,7 +115,19 @@ export default {
     updateUserBaseInfo(){
       let data = {avatar:this.avatar, address:this.address}
       this.$api.user.updateUserBaseInfo(data).then(res=>{
-        console.log('成功',res);
+        console.log(res);
+        if(res.code == 200){
+          this.$ylToast({
+            msg: "修改成功",
+            type: "success",
+            duration: 2000,
+          });
+        }else{
+          this.$ylToast({
+            msg: "修改失败",
+            type: "error",
+          });
+        }
       })
     }
   },

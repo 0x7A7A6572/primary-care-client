@@ -14,4 +14,6 @@ import medicine from "./apis/medicine";
 import remind from "./apis/remind";
 // 文件上传
 import upload from "./apis/upload";
-export default { user, info, news, bible,aptregister,medicine,remind,upload }
+import chat from "./apis/chat";
+
+export default { user, info, news, bible,aptregister,medicine,remind,upload,chat }

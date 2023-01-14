@@ -24,3 +24,8 @@ textarea{
   height: 100%;
   border: none;
 }
+
+hr{
+  border: none;
+  border-bottom: 1px solid var(--color-mian-bg);
+}

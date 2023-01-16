@@ -34,6 +34,14 @@ export default {
     if (this.$route.name == "Home") {
       this.ylTabbarShow = true;
     }
+    // 在线状态
+    if (this.$store.getters.token) {
+      this.$io.emit("online", {
+        uid: this.$store.getters.user.uid,
+        token: this.$store.getters.token,
+      });
+      console.log('通知服务器用户已上线');
+    }
   },
   data() {
     return {

@@ -32,7 +32,7 @@
           <span class="__score">{{ doctor?.score }}</span></span
         >
       </div>
-      <div class="padding-base text-medium-int" style="padding-left:16px">医生简介: <span>{{doctor.descs || '无'}}</span></div>
+      <div class="padding-base text-medium-int" style="padding-left:16px">医生简介: <span>{{doctor?.descs || '无'}}</span></div>
     <!-- <van-field
       label="医生简介:"
     ><template #input>
@@ -78,7 +78,8 @@ export default {
       consultInfor: { // 问诊信息
         patient: this.$store.getters.user, // 患者信息
         ctime: new Date().getTime(), // 发起时间
-        desc: '' // 症状描述
+        desc: '', // 症状描述
+        type: 0 // TODO 问诊类型 0-图文问诊 目前只考虑这个 
       }
     };
   },

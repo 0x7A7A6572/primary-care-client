@@ -12,6 +12,7 @@
     "js-md5": "^0.7.3",
     "sass": "^1.57.0",
     "sass-loader": "^13.2.0",
+    "socket.io-client": "^4.5.4",
     "vant": "^2.12.53",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",

@@ -9,7 +9,7 @@ import {
 	Icon, DropdownMenu, DropdownItem,
 	Sticky, Popup, Search, List, Cell, Tag,
 	Image, Button, Divider, Form, Field, DatetimePicker, Dialog, Uploader,
-	Popover, TreeSelect
+	Popover, TreeSelect,  Collapse, CollapseItem
 } from 'vant'; // 按需导入
 
 import 'vant/lib/index.css';
@@ -55,7 +55,8 @@ Vue.use(Field);
 Vue.use(Uploader);
 Vue.use(Popover);
 Vue.use(TreeSelect);
-
+Vue.use(Collapse);
+Vue.use(CollapseItem);
 
 
 Vue.config.productionTip = false;
@@ -70,6 +71,22 @@ Vue.prototype.$io = server;
 
 // 过滤器
 Vue.filter('datetime', (num) => {
+	if(!num) return '无';
+	//参数是数字--时间戳 ,返回日期时间字符串
+	let d = new Date(num) //把时间戳转换为日期对像
+	//获取Date中的不同部分
+	let yy = d.getFullYear()
+	let MM = d.getMonth() + 1
+	MM = MM < 10 ? '0' + MM : MM
+	let dd = d.getDate()
+	dd = dd < 10 ? '0' + dd : dd
+	let hh = d.getHours()
+	let mm = d.getMinutes()
+	mm = mm < 10 ? '0' + mm : mm
+	hh = hh < 10 ? '0' + hh : hh
+	return `${yy}-${MM}-${dd} ${hh}:${mm}`
+});
+Vue.filter('date', (num) => {
 	//参数是数字--时间戳 ,返回日期时间字符串
 	let d = new Date(num) //把时间戳转换为日期对像
 	//获取Date中的不同部分

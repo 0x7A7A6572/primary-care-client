@@ -3,7 +3,7 @@
     <!-- S 嵌入ylNavbar -->
     <div ref="avatar" class="slot-title-avatar">
       <img
-        :src="doctor.avatar"
+        :src="doctor?.avatar"
         alt=""
         width="40px"
         height="40px"
@@ -14,7 +14,12 @@
         "
       />
     </div>
-    <span ref="endChat" style="color: var(--color-error)" @click="showEndPopup">
+    <span
+      v-show="state == 0"
+      ref="endChat"
+      style="color: var(--color-error)"
+      @click="showEndPopup"
+    >
       结束问诊
     </span>
     <!-- E 嵌入ylNavbar -->
@@ -23,15 +28,15 @@
       <!-- 患者信息 -->
       <div class="patient-info box-round margin-base shadow">
         <div class="__info">
-          <van-image round :src="consultInfor.patient.avatar"></van-image>
-          <span class="__name">{{ consultInfor.patient.name }}&emsp; </span>
+          <van-image round :src="consultInfor?.patient?.avatar"></van-image>
+          <span class="__name">{{ consultInfor?.patient?.name }}&emsp; </span>
           <span class="__age"
-            >{{ consultInfor.patient.gender == 0 ? "女" : "男" }}&emsp;
+            >{{ consultInfor?.patient?.gender == 0 ? "女" : "男" }}&emsp;
           </span>
           <span class="__age"
-            >{{ consultInfor.patient.birthday | age }}岁&emsp;
+            >{{ consultInfor?.patient?.birthday | age }}岁&emsp;
           </span>
-          <span>{{ consultInfor.ctime | time }} </span>
+          <span>{{ consultInfor?.ctime | time }} </span>
         </div>
         <hr />
         <div
@@ -39,7 +44,7 @@
           @click="ellipsis = !ellipsis"
         >
           <span class="text-blod">症状描述：</span>
-          <span>{{ consultInfor.desc || "无" }}</span>
+          <span>{{ consultInfor?.desc || "无" }}</span>
         </div>
       </div>
       <ylChatMsg
@@ -47,12 +52,16 @@
         :key="item.msg + item.time"
         :msg="item.msg"
         :avatar="
-          item.role == 'others' ? doctor.avatar : $store.getters.user.avatar
+          item.role == 'others' ? doctor?.avatar : $store.getters.user.avatar
         "
         :theme="item.role"
       />
     </div>
-    <ylChatInput @send="send" v-model="inptxt"></ylChatInput>
+    <ylChatInput
+      v-show="state == 0"
+      @send="send"
+      v-model="inptxt"
+    ></ylChatInput>
   </div>
 </template>
 
@@ -68,42 +77,7 @@ export default {
       doctor: this.$route.params.doctor || this.$route.query.doctor,
       consultInfor: this.$route.params.consultInfor,
       inptxt: "",
-      msgs: [
-        /* 
-        // 模拟数据
-        {
-          time: "00",
-          msg: "我是xxx科的李医生，请详细描述一下您的病情。",
-          type: "text",
-          role: "others",
-        },
-        { time: "00", msg: "您好", type: "text", role: "self" },
-        { time: "2-25 23:59", msg: "2-25 23:59", type: "text", role: "system" },
-        { time: "00", msg: "是这样的....", type: "text", role: "self" },
-        {
-          time: "00",
-          msg: "嗯，大概的情况我已经了解了",
-          type: "text",
-          role: "others",
-        },
-        {
-          time: "00",
-          msg: "您这边平时睡眠情况还好吗？",
-          type: "text",
-          role: "others",
-        },
-        {
-          time: "00",
-          msg: "我....... , 就是.........., 除此之外....... ，其他没有感觉！",
-          type: "text",
-          role: "self",
-        },
-        { time: "00", msg: "！", type: "text", role: "others" },
-        { time: "2-25 23:59", msg: "2-26 01:30", type: "text", role: "system" },
-        { time: "00", msg: "寄了🤔", type: "text", role: "others" },
-        { time: "00", msg: "？？？？？😧....", type: "text", role: "self" },
-       */
-      ],
+      msgs: [],
       ellipsis: true,
     };
   },
@@ -114,6 +88,7 @@ export default {
         return;
       }
       let Msg = {
+        sid: this.sid,
         uid: this.$store.getters.user.uid,
         token: this.$store.getters.token,
         touid: this.doctor?.uid,
@@ -123,7 +98,7 @@ export default {
         role: "self",
       };
       this.msgs.push(Msg);
-      server.emit("uchat", Msg);
+      this.$io.emit("uchat", Msg);
       // 滑动到最新消息
       this.$nextTick(() => {
         this.$refs.chatRoom.scrollTop = this.$refs.chatRoomWindow.scrollHeight;
@@ -139,18 +114,34 @@ export default {
         })
         .then(() => {
           // TODD 执行结束问诊
-          console.log("end");
-          server.emit('end',{
+          console.log("visit-end", this.sid);
+          this.$io.emit("visit-end", {
             msg: "问诊结束",
-            sid: this.sid,
-            endid: this.$store.getters.user.uid,
+            sid: this.sid, // 问诊会话id
+            endid: this.$store.getters.user.uid, // 结束发起人
+          });
+          this.state = 1; //结束问诊
+          this.msgs.push({
+            time: new Date().getTime(),
+            msg: "问诊结束",
+            type: "text",
+            role: "system",
           });
         })
         .catch(() => {});
     },
   },
   created() {
-    this.$route.meta.title = this.$route.query.title;
+    this.$route.meta.title = this.$route.params.title;
+    // 会话信息同步
+    if (this.$route.params.sinfo) {
+      let { sid, state } = this.$route.params.sinfo;
+      this.sid = sid;
+      this.state = state;
+      this.doctor = this.$route.params.doctor;
+      this.consultInfor = this.$route.params.sinfo;
+      console.log("???", this.$route.params);
+    }
     // 滑动到最新消息
     this.$nextTick(() => {
       this.$refs.chatRoom.scrollTop = this.$refs.chatRoomWindow.scrollHeight;
@@ -161,37 +152,88 @@ export default {
     this.$route.params.slotTitle = this.$refs["avatar"];
     this.$route.params.slotTitleBefore = this.$refs["endChat"];
 
+    // 获取历史消息
+    if (this.sid) {
+      this.$api.chat.details({ sid: this.sid }).then((res) => {
+        console.log("details:", res);
+//         {
+//     "mid": 5,
+//     "sid": 17,
+//     "content": "1111111111111",
+//     "type": "text",
+//     "sendtime": "1673883529288",
+//     "sender": "450122199611021512",
+//     "recipient": "450111111133311112",
+//     "state": 1
+// }
+        this.msgs = res.data.map((v) => {
+          return {
+            uid: v.sendtime,
+            touid: v.recipient,
+            time: v.time,
+            msg: v.content,
+            type: v.sendtime,
+            role: v.sender == this.$store.getters.user.uid ? "self" : "others",
+          };
+        });
+      });
+    }
+
     // socket 服务
+    if (this.sid && this.state == 0) {
+      // 重连未结束的会话
+      this.$io.emit("visit-reload", {
+        sid: this.sid,
+        uid: this.$store.getters.user.uid, // 发送者
+        token: this.$store.getters.token,
+        touid: this.doctor?.uid, // 接收者
+        descs: this.consultInfor?.desc, // 症状描述
+        type: this.consultInfor.type, // 问诊类型
+      });
+      console.log("重连问诊", this.sid, this.doctor?.uid);
+    } else if (this.sid && this.state == 1) {
+      // 已结束的问诊
+    } else {
+      // 开始问诊
+      console.log("发起问诊", this.doctor);
+      this.$io.emit("visit-start", {
+        uid: this.$store.getters.user.uid, // 发送者
+        token: this.$store.getters.token,
+        touid: this.doctor?.uid, // 接收者
+        descs: this.consultInfor?.desc, // 症状描述
+        type: this.consultInfor?.type, // 问诊类型
+      });
+    }
+
+    // 问诊会话信息通知
+    this.$io.on("visit-start", (msg) => {
+      console.log("visit-start", msg);
+      // $('.chart-box').scroll(-1);
+      this.msgs.push(msg);
+      switch (msg.code) {
+        case 0x7a7a6572: // 会话创建成功标识
+          this.sid = msg.sid;
+          console.log("已获取会话id", msg.sid);
+          break;
+      }
+    });
+
+    // 系统通知
     this.$io.on("schat", (msg) => {
       console.log("schat", msg);
       // $('.chart-box').scroll(-1);
       this.msgs.push(msg);
+      switch (msg.code) {
+        case 0x7a7a6572: // 会话创建成功标识
+          this.sid = msg.sid;
+          break;
+      }
     });
+    // 私聊消息
     this.$io.on("uchat", (msg) => {
       console.log("uchat", msg);
       this.msgs.push(msg);
       // $('.chart-box').scroll(-1);
-    });
-    this.$io.on("register", (msg) => {
-      console.log("register", msg);
-      // 发送验证消息告诉服务器开始用户发起问诊
-      switch (msg.code) {
-        case 0x7a7a6572:
-          server.emit("register", {
-            uid: this.$store.getters.user.uid, // 发送者
-            token: this.$store.getters.token,
-            touid: this.doctor?.uid,
-            recipient: this.doctor?.uid, // 接收者
-            descs: this.consultInfor.desc,
-            type: this.consultInfor.type,
-          });
-          console.log("this.consultInfor", this.consultInfor);
-          break;
-        case 1: // 会话创建成功
-          this.msgs.push(msg);
-          this.sid = msg.sid;
-          break;
-      }
     });
   },
 };

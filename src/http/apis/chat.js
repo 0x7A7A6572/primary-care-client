@@ -8,5 +8,13 @@ const chat = {
       data,
     })
    },
+   details(data){
+    return myAxios({
+      method: "post",
+      url: "/chat/details",
+      data,
+    })
+   }
+   
 }
 export default chat;

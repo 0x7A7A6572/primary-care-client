@@ -7,6 +7,7 @@
     >
       <van-icon class-prefix="yl-icon" name="aixinzhijia1" />
       <span>首页</span>
+      <div class="red-dot" v-show="reddot?.Home > 0 && itemIndex != 0">{{ reddot?.Home }}</div>
     </div>
     <div
       :class="['tabbar-item', itemIndex === 1 ? 'active' : '']"
@@ -14,6 +15,7 @@
     >
       <van-icon class-prefix="yl-icon" name="xiaoxi" />
       <span>问诊</span>
+      <div class="red-dot" v-show="reddot?.ChatList > 0 && itemIndex != 1">{{ reddot?.ChatList }}</div>
     </div>
     <div
       :class="['tabbar-item', itemIndex === 2 ? 'active' : '']"
@@ -21,6 +23,7 @@
     >
       <van-icon class-prefix="yl-icon" name="xiangzi1" />
       <span>查药</span>
+      <div class="red-dot" v-show="reddot?.Medicine > 0 && itemIndex != 2">{{ reddot?.Medicine }}</div>
     </div>
     <div
       :class="['tabbar-item', itemIndex === 3 ? 'active' : '']"
@@ -28,6 +31,7 @@
     >
       <van-icon class-prefix="yl-icon" name="danren" />
       <span>我的</span>
+      <div class="red-dot" v-show="reddot?.User > 0 && itemIndex != 3">{{ reddot?.User }}</div>
     </div>
     <!-- 动态悬浮球背景 -->
     <div
@@ -66,6 +70,7 @@ export default {
   },
   data() {
     return {
+      reddot: this.$store.getters.getTabbarDot
       // itemIndex: this.$route.meta.tabbarIndex,
     };
   },
@@ -106,7 +111,6 @@ export default {
     overflow: hidden;
     box-shadow: 0px -2px 6px rgba(159, 159, 159, 0.366);
 
-
     .false-active-bg {
       position: absolute;
       background: transparent;
@@ -139,6 +143,7 @@ export default {
     }
   }
   > .tabbar-item {
+    position: relative;
     // line-height: 60px;
     // text-align: center;
     display: flex;
@@ -170,7 +175,7 @@ export default {
   }
   .active-bg {
     position: absolute;
-    background: var(--color-fab-bg);// var(--color-main);
+    background: var(--color-fab-bg); // var(--color-main);
     border-radius: 50%;
     width: 14vw;
     height: 14vw;
@@ -180,6 +185,22 @@ export default {
     // border: 1vw solid var(--color-mian-bg);
     margin: 1vw; // 代替border 同时宽高-2vw
     box-shadow: 0px 2px 8px var(--color-main);
+  }
+  .red-dot {
+    background: red;
+    color: white;
+    font-size: small !important;
+    position: absolute;
+    right: 5px;
+    top: 14px;
+    padding: 5px;
+    border-radius: 3rem;
+    height: 24%;
+    width: 24%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
   }
 }
 </style>

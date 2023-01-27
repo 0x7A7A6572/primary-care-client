@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import chat from './chat'
+import reddot from './reddot'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -54,5 +55,7 @@ export default new Vuex.Store({
     }
   },
   modules: {
+    chat,
+    reddot,
   }
 })

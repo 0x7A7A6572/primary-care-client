@@ -40,7 +40,17 @@ export default {
         uid: this.$store.getters.user.uid,
         token: this.$store.getters.token,
       });
-      console.log('通知服务器用户已上线');
+      console.log("通知服务器用户已上线");
+      // 并接收新消息通知
+      this.$io.on("uchat", (Msg) => {
+        // tabbar红点显示
+        this.$store.commit('addTabbarDot','ChatList');
+        // 红点消息同步
+        this.$store.dispatch('updateChatListBySid',{
+          sid: Msg.sid,
+          chat: Msg});
+      //  console.log("有新消息：", Msg, this.$store.getters.getChatBySid(Msg.sid));
+      });
     }
   },
   data() {
@@ -91,6 +101,8 @@ export default {
       // 如果和当前路由同名则不跳转
       if (this.$route.name == name) return;
       this.$router.push(name);
+      // 执行清除红点操作
+      // this.$store.commit('clearTabbarDot',name);
     },
     _isMobile() {
       let flag = navigator.userAgent.match(

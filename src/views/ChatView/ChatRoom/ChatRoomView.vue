@@ -49,7 +49,7 @@
       </div>
       <ylChatMsg
         v-for="item in msgs"
-        :key="item.msg + item.time"
+        :key="item.mid"
         :msg="item.msg"
         :avatar="
           item.role == 'others' ? doctor?.avatar : $store.getters.user.avatar
@@ -73,11 +73,11 @@ export default {
   data() {
     return {
       state: 0, //当前会话状态
-      sid: 0, // 当前问诊会话id
+      sid: null, // 当前问诊会话id
       doctor: this.$route.params.doctor || this.$route.query.doctor,
       consultInfor: this.$route.params.consultInfor,
       inptxt: "",
-      msgs: [],
+      msgs: [], //this.$store.getters.getMsglist,
       ellipsis: true,
     };
   },
@@ -95,9 +95,13 @@ export default {
         time: new Date().getTime(),
         msg: v,
         type: "text",
-        role: "self",
+        role: "self", // socket传输中有点多余的属性
       };
       this.msgs.push(Msg);
+      // @弃用
+      // this.$store.dispatch('addMsg',Msg).then(res=>{
+      //   console.log("ssss:",res)
+      // });
       this.$io.emit("uchat", Msg);
       // 滑动到最新消息
       this.$nextTick(() => {
@@ -119,6 +123,7 @@ export default {
             msg: "问诊结束",
             sid: this.sid, // 问诊会话id
             endid: this.$store.getters.user.uid, // 结束发起人
+            touid:  this.doctor?.uid
           });
           this.state = 1; //结束问诊
           this.msgs.push({
@@ -156,23 +161,20 @@ export default {
     if (this.sid) {
       this.$api.chat.details({ sid: this.sid }).then((res) => {
         console.log("details:", res);
-//         {
-//     "mid": 5,
-//     "sid": 17,
-//     "content": "1111111111111",
-//     "type": "text",
-//     "sendtime": "1673883529288",
-//     "sender": "450122199611021512",
-//     "recipient": "450111111133311112",
-//     "state": 1
-// }
+        // @弃用
+        // this.$store.dispatch('setMsgList',res.data).then(sres=>{
+        //   this.msgs = sres;
+        //   // console.log('sres',sres)
+        // });
         this.msgs = res.data.map((v) => {
           return {
-            uid: v.sendtime,
+            mid: v.mid,
+            sid: v.sid,
+            uid: v.sender,
             touid: v.recipient,
-            time: v.time,
+            time: v.sendtime,
             msg: v.content,
-            type: v.sendtime,
+            type: v.type,
             role: v.sender == this.$store.getters.user.uid ? "self" : "others",
           };
         });
@@ -193,9 +195,11 @@ export default {
       console.log("重连问诊", this.sid, this.doctor?.uid);
     } else if (this.sid && this.state == 1) {
       // 已结束的问诊
+
     } else {
+      
       // 开始问诊
-      console.log("发起问诊", this.doctor);
+      console.log("发起问诊",this.sid, this.state, this.doctor);
       this.$io.emit("visit-start", {
         uid: this.$store.getters.user.uid, // 发送者
         token: this.$store.getters.token,
@@ -217,6 +221,18 @@ export default {
           break;
       }
     });
+    // 任何一方结束问诊通知另一方
+    this.$io.on("visit-end", (msg) => {
+      // console.log("对方结束问诊", msg);
+      // $('.chart-box').scroll(-1);
+         this.state = 1; //结束问诊
+          this.msgs.push({
+            time: new Date().getTime(),
+            msg: "问诊结束",
+            type: "text",
+            role: "system",
+          });
+    });
 
     // 系统通知
     this.$io.on("schat", (msg) => {
@@ -229,12 +245,13 @@ export default {
           break;
       }
     });
-    // 私聊消息
-    this.$io.on("uchat", (msg) => {
-      console.log("uchat", msg);
-      this.msgs.push(msg);
-      // $('.chart-box').scroll(-1);
-    });
+
+    // 私聊消息 (已在App.vue处理)
+    // this.$io.on("uchat", (msg) => {
+    //   console.log("uchat", msg);
+    //   this.msgs.push(msg);
+    //   // $('.chart-box').scroll(-1);
+    // });
   },
 };
 </script>

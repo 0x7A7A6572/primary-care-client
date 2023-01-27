@@ -103,7 +103,7 @@ const routes = [
   {// 问诊消息列表
     path: '/ChatList',
     name: 'ChatList',
-    meta: { tabbarShow: true, tabbarIndex: 1, keepAlive: true },
+    meta: { tabbarShow: true, tabbarIndex: 1, keepAlive: false },
     component: () => import('../views/ChatView/ChatView.vue')
   },
   { // 问诊聊天窗口页

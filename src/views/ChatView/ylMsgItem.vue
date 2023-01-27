@@ -1,7 +1,7 @@
 <template>
   <div class="yl-msg-item box-round">
     <div class="__item-content"  @click="$emit('click', { user })">
-      <van-image round width="18vw" height="18vw" :src="user?.avatar" alt="" />
+      <van-image round width="10vw" height="10vw" :src="user?.avatar" alt="" />
 
       <div class="__user-info">
         <span class="__name text-large"
@@ -62,6 +62,9 @@ export default {
     display: flex;
 
     justify-content: space-between;
+    .van-image{
+      min-width: 10vw;
+    }
     // > img {
     //   width: 18vw;
     //   height: 18vw;

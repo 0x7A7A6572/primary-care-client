@@ -118,6 +118,7 @@ export default {
           this.search.meddatas = res.data.result;
           this.search.total = res.data.total;
           this.$ylToast({
+            type: "success",
             msg: `搜索到${res.data.total}条结果`,
           });
         });

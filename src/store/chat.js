@@ -74,6 +74,16 @@ export default {
           if (month == dm && date == dd) return true;
         }
         return false;
+      };
+    },
+    getChatByDay(state){
+      return (d)=>{
+        return state.chatList.filter(v =>{
+         let vd = new Date(v.stime);
+         return (vd.getFullYear() == d.getFullYear() &&
+                vd.getMonth() == d.getMonth() && 
+                vd.getDate() == d.getDate());
+        });
       }
     }
   },

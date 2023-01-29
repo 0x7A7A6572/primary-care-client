@@ -66,12 +66,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .yl-toast {
+  --top: 8%;
   position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
-  top: 10%;
+  top: var(--top);
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
@@ -92,13 +94,15 @@ export default {
     margin-right: var(--margin-base);
     font-size: var(--font-size-lg);
   }
-}
-@keyframes show {
+
+  @keyframes show {
   0% {
-    top: -10%;
+    top: -8%;
   }
   100% {
-    top: 10%;
+    top: var(--top);;
   }
 }
+}
+
 </style>

@@ -3,7 +3,7 @@
     @click="$emit('click')"
     :class="['yl-search', 'box', boxShadow ? 'shadow' : '']"
     :disabled="disabled"
-    :style="{border: '2px solid ' + borderColor}"
+    :style="{ border: '2px solid ' + borderColor }"
   >
     <van-icon
       class-prefix="yl-icon"
@@ -12,6 +12,7 @@
       size="var(--icon-size)"
     />
     <input
+      ref="yl-search-input"
       type="text"
       :placeholder="placeholder"
       :value="value"
@@ -20,7 +21,7 @@
       :disabled="disabled"
       @keyup.enter="search"
     />
-
+<!--  v-focus="autoFocus" -->
     <div
       v-show="searchBtn"
       class="__search-btn box"
@@ -90,25 +91,29 @@ export default {
       type: [String, Number],
       default: "",
     },
+    autoFocus: Boolean,
   },
   data() {
     return {
-        // currentValue: '',
+      // currentValue: '',
     };
   },
   methods: {
     change(e) {
-    //  this.currentValue = e.target.value
+      //  this.currentValue = e.target.value
       this.$emit("change", e.target.value);
     },
     inputload(e) {
-    //  this.currentValue = e.target.value
+      //  this.currentValue = e.target.value
       this.$emit("input", e.target.value);
     },
     search(e) {
       this.$emit("search", e.target.value);
     },
   },
+  mounted(){
+    if(this.$props.autoFocus) this.$refs['yl-search-input']?.focus();
+  }
 };
 </script>
 

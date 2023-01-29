@@ -118,6 +118,14 @@ Vue.filter('age', (num) => {
 	let currd_yy = currd.getFullYear();
 	return currd_yy - yy;
 });
+
+// 自定义指令
+Vue.directive('focus',{
+	inserted: function(el,o){
+	if(o.value) el.focus();
+	}
+});
+
 new Vue({
 	router,
 	store,

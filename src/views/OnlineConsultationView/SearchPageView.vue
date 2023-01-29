@@ -2,6 +2,7 @@
   <div class="search-doctor-page">
     <van-sticky :offset-top="60">
       <ylSearch
+        :autoFocus='true'
         placeholder="请输入医生/疾病搜索"
         v-model="inpt"
         :disabled="false"

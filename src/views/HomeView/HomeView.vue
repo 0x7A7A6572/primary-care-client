@@ -2,10 +2,7 @@
   <div class="home">
     <!-- 用户信息 -->
     <div class="home-user">
-      <van-image
-        class="__avatar" round
-        :src="$store.getters.user?.avatar"
-      />
+      <van-image class="__avatar" round :src="$store.getters.user?.avatar" />
       <!-- <img class="__avatar" :src="$store.getters.user?.avatar" alt="" /> -->
       <span
         class="text-larger"
@@ -71,21 +68,28 @@
     <!-- 健康新闻 -->
     <div class="news-list box-round">
       <ylTitle title="健康新闻" />
-
-      <!-- <van-list finished-text="没有更多了"> -->
-      <ylNewsItem
-        v-for="item in newsList"
-        :key="item.id"
-        :news="item"
-        @click="toNewsPage(item)"
-      />
-      <!-- </van-list> -->
+      <van-skeleton title :row="4" :loading="loading" :style="{
+        paddingTop: '20px'
+      }">
+        <!-- <van-list finished-text="没有更多了"> -->
+        <ylNewsItem
+          v-for="item in newsList"
+          :key="item.id"
+          :news="item"
+          @click="toNewsPage(item)"
+        />
+        <!-- </van-list> -->
+      </van-skeleton>
     </div>
 
     <!-- 社区活动 -->
     <div class="activity-list box-round">
       <ylTitle title="社区活动" />
-      <ylEmpty title="暂无活动" />
+      <van-skeleton title :row="5" :loading="loading" :style="{
+        paddingTop: '20px'
+      }">
+        <ylEmpty title="暂无活动" />
+      </van-skeleton>
     </div>
   </div>
 </template>
@@ -96,6 +100,7 @@ export default {
   components: { ylNewsItem },
   data() {
     return {
+      loading: true,
       newsList: [],
     };
   },
@@ -110,14 +115,15 @@ export default {
           console.log(res);
           this.newsList = res.data.data;
         }
+        this.loading = false;
       });
   },
   methods: {
     toNewsPage(news) {
       this.$router.push({
         path: "/News/Details",
-        query:{
-         nid: news.nid
+        query: {
+          nid: news.nid,
         },
         params: {
           news,

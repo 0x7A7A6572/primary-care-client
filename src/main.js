@@ -10,7 +10,7 @@ import {
 	Sticky, Popup, Search, List, Cell, Tag,
 	Image, Button, Divider, Form, Field, DatetimePicker, Dialog, Uploader,
 	Popover, TreeSelect,Tab,Tabs,  Collapse, CollapseItem,PullRefresh,
-	Calendar
+	Calendar, Skeleton 
 } from 'vant'; // 按需导入
 
 import 'vant/lib/index.css';
@@ -62,6 +62,7 @@ Vue.use(Collapse);
 Vue.use(CollapseItem);
 Vue.use(PullRefresh);
 Vue.use(Calendar);
+Vue.use(Skeleton);
 
 Vue.config.productionTip = false;
 import ylToast from './components/ylToast/ylToast.js';

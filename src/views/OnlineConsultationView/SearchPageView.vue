@@ -2,7 +2,7 @@
   <div class="search-doctor-page">
     <van-sticky :offset-top="60">
       <ylSearch
-        :autoFocus='true'
+        :autoFocus="true"
         placeholder="请输入医生/疾病搜索"
         v-model="inpt"
         :disabled="false"
@@ -22,27 +22,37 @@
         type="search"
         title="未搜索到相关结果"
       />
-      <ylEmpty v-show="doctors == null" width="60%" type="list" title="" />
-      <ylPsersonDoctor v-for="item in doctors" :key="item.id" :doctor="item">
-        <div class="slot-doctor-info">
-          <span>
-            <i class="yl-icon yl-icon-yiwurenyuan2"></i>
-            接诊人数：<span class="__service-count text-medium">{{
-              item.service_count
-            }}</span>
-          </span>
+        <ylPsersonDoctor v-for="item in doctors" :key="item.id" :doctor="item">
+          <div class="slot-doctor-info">
+            <span>
+              <i class="yl-icon yl-icon-yiwurenyuan2"></i>
+              接诊人数：<span class="__service-count text-medium">{{
+                item.service_count
+              }}</span>
+            </span>
 
-          <span>
-            &nbsp;&nbsp;
-            <i class="yl-icon yl-icon-haoping"></i>
-            评价 <span class="__score text-medium">{{ item.score }}</span></span
-          >
-          <div class="icon-btn consulting" @click="consultingService(item)">
-            <van-icon class-prefix="yl-icon" name="liaotian4" />
-            咨询
+            <span>
+              &nbsp;&nbsp;
+              <i class="yl-icon yl-icon-haoping"></i>
+              评价
+              <span class="__score text-medium">{{ item.score }}</span></span
+            >
+            <div class="icon-btn consulting" @click="consultingService(item)">
+              <van-icon class-prefix="yl-icon" name="liaotian4" />
+              咨询
+            </div>
           </div>
-        </div>
-      </ylPsersonDoctor>
+        </ylPsersonDoctor>
+      <van-skeleton
+        v-for="index in 8"
+        title
+        avatar
+        avatar-size="16vw"
+        :row="4"
+        :loading="loading"
+        :key="index"
+      />
+      <ylEmpty v-show="doctors == null" width="60%" type="list" title="" />
     </div>
   </div>
 </template>
@@ -54,16 +64,19 @@ export default {
   components: { ylPsersonDoctor },
   data() {
     return {
+      loading: false,
       inpt: "",
       doctors: null,
     };
   },
   methods: {
     onSearch(e) {
+      this.loading = true;
       this.showPanel = true;
       this.$api.info.searchDoctor({ key: this.inpt }).then((res) => {
         this.doctors = res.data;
         // console.log("doctors:", this.doctors);
+        this.loading = false;
       });
     },
     consultingService(item) {

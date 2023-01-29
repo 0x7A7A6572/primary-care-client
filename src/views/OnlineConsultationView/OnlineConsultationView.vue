@@ -44,6 +44,16 @@
       color="var(--color-second-text)"
     />
     <div class="scroll-recommend">
+      <van-skeleton
+       class="recom-item box flex-d-column flex-center margin-base"
+        v-for="index in 5"
+        title
+        avatar
+        avatar-size="20vw"
+        :row="1"
+        :loading="loading"
+        :key="index"
+      />
       <ylPsersonExpert
         class="recom-item box"
         v-for="item in recommendDoctors"
@@ -75,6 +85,7 @@
           <!-- <van-dropdown-item v-model="value2" :options="grades" /> -->
         </van-dropdown-menu>
       </van-sticky>
+
       <van-list
         v-model="loading"
         :finished="finished"
@@ -103,6 +114,15 @@
           </div>
         </ylPsersonDoctor>
       </van-list>
+      <van-skeleton
+        v-for="index in 5"
+        title
+        avatar
+        avatar-size="16vw"
+        :row="3"
+        :loading="loading"
+        :key="index"
+      />
     </div>
   </div>
 </template>
@@ -115,6 +135,7 @@ export default {
   components: { ylPsersonDoctor, ylPsersonExpert },
   data() {
     return {
+      // initLoading: true,
       loading: false,
       finished: false,
       page: 1,
@@ -134,8 +155,8 @@ export default {
   methods: {
     consultingService(item) {
       this.$router.push({
-          name: 'OnlineConConfirm',
-          params: { doctor:item},
+        name: "OnlineConConfirm",
+        params: { doctor: item },
       });
     },
 
@@ -169,7 +190,7 @@ export default {
       this.queryDoctorList(this.page++, 10, (data) => {
         // 加载状态结束
         this.loading = false;
-
+        this.initLoading = false;
         // 数据全部加载完成
         if (this.doctors.length >= data.total) {
           this.finished = true;

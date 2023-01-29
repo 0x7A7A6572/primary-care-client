@@ -19,6 +19,7 @@ export default {
 <style lang="scss" scoped>
 .yl-sticky-head{
   padding: var(--padding-base);
+
   .__title {
     text-align: center;
     margin-bottom: var(--margin-lg);
@@ -33,6 +34,7 @@ export default {
   }
    ::v-deep .van-sticky--fixed {
       padding: 10px 20px;
+      box-shadow: var(--box-shadow);
   }
 }
 </style>

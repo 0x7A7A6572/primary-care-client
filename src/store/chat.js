@@ -22,7 +22,7 @@ export default {
       }
     },
     setChatList(state, chatlist) {
-      state.chatList = chatlist;
+      if(chatlist) state.chatList = chatlist;
     },
     updateChatListBySid(state, { sid, chat }) {
       state.chatList.forEach((e,i) => {
@@ -58,6 +58,24 @@ export default {
         }
       }
     },
+    calendarHasChats(state){
+     return state.chatList.map(v=>{
+        return v.stime;
+      })
+    },
+    dayHasChat(state){
+      return (day)=>{
+        const month = day.date.getMonth() + 1;
+        const date = day.date.getDate();
+        for (let e of state.chatList) {
+          let d = new Date(e.stime);
+          let dm = d.getMonth()+1;
+          let dd = d.getDate();
+          if (month == dm && date == dd) return true;
+        }
+        return false;
+      }
+    }
   },
   actions: {
     //  setMsgList({commit,getters}, chat){
@@ -85,7 +103,7 @@ export default {
     getChatlist({ commit }) {
       return new Promise((resolve, reject) => {
         $api.chat.list().then((res) => {
-          commit('setChatList', res.data.map((v) => {
+          commit('setChatList', res.data?.map((v) => {
                 return {
                   unreadCount: 0,
                   lastMsg: '',
@@ -108,7 +126,7 @@ export default {
           // 没有找到对应sid时需要更新
         $api.chat.list().then((res) => {
           // commit('addChat', res.data);
-          commit('setChatList', res.data.map((v,i) => {
+          commit('setChatList', res.data?.map((v,i) => {
             if(getters.getChat[i]){
               return {
                 unreadCount: getters.getChat[i].unreadCount,

@@ -1,26 +1,50 @@
 <template>
-<div  class="chat-view">
-<ylStickyHead title="问诊记录" />
-  <van-pull-refresh  v-model="isLoading" @refresh="onRefresh">
-    <YlMsgItem
-      v-for="item in chatList()"
-      :key="item.sid"
-      :user="{
-        avatar: user.uid == item.uid ? item.d_avatar : item.u_avatar,
-        name: user.uid == item.uid ? item.d_name : item.u_name,
-        grade: user.uid == item.uid ? item.d_grade : '患者',
-      }"
-      :lastMsg="item.lastMsg"
-      :lastTime="item.stime"
-      :stime="item.stime"
-      :etime="item.etime"
-      :desc="item.descs"
-      :unreadCount="item.unreadCount"
-      @click="toChatRoom(item)"
-    />
-  </van-pull-refresh>
-</div>
+  <div class="chat-view">
+    <ylStickyHead title="问诊记录">
+      <!-- 改造日历组件 -->
+      <van-calendar
+        title=""
+        color="var(--color-main)"
+        :poppable="false"
+        :show-confirm="false"
+        :max-date="new Date()"
+        :min-date="new Date(2022, 10, 1)"
+        :formatter="formatterCalendar"
+        :style="{
+          height: calendarHeight + 'px',
+          maxHeight: '60vh',
+          transition: onTouchSign ? 'none' : '0.5s',
+        }"
+      />
+      <div
+        class="calendar-ctrl-bar"
+        @touchstart="onCalendarBarTouchStart"
+        @touchend="onTouchSign = false"
+        @touchmove="onCalendarBarTouch"
+      >
+        <div class="__ctrl" @click="onCalendarBarClick"></div>
+      </div>
+    </ylStickyHead>
 
+    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+      <YlMsgItem
+        v-for="item in chatList()"
+        :key="item.sid"
+        :user="{
+          avatar: user.uid == item.uid ? item.d_avatar : item.u_avatar,
+          name: user.uid == item.uid ? item.d_name : item.u_name,
+          grade: user.uid == item.uid ? item.d_grade : '患者',
+        }"
+        :lastMsg="item.lastMsg"
+        :lastTime="item.stime"
+        :stime="item.stime"
+        :etime="item.etime"
+        :desc="item.descs"
+        :unreadCount="item.unreadCount"
+        @click="toChatRoom(item)"
+      />
+    </van-pull-refresh>
+  </div>
 </template>
 
 <script>
@@ -31,25 +55,33 @@ export default {
   components: { YlMsgItem, ylStickyHead },
   data() {
     return {
+      // storeChatList: this.$store.getters.getChat,
       user: this.$store.getters.user,
       isLoading: false,
+      calendarHeight: 80,
+      calendarStartY: 336,
+      // 记录拖拽状态 用于拖动时关闭动画属性
+      onTouchSign: false,
+      // calendarHasChats: this.$store.getters.calendarHasChats
     };
   },
   mounted() {
     // vuex 没有则从api获取
     // if (this.$store.getters.getChat instanceof Array && this.$store.getters.getChat?.lenght <= 0) {
-      this.$store.dispatch("getChatlist").then((res) => {
-        // console.log("getters.getChat", this.$store.getters.getChat);
-      });
+    this.$store.dispatch("getChatlist").then((res) => {
+      // console.log("getters.getChat", this.$store.getters.getChat);
+        // this.storeChatList = res;
+   });
     // }else{
     // }
   },
   methods: {
-    onRefresh(){
-    //  console.log('下拉刷新');
-     this.$store.dispatch("getChatlist").then((res) => {
+    onRefresh() {
+      //  console.log('下拉刷新');
+      this.$store.dispatch("getChatlist").then((res) => {
         // console.log("getters.getChat", this.$store.getters.getChat);
-      this.isLoading = false;
+        this.isLoading = false;
+        // this.storeChatList = res;
       });
     },
     chatList() {
@@ -84,6 +116,40 @@ export default {
       });
       // console.log(e);
     },
+    onCalendarBarTouchStart(e) {
+      let screenY = e.targetTouches[0].screenY;
+       this.calendarStartY = screenY;
+       this.onTouchSign = true;
+    },
+    onCalendarBarTouch(e) {
+      let screenY = e.targetTouches[0].screenY;
+      let needChange = Math.abs(this.calendarStartY - screenY);
+      if (this.calendarStartY > screenY) {
+        // console.log("上划");
+        this.calendarHeight -= needChange;
+      } else {
+        // console.log("下划");
+        this.calendarHeight += needChange;
+      }
+      if (this.calendarHeight < 80) return (this.calendarHeight = 80);
+      this.calendarStartY = screenY;
+      // console.log(this.calendarHeight)
+    },
+    onCalendarBarClick(e) {
+      if (this.calendarHeight < 200) {
+        this.calendarHeight = 400;
+      } else {
+        this.calendarHeight = 80;
+      }
+      // console.log(e);
+      this.calendarStartY = e.screenX;
+    },
+    formatterCalendar(day) {
+      if (this.$store.getters.dayHasChat(day)) {
+        day.bottomInfo = "问诊";
+      }
+      return day;
+    },
   },
 };
 </script>
@@ -93,6 +159,45 @@ export default {
   .__title {
     text-align: center;
     margin: var(--margin-lg);
+  }
+  // 改日历样式
+  .dragCalendar {
+    transition: 0.5s;
+  }
+  ::v-deep .van-calendar__bottom-info {
+    color: var(--color-main);
+    font-weight: bold;
+  }
+  ::v-deep .van-calendar__header-title {
+    display: none;
+  }
+  ::v-deep .van-calendar__header-subtitle {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+  }
+  ::v-deep .van-calendar__selected-day {
+    width: 40px;
+    height: 40px;
+    .van-calendar__bottom-info {
+      display: none;
+    }
+  }
+  // 日历控制条
+  .calendar-ctrl-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--padding-base);
+    height: 8px;
+    min-height: 8px;
+    background: transparent;
+    .__ctrl {
+      background: var(--color-main);
+      border-radius: 2rem;
+      width: 10vw;
+      height: 8px;
+    }
   }
 }
 </style>

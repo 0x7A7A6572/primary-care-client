@@ -103,6 +103,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   height: 100%;
+  width: 100%;
   background: #fff;
   padding: var(--padding-lg);
   margin: auto;

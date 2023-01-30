@@ -28,15 +28,15 @@
       <!-- 患者信息 -->
       <div class="patient-info box-round margin-base shadow">
         <div class="__info">
-          <van-image round :src="consultInfor?.patient?.avatar"></van-image>
-          <span class="__name">{{ consultInfor?.patient?.name }}&emsp; </span>
+          <van-image round :src="getConsultInfor().patient?.avatar"></van-image>
+          <span class="__name">{{ getConsultInfor().patient?.name }}&emsp; </span>
           <span class="__age"
-            >{{ consultInfor?.patient?.gender == 0 ? "女" : "男" }}&emsp;
+            >{{ getConsultInfor().patient?.gender == 0 ? "女" : "男" }}&emsp;
           </span>
           <span class="__age"
-            >{{ consultInfor?.patient?.birthday | age }}岁&emsp;
+            >{{ getConsultInfor().patient.birthday | age }}岁&emsp;
           </span>
-          <span>{{ consultInfor?.ctime | time }} </span>
+          <span>{{ getConsultInfor().ctime | time }} </span>
         </div>
         <hr />
         <div
@@ -44,7 +44,7 @@
           @click="ellipsis = !ellipsis"
         >
           <span class="text-blod">症状描述：</span>
-          <span>{{ consultInfor?.desc || "无" }}</span>
+          <span>{{ getConsultInfor().desc || "无" }}</span>
         </div>
       </div>
       <ylChatMsg
@@ -75,13 +75,16 @@ export default {
       state: 0, //当前会话状态
       sid: null, // 当前问诊会话id
       doctor: this.$route.params.doctor || this.$route.query.doctor,
-      consultInfor: this.$route.params.consultInfor,
+      // consultInfor: this.$route.params.consultInfor,
       inptxt: "",
       msgs: [], //this.$store.getters.getMsglist,
       ellipsis: true,
     };
   },
   methods: {
+    getConsultInfor(){
+      return this.$route.params.consultInfor;
+    },
     send(v) {
       if (!v.trim()) {
         console.log("请先输入文字再发送！");
@@ -145,7 +148,7 @@ export default {
       this.state = state;
       this.doctor = this.$route.params.doctor;
       this.consultInfor = this.$route.params.sinfo;
-      console.log("???", this.$route.params);
+      console.log("会话信息同步:", this.$route.params);
     }
     // 滑动到最新消息
     this.$nextTick(() => {

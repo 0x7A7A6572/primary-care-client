@@ -49,7 +49,7 @@
       />
       <ylEmpty
         title="当前选择的日期无问诊记录"
-        type='msg'
+        type="msg"
         v-show="chatList()?.length == 0"
       />
     </van-pull-refresh>
@@ -109,7 +109,6 @@ export default {
       // console.log("isFilterChatList", this.defaultDate);
     },
     toChatRoom(e) {
-      // console.log("e:",e);
       this.$router.push({
         // path: "/ChatList/ChatRoom",
         name: "ChatRoom",
@@ -122,14 +121,14 @@ export default {
           },
           // 患者信息
           consultInfor: {
+            ctime: e.stime,
+            desc: e.descs,
             patient: {
               avatar: e.u_avatar,
               name: e.u_name,
               gender: e.u_gender,
               birthday: e.u_birthday,
             },
-            ctime: e.ctime,
-            desc: e.desc,
           },
           title: e.d_name,
           sinfo: e, // 会话信息
@@ -190,11 +189,13 @@ export default {
         selectDateEl?.scrollIntoView();
 
         // this.chatList 会多次触发,暂时放这里
-        this.$ylToast({
-          type:'success',
-          msg:`筛选完成`,
-          duration: 1000
-        })
+        if (this.defaultDate != null) {
+          this.$ylToast({
+            type: "success",
+            msg: `筛选完成`,
+            duration: 1000,
+          });
+        }
       }, 500);
     },
   },

@@ -23,7 +23,7 @@ const routes = [
   { // 主页个人信息面板
     path: '/User',
     name: 'User',
-    meta: { tabbarShow: true, tabbarIndex: 3,keepAlive: true },
+    meta: { tabbarShow: true, tabbarIndex: 3, keepAlive: false },
     component: () => import('../views/UserView/UserView.vue')
   },
   { // 编辑个人基本信息
@@ -85,19 +85,19 @@ const routes = [
   { // 问诊医生选择页
     path: '/OnlineConsultation',
     name: 'OnlineConsultation',
-    meta: { title: '线上问诊', navbarShow: true, keepAlive: true,keepAlive: true },
+    meta: { title: '线上问诊', navbarShow: true, keepAlive: true, keepAlive: true },
     component: () => import('../views/OnlineConsultationView/OnlineConsultationView.vue')
   },
   { // 医生搜索页
     path: '/OnlineConsultation/DoctorSearch',
     name: 'DoctorSearch',
-    meta: { title: '医生搜索', navbarShow: true,keepAlive: true },
+    meta: { title: '医生搜索', navbarShow: true, keepAlive: true },
     component: () => import('../views/OnlineConsultationView/SearchPageView.vue')
   },
   { // 问诊确认信息页
     path: '/OnlineConsultation/OnlineConConfirm',
     name: 'OnlineConConfirm',
-    meta: { title: '问诊信息确认', navbarShow: true},
+    meta: { title: '问诊信息确认', navbarShow: true },
     component: () => import('../views/OnlineConsultationView/OnlineConConfirmView.vue')
   },
   {// 问诊消息列表
@@ -159,7 +159,7 @@ const routes = [
     path: '/AppointmentRegist/RegistOrderList',
     name: 'RegistOrderList',
     meta: {
-      title: '我的预约订单', navbarShow: true
+      title: '我的预约订单', navbarShow: true, back: 'User'
     },
     component: () => import('../views/AppointmentRegistView/RegistOrderList.vue')
   },
@@ -170,7 +170,7 @@ const routes = [
   {
     path: '/Medicine',
     name: 'Medicine',
-    meta: { tabbarShow: true, tabbarIndex: 2,keepAlive: true },
+    meta: { tabbarShow: true, tabbarIndex: 2, keepAlive: true },
     component: () => import('../views/MedicineView/MedicineView.vue')
   },
   /**---------------------
@@ -195,6 +195,34 @@ const routes = [
     },
     component: () => import('../views/MedicalTreasureView/MedicalTreasureView.vue')
   },
+ /**---------------------
+ *     其他
+ * ---------------------*/
+    { // 社区药房
+      path: '/Pharmacy',
+      name: 'Pharmacy',
+      meta: {
+        title: '社区药房', navbarShow: true
+      },
+      component: () => import('../views/Pharmacy/Pharmacy.vue')
+    },
+    { // 使用帮助
+      path: '/Help',
+      name: 'Help',
+      meta: {
+        title: '使用帮助', navbarShow: true
+      },
+      component: () => import('../views/Others/HelpView.vue')
+    },
+    { // 使用帮助
+      path: '/About',
+      name: 'About',
+      meta: {
+        title: '关于', navbarShow: true
+      },
+      component: () => import('../views/Others/AboutView.vue')
+    }
+  
 ]
 
 const router = new VueRouter({
@@ -211,7 +239,7 @@ router.beforeEach((to, from, next) => {
   if (!/\/Login|\/Home/g.test(to.path)) {
     if (!token) {
       next('/Login');//跳到登录页面
-    }else{
+    } else {
       next();
     }
   } else {

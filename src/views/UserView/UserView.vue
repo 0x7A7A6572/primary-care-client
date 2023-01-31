@@ -4,11 +4,11 @@
     <div class="user">
       <van-image round width="5rem" height="5rem" fit="cover"
         :src="$store.getters.user?.avatar" />
-      <div class="user_item">
+      <div class="user_item" @click="jump('/User/EditUserBaseInfo')">
         <h2 style="padding-bottom: 10px;">{{$store.getters.user?.name}}</h2>
-        <span>{{$store.getters.user?.birthday | datetime}}</span>
-        <div class="user_item_bi" @click="jump('/User/EditUserBaseInfo')">
-          <van-icon class-prefix="yl-icon" name="xiugai_bi" color="var(--color-main)" />
+        <span>{{$store.getters.user?.birthday | date}}</span>
+        <div class="user_item_bi" >
+          <van-icon class-prefix="yl-icon" name="right_arrow" color="var(--color-main)" />
         </div>
       </div>
     </div>
@@ -91,7 +91,7 @@
         </div>
         <van-divider
           :style="{ color: 'var(--color-third-text)', borderColor: 'var(--color-third-text)', margin: '15px 0' }" />
-        <div class="address">
+        <div class="address"  @click="jump('/Help')">
           <div class="address_list">
             <van-icon class="address_list" class-prefix="yl-icon" name="bingli" color="var(--color-main)" size="3vh" />
             <span>使用帮助</span>
@@ -100,7 +100,7 @@
         </div>
         <van-divider
           :style="{ color: 'var(--color-third-text)', borderColor: 'var(--color-third-text)', margin: '15px 0' }" />
-        <div class="address">
+        <div class="address"  @click="jump('/About')">
           <div class="address_list">
             <van-icon class="address_list" class-prefix="yl-icon" name="fasong" color="var(--color-main)" size="3vh" />
             <span>关于</span>
@@ -165,6 +165,7 @@ export default {
 
 .user-view {
   padding: 0px var(--padding-base);
+  padding-bottom: 10vh;
 }
 
 .user {
@@ -185,7 +186,7 @@ export default {
 .user_item_bi {
   width: 30px;
   height: 30px;
-  background-color: var(--color-box-bg);
+  // background-color: var(--color-box-bg);
   border-radius: 50px;
   display: block;
   display: flex;

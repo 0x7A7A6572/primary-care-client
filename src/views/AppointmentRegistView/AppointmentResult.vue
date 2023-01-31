@@ -64,7 +64,7 @@ export default {
     mounted(){
         this.arr1=this.$route.params.arr
         this.time=this.$route.params.time.slice(0,10)
-        this.time1=Number( this.$route.params.time.slice(11))
+        this.time1= new Date(this.$route.params.time).getHours()
         this.title=JSON.parse( sessionStorage.getItem('hid')).title
        this.address=JSON.parse( sessionStorage.getItem('hid')).address
        this.name=this.$store.getters.user.name
@@ -95,6 +95,7 @@ export default {
     height: 100vh;
     margin-top: 26px;
     border-radius: var(  --border-radius-medium);
+    padding: var(--padding-sm);
     .address{
         margin: 15px 20px;
         border-bottom: 2px solid var(  --color-secondary);
@@ -161,7 +162,14 @@ export default {
     }
     }
     .btn{
-        
+        display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    >button{
+        border-radius: var(--border-radius-medium);
+        width: 90%;
+    }
     }
 }
 

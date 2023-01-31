@@ -5,24 +5,26 @@
        <ylOrder :order="item"  v-for="item in list"
         @onCancelReg="onCancelReg"
        :key="item.oid"></ylOrder>
-          <ylEmpty v-show="list?.lenght == 0" />
+          <ylEmpty v-show="!list || list?.length == 0" />
       </van-tab>
 
       <van-tab class="order-list" title="待诊断">
-        <ylOrder :order="item"  v-for="(item, i) in getFilterList('待问诊')"
+        <ylOrder :order="item"  v-for="(item, i) in getFilterList(0)"
           :key="i"></ylOrder>
-        <ylEmpty v-show="!getFilterList('待问诊')"
-      /></van-tab>
+          <ylEmpty v-if="getFilterList(0)?.length == 0" />
+
+    </van-tab>
 
       <van-tab class="order-list" title="已完成">
-        <ylOrder :order="item"  v-for="(item, i) in getFilterList('已完成')"
+        <ylOrder :order="item"  v-for="(item, i) in getFilterList(1)"
           :key="i"></ylOrder>
-        <ylEmpty v-show="getFilterList('已完成')" />
+        <ylEmpty v-if="getFilterList(1)?.length == 0" />
       </van-tab>
+
       <van-tab class="order-list" title="已取消">
-        <ylOrder :order="item"  v-for="(item, i) in getFilterList('已取消')"
+        <ylOrder :order="item"  v-for="(item, i) in getFilterList(3)"
           :key="i"></ylOrder>
-        <ylEmpty v-show="getFilterList('已完成')" />
+          <ylEmpty v-if="getFilterList(3)?.length == 0" />
       </van-tab>
     </van-tabs>
   </div>
@@ -36,12 +38,6 @@ export default {
     return {
       active: "",
       list: [],
-      unlist: this.list?.filter((v) => {
-        return v.state == 0;
-      }),
-      endlist: this.list?.filter((v) => {
-        return v.state == 1;
-      }),
     };
   },
   methods: {
@@ -52,22 +48,7 @@ export default {
         this.list = res.data.result;
       });
     },
-    getFilterList(type) {
-      switch (type) {
-        case "待问诊":
-          return this.list?.filter((v) => {
-            return v.state == 0;
-          });
-        case "已完成":
-          return this.list?.filter((v) => {
-            return v.state == 1;
-          });
-          case "已取消":
-          return this.list?.filter((v) => {
-            return v.state == 3;
-          });
-      }
-    },
+
     onCancelReg(order){
         this.$Dialog.confirm({
         title: '提示',
@@ -98,6 +79,12 @@ export default {
       }).catch(()=>{
 
       });
+    },
+    getFilterList(state) {
+     let list = this.list?.filter((v) => {
+            return (v.state == state);
+          });
+         return list
     },
   },
   mounted() {

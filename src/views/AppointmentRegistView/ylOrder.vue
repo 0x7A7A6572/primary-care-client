@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     returnStateName(id) {
-      let states = ['待诊断','正在诊断','诊断完成','取消挂号'];
+      let states = ['待诊断','正在诊断','诊断完成','已取消'];
       return states[id];
     },
   }

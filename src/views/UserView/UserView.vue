@@ -6,7 +6,7 @@
         :src="$store.getters.user?.avatar" />
       <div class="user_item">
         <h2 style="padding-bottom: 10px;">{{$store.getters.user?.name}}</h2>
-        <span>{{$store.getters.user?.birthday | datetime}}</span>
+        <span>{{$store.getters.user?.birthday | date}}</span>
         <div class="user_item_bi" @click="jump('/User/EditUserBaseInfo')">
           <van-icon class-prefix="yl-icon" name="xiugai_bi" color="var(--color-main)" />
         </div>

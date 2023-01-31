@@ -37,7 +37,7 @@
         </div>
         <div class="sex">
           <span class="text-large __title">性别</span>
-          <ylSwitch :items="['男']" />
+          <ylSwitch :items="[(gender == 0 ? '女' : '男')]" />
         </div>
       </div>
       <van-field v-model="name" class="yl-van-field" label="姓名" disabled />
@@ -87,6 +87,7 @@ export default {
       name: this.$store.getters.user.name,
       uid: this.$store.getters.user.uid,
       phone: this.$store.getters.user.phone,
+      gender: this.$store.getters.user.gender,
       rules: {
         Detailed: [{ required: true, message: "请填写详细地址" }],
       },
@@ -116,6 +117,7 @@ export default {
           user.avatar = this.avatar;
           user.uid = this.uid;
           user.phone = this.phone;
+          user.gender = this.gender;
           this.$store.commit("updateUser", user);
         }
         console.log(res);

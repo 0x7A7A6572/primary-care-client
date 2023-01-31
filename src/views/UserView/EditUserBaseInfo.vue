@@ -1,68 +1,63 @@
 <template>
   <div class="content">
-    <!-- 更换头像 --> 
+    <!-- 更换头像 -->
     <div class="Personal_information">
-      <van-image
-        width="100"
-        height="100"
-        :src="avatar"
-        fit="cover"
-        round
-      />
-     <van-uploader  class="Personal" :show-upload="false"  name="file" :action="config.uploadUrl + '/upload'"  :after-read="afterRead">
+      <van-image width="100" height="100" :src="avatar" fit="cover" round />
+      <van-uploader
+        class="Personal"
+        :show-upload="false"
+        name="file"
+        :action="config.uploadUrl + '/upload'"
+        :after-read="afterRead"
+      >
         <van-icon
           class-prefix="yl-icon"
           name="xiugai_bi"
           color="var(--color-main)"
         />
-     </van-uploader>
-    </div> 
+      </van-uploader>
+    </div>
     <!-- 详细地址 -->
     <div>
       <van-form @submit="onSubmit">
-      <van-field
-        v-model="address"
-        class="yl-van-field"
-        label="详细地址"
-        placeholder="请输入详细地址"
-        :rules="rules.Detailed"
-      />
+        <van-field
+          v-model="address"
+          class="yl-van-field"
+          label="详细地址"
+          placeholder="请输入详细地址"
+          :rules="rules.Detailed"
+        />
       </van-form>
       <div class="form-user-info text-large flex-around">
         <div>
           <span class="text-large __title">出生日期</span>
-          <div @click="showPopup" style="color: var(--color-main)">
-            <span>2000-10-13</span>
+          <div style="color: var(--color-main)">
+            <span>{{ this.$store.getters.user.birthday | date }}</span>
           </div>
-          <van-popup v-model="show" position="bottom">
-            <van-datetime-picker
-              type="date"
-              title="选择出生日期"
-              v-model="currentDate"
-              :max-date="maxDate"
-              :min-date="minDate"
-              @confirm="changeBirthday"
-              @cancel="show = false"
-            />
-          </van-popup>
         </div>
         <div class="sex">
           <span class="text-large __title">性别</span>
-          <ylSwitch :items="['男']" />
+          <ylSwitch :items="[(gender == 0 ? '女' : '男')]" />
         </div>
       </div>
-      <van-field class="yl-van-field" label="姓名" disabled />
-      <van-field class="yl-van-field" label="居民身份证" disabled />
+      <van-field v-model="name" class="yl-van-field" label="姓名" disabled />
+      <van-field
+        v-model="uid"
+        class="yl-van-field"
+        label="居民身份证"
+        disabled
+      />
       <van-field
         class="yl-van-field"
         label="手机号"
         name="phone"
+        v-model="phone"
         disabled
       />
 
       <div style="margin: 16px">
         <van-button
-        @click="updateUserBaseInfo"
+          @click="updateUserBaseInfo"
           class="yl"
           round
           block
@@ -77,7 +72,7 @@
 </template>
 
 <script>
-import config from '@/utils/config';
+import config from "@/utils/config";
 export default {
   data() {
     return {
@@ -87,49 +82,59 @@ export default {
       currentDate: new Date(1960, 0, 1),
       maxDate: new Date(),
       minDate: new Date(1900, 1, 1),
-      address:'',
-      avatar:'',
-      rules:{
-       Detailed: [{ required: true, message: '请填写详细地址' }]
-      }
+      address: this.$store.getters.user.address,
+      avatar: this.$store.getters.user.avatar,
+      name: this.$store.getters.user.name,
+      uid: this.$store.getters.user.uid,
+      phone: this.$store.getters.user.phone,
+      gender: this.$store.getters.user.gender,
+      rules: {
+        Detailed: [{ required: true, message: "请填写详细地址" }],
+      },
     };
   },
   methods: {
     onSubmit(values) {
-      console.log('submit', values);
-    },
-    showPopup() {
-      this.show = true;
+      console.log("submit", values);
     },
     changeBirthday(v) {
       this.show = false;
     },
     afterRead(file) {
-        console.log(file);
-        this.$api.upload.upload(file).then(res=>{
-          console.log('上传成功',res);
-          this.avatar = res.data
-          this.$store.commit('setUserAvatar',this.avatar)
-        })
+      console.log(file);
+      this.$api.upload.upload(file).then((res) => {
+        console.log("上传成功", res);
+        this.avatar = res.data;
+        this.$store.commit("setUserAvatar", this.avatar);
+      });
     },
-    updateUserBaseInfo(){
-      let data = {avatar:this.avatar, address:this.address}
-      this.$api.user.updateUserBaseInfo(data).then(res=>{
+    updateUserBaseInfo() {
+      let data = { avatar: this.avatar, address: this.address };
+      this.$api.user.updateUserBaseInfo(data).then((res) => {
+        if (res.code == 200) {
+          let user = this.$store.getters.user;
+          user.address = this.address;
+          user.avatar = this.avatar;
+          user.uid = this.uid;
+          user.phone = this.phone;
+          user.gender = this.gender;
+          this.$store.commit("updateUser", user);
+        }
         console.log(res);
-        if(res.code == 200){
+        if (res.code == 200) {
           this.$ylToast({
             msg: "修改成功",
             type: "success",
             duration: 2000,
           });
-        }else{
+        } else {
           this.$ylToast({
             msg: "修改失败",
             type: "error",
           });
         }
-      })
-    }
+      });
+    },
   },
 };
 </script>

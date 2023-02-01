@@ -14,6 +14,8 @@
         name="file"
         :action="config.uploadUrl + '/upload'"
         :after-read="afterRead"
+        :max-size="800 * 1024"
+         @oversize="onOversize"
       >
         <i class="yl-icon yl-icon-xiugai_bi" />
       </van-uploader>
@@ -268,7 +270,14 @@ export default {
           this.$ylToast({type:"error",msg: res.msg || '认证失败'});
         }
       });
-    }
+    },
+    onOversize(file) {
+      // console.log(file);
+      this.$ylToast({
+        type: 'error',
+        msg: '文件大小不能超过 800kb',
+      });
+    },
   },
 };
 </script>

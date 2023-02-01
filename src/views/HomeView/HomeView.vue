@@ -2,7 +2,7 @@
   <div class="home">
     <!-- 用户信息 -->
     <div class="home-user">
-      <van-image class="__avatar" round :src="$store.getters.user?.avatar" />
+      <van-image class="__avatar"  fit="cover" round :src="$store.getters.user?.avatar" />
       <!-- <img class="__avatar" :src="$store.getters.user?.avatar" alt="" /> -->
       <span
         class="text-larger"

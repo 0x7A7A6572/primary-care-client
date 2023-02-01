@@ -6,9 +6,11 @@
       <van-uploader
         class="Personal"
         :show-upload="false"
+        :max-size="800 * 1024"
         name="file"
         :action="config.uploadUrl + '/upload'"
         :after-read="afterRead"
+         @oversize="onOversize"
       >
         <van-icon
           class-prefix="yl-icon"
@@ -105,7 +107,6 @@ export default {
       this.$api.upload.upload(file).then((res) => {
         console.log("上传成功", res);
         this.avatar = res.data;
-        this.$store.commit("setUserAvatar", this.avatar);
       });
     },
     updateUserBaseInfo() {
@@ -127,12 +128,20 @@ export default {
             type: "success",
             duration: 2000,
           });
+           this.$store.commit("setUserAvatar", this.avatar);
         } else {
           this.$ylToast({
             msg: "修改失败",
             type: "error",
           });
         }
+      });
+    },
+    onOversize(file) {
+      // console.log(file);
+      this.$ylToast({
+        type: 'error',
+        msg: '文件大小不能超过 800kb',
       });
     },
   },
@@ -157,6 +166,9 @@ export default {
     position: absolute;
     bottom: 0;
     right: 0;
+  }
+  .van-image{
+    border: 2px solid var(--color-main);
   }
 }
 .form-user-info {

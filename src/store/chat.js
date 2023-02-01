@@ -145,7 +145,7 @@ export default {
               };
             }else{
               return {
-                unreadCount: 0,
+                unreadCount: 1,
                 lastMsg: '',
                 ...v
               };

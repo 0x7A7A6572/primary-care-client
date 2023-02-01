@@ -31,7 +31,7 @@
       <div class="health-item">
         <div class="health-item-health">
           <ylTitle title="个人健康数据" theme="left" color="var(--color-second-text)" />
-          <span>{{user.update_time | datetime}}</span>
+          <span>{{user?.update_time | datetime}}</span>
         </div>
         <div @click="jump('/User/EditUserHealthyInfo')">
           <van-icon class-prefix="yl-icon" name="xiugai_bi" color="var(--color-main)" />
@@ -42,19 +42,19 @@
       <div class="health-list">
         <div class="health-list-item">
           <span>身高(cm)</span>
-          <span>{{user.height}}cm</span>
+          <span>{{user?.height}}cm</span>
         </div>
         <div class="health-list-item">
           <span>体重(kg)</span>
-          <span>{{user.weight}}kg</span>
+          <span>{{user?.weight}}kg</span>
         </div>
         <div class="health-list-item">
           <span>血压(mmHg)</span>
-          <span>{{user.blood_ressure}}mmHg</span>
+          <span>{{user?.blood_ressure}}mmHg</span>
         </div>
         <div class="health-list-item">
           <span>血糖(mmol/L)</span>
-          <span>{{user.blood_sugar}}mmol/L</span>
+          <span>{{user?.blood_sugar}}mmol/L</span>
         </div>
       </div>
     </div>

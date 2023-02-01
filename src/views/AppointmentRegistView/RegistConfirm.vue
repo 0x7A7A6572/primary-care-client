@@ -7,8 +7,8 @@
     <div style="margin: 10px 0">
       <van-form @submit="onSubmit">
         <van-cell is-link @click="showPopup"
-          ><van-icon name="clock-o" size="1.5rem" /><span class="title">
-            <span v-if="!this.time2">请填写预约时间:</span>
+          ><van-icon class-prefix="yl-icon" name="riqi1" size="1.2rem" /><span class="title">
+            <span v-if="!this.time2">请选择预约时间:</span>
             <span v-else>{{ time2 }}</span>
           </span>
         </van-cell>

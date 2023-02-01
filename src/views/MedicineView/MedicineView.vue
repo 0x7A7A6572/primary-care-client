@@ -73,7 +73,7 @@ export default {
       inpt: "",
       meddatas: [],
       // TODO 这个接口没写
-      drugsHotSearch:['布洛芬缓释胶囊','莲花清温','六位地黄丸','小儿肠胃康颗粒','藿香正气水']
+      drugsHotSearch:['布洛芬缓释胶囊','板蓝根','六味地黄丸','小儿肠胃康颗粒','藿香正气水']
     };
   },
   created() {

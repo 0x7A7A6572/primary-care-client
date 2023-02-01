@@ -14,7 +14,7 @@ const routes = [
     component: HomeView,
     meta: {
       tabbarShow: true, tabbarIndex: 0,
-      keepAlive: true
+      keepAlive: false
     }
   },
   /**---------------------

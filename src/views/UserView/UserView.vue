@@ -136,6 +136,10 @@ export default {
         message: '确定退出登录吗?',
         beforeClose: (action, done)=> {
           if (action === 'confirm') {
+           // 通知下线
+           this.$io.emit("offline", {
+            uid: this.$store.getters.user.uid
+           });
            this.$router.push('/Login');
            this.$store.dispatch('logout');
            done();

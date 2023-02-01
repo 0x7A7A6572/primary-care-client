@@ -84,6 +84,12 @@ export default {
             type: "success",
             duration: 2000,
           });
+          // 通知上线
+          this.$io.emit("online", {
+          uid: res.data.user.uid,
+          token: res.data.token,
+        });
+         console.log("通知服务器用户已上线");
         } else {
           this.$ylToast({
             type: "error",
